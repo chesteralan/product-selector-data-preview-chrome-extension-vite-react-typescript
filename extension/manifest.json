@@ -23,10 +23,6 @@
       "js": ["dist/assets/index.js"]
     }
   ],
-  "action": {
-    "default_popup": "dist/index.html",
-    "default_title": "Open the popup"
-},
   "homepage_url": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript"
   
 }

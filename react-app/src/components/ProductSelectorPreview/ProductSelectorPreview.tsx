@@ -60,7 +60,7 @@ const ProductSelectorPreview = ({ data, setShow }: Props) => {
                   {data.currency.symbol}
                   {product.checkoutData.discounted_price}{' '}
                   <small>
-                    ({data.currency.symbol}
+                    (Savings: {data.currency.symbol}
                     {(
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
@@ -79,7 +79,7 @@ const ProductSelectorPreview = ({ data, setShow }: Props) => {
                   <br /> <strong>Higher Initial Discount</strong>: {product.higher_initial_discount.join(', ')}
                   <br /> <strong>Rebill Code</strong>: {product.rebill_discount.join(', ')}
                   <br /> <strong>Price Setting Tag</strong>: {product.priceSettingTag}
-                  <br /> <strong>Upsell URL</strong>: {product.upsell_url}
+                  <br /> <strong>Upsell URL</strong>: <a href={`${product.upsell_url}/token`} target="_blank">{product.upsell_url}</a>
                 </li>
               ))}
             </ul>
@@ -100,7 +100,7 @@ const ProductSelectorPreview = ({ data, setShow }: Props) => {
                   {data.currency.symbol}
                   {product.checkoutData.discounted_price}{' '}
                   <small>
-                    ({data.currency.symbol}
+                    (Savings: {data.currency.symbol}
                     {(
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
@@ -113,6 +113,7 @@ const ProductSelectorPreview = ({ data, setShow }: Props) => {
                 </li>
               ))}
             </ul>
+            <hr />
             <h3>Onetime:</h3>
             <p>
               <u>Discount Code:</u>{' '}
@@ -135,14 +136,14 @@ const ProductSelectorPreview = ({ data, setShow }: Props) => {
                   {data.currency.symbol}
                   {product.checkoutData.discounted_price}{' '}
                   <small>
-                    ({data.currency.symbol}
+                    (Savings: {data.currency.symbol}
                     {(
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
                     ).toFixed(2)}
                     )
                   </small>
-                  <br /> <strong>Upsell URL</strong>: {product.upsell_url}
+                  <br /> <strong>Upsell URL</strong>: <a href={`${product.upsell_url}/token`} target="_blank">{product.upsell_url}</a>
                 </li>
               ))}
             </ul>
@@ -163,7 +164,7 @@ const ProductSelectorPreview = ({ data, setShow }: Props) => {
                   {data.currency.symbol}
                   {product.checkoutData.discounted_price}{' '}
                   <small>
-                    ({data.currency.symbol}
+                    (Savings: {data.currency.symbol}
                     {(
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
