@@ -1,0 +1,20 @@
+{
+  "name": "product-selector-data-preview-chrome",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "yarn --cwd ./react-app build",
+    "dev": "yarn --cwd ./react-app dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript/issues"
+  },
+  "homepage": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript#readme"
+}
