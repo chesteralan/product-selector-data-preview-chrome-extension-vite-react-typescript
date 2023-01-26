@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ProductSelectorPreview from '../ProductSelectorPreview/ProductSelectorPreview';
+import ProductSelectorPreview from "../ProductSelectorPreview/ProductSelectorPreview";
 
 type Props = {};
 
@@ -27,24 +27,41 @@ const styles: React.CSSProperties = {
   zIndex: 9999,
 };
 const ProductsData = (props: Props) => {
-    const [found, setFound] = useState<boolean>(false)
-    const [show, setShow] = useState<boolean>(false)
-    const [selectorData, setSelectorData] = useState(null);
+  const [found, setFound] = useState<boolean>(false);
+  const [show, setShow] = useState<boolean>(false);
+  const [selectorData, setSelectorData] = useState(null);
 
   useEffect(() => {
     const pageData = `/page-data${window.location.pathname}/page-data.json`;
-    fetch(pageData)
-      .then((response) => response.json())
-      .then((data) => {
-        setFound(true);
-        setSelectorData(data);
-      });
+    try {
+      fetch(pageData)
+        .then(async (response) => {
+          const data = await response.json();
+          setFound(data.result?.data?.funnelPageData?.hasOwnProperty('productSelector') || false);
+          setSelectorData(data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
-  return found ? <>
-  <div style={styles} onClick={() => setShow(!show)}>Product Data</div>
-  {show ? <ProductSelectorPreview data={(selectorData as any).result.data.funnelPageData.productSelector} setShow={setShow} /> : null}
-  </> : null;
+
+  return found ? (
+    <>
+      <div style={styles} onClick={() => setShow(!show)}>
+        Product Data
+      </div>
+      {show ? (
+        <ProductSelectorPreview
+          data={(selectorData as any).result?.data?.funnelPageData?.productSelector}
+          setShow={setShow}
+        />
+      ) : null}
+    </>
+  ) : null;
 };
 
 export default ProductsData;
