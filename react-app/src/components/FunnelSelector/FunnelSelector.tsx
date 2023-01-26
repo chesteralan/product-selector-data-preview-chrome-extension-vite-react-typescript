@@ -32,7 +32,7 @@ const PriceStrike: React.CSSProperties = {
   textDecoration: `line-through`
 };
 
-const ProductSelectorPreview = ({ data, setShow }: Props) => {
+const FunnelSelector = ({ data, setShow }: Props) => {
   console.log(data)
   const extraData = JSON.parse(data.extra);
   return <>
@@ -209,4 +209,4 @@ const ProductSelectorPreview = ({ data, setShow }: Props) => {
   </>;
 }
 
-export default ProductSelectorPreview;
+export default FunnelSelector;

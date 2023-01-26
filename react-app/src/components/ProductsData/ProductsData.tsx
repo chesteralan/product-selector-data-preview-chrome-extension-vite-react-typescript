@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import ProductSelectorPreview from "../ProductSelectorPreview/ProductSelectorPreview";
+import { hasProductData, hasUpsellData, hasFunnelData } from "../../utils/hasProductData";
+import { isUpsell } from "../../utils/isUpsell";
+import FunnelSelector from "../FunnelSelector/FunnelSelector";
+import UpsellSelector from "../UpsellSelector/UpsellSelector";
+import { getPathname } from '../../utils/getPathname';
 
 type Props = {};
 
@@ -29,16 +33,20 @@ const styles: React.CSSProperties = {
 const ProductsData = (props: Props) => {
   const [found, setFound] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
+  const [showUpsell, setShowUpsell] = useState<boolean>(false);
+  const [showFunnel, setShowFunnel] = useState<boolean>(false);
   const [selectorData, setSelectorData] = useState(null);
 
   useEffect(() => {
-    const pageData = `/page-data${window.location.pathname}/page-data.json`;
+    const pageData = `/page-data${getPathname(window)}/page-data.json`;
     try {
       fetch(pageData)
         .then(async (response) => {
           const data = await response.json();
-          setFound(data.result?.data?.funnelPageData?.hasOwnProperty('productSelector') || false);
+          setFound( hasProductData(data) );
           setSelectorData(data);
+          setShowUpsell( isUpsell(window) && hasUpsellData(data) );
+          setShowFunnel( !isUpsell(window) && hasFunnelData(data) );
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -54,11 +62,16 @@ const ProductsData = (props: Props) => {
       <div style={styles} onClick={() => setShow(!show)}>
         Product Data
       </div>
-      {show ? (
-        <ProductSelectorPreview
+      {show ? (<>
+        {showUpsell ? <UpsellSelector 
+          data={(selectorData as any).result?.data?.upsellCheckoutData}
+          setShow={setShow}
+          /> : null}
+        {showFunnel ? <FunnelSelector
           data={(selectorData as any).result?.data?.funnelPageData?.productSelector}
           setShow={setShow}
-        />
+        /> : null}
+        </>
       ) : null}
     </>
   ) : null;

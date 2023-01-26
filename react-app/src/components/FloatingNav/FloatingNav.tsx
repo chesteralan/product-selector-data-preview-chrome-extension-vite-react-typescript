@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
+import { getPathname } from "../../utils/getPathname";
+import { getSiteRegion } from "../../utils/getSiteRegion";
+import { isUpsell } from "../../utils/isUpsell";
 import ConfigButton from "../Buttons/ConfigButton";
 import DevButton from "../Buttons/DevButton";
+import DevtoolButton from "../Buttons/DevtoolButton";
 import EditButton from "../Buttons/EditButton";
 import LiveButton from "../Buttons/LiveButton";
 import LocalButton from "../Buttons/LocalButton";
@@ -14,7 +18,7 @@ type Props = {
 const styles: React.CSSProperties = {
   position: "fixed",
   width: 30,
-  top: 100,
+  top: `calc(50vh - 130px)`,
   right: 0,
   display: `block`,
   zIndex: 9999,
@@ -22,9 +26,13 @@ const styles: React.CSSProperties = {
 
 const FloatingNav = ({ funnelId, productSelectorId }: Props) => {
   const [pathname, setPathname] = useState<string>("");
+  const [region, setRegion] = useState<string>(`US`);
+  const [upsell, setUpsell] = useState<boolean>(false);
 
   useEffect(() => {
-    setPathname(window.location.pathname);
+    setPathname(getPathname(window));
+    setRegion(getSiteRegion(window));
+    setUpsell(isUpsell(window));
   }, []);
 
   return (
@@ -33,10 +41,11 @@ const FloatingNav = ({ funnelId, productSelectorId }: Props) => {
       <ConfigButton productSelectorId={productSelectorId} />
       {pathname.includes("funnel-preview") ? null : (
         <>
-          <LocalButton pathname={pathname} />
-          <DevButton pathname={pathname} />
-          <LiveButton pathname={pathname} />
-          <PreviewButton pathname={pathname} />
+          <LocalButton region={region} upsell={upsell} pathname={pathname} />
+          <DevButton region={region} upsell={upsell} pathname={pathname} />
+          <LiveButton region={region} upsell={upsell} pathname={pathname} />
+          <PreviewButton region={region} upsell={upsell} pathname={pathname} />
+          <DevtoolButton />
         </>
       )}
     </div>
