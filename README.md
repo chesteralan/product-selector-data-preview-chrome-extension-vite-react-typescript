@@ -1,7 +1,7 @@
 # Product Selector Preview
 A chrome extension that add builder shortcuts to petlab's live funnels and upsells.
 
-![screenshot](/images/screenshot.png)
+![screenshot](/extension/images/screenshot.jpeg)
 
 ## how to install
 
