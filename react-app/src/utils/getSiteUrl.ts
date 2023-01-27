@@ -5,9 +5,13 @@ type Site = {
     url: string;
 }
 export const getSiteUrl = (region:string = `US`, upsell:boolean = false, env:string = 'live'):string => {
-    const defaultSite:Site = { region: `US`, upsell: false, env: `live`, url: `https://offer.thepetlabco.com` }
+
+    const defaultFunnel:Site = { region: `US`, upsell: false, env: `live`, url: `https://offer.thepetlabco.com` }
+
+    const defaultUpsell:Site = { region: `US`, upsell: true, env: `live`, url: `https://ups.thepetlabco.com` }
+
     const siteUrls:Site[] = [
-        defaultSite,
+        defaultFunnel,
         { region: `UK`, upsell: false, env: `live`, url: `https://offer.petlabco.co.uk` },
         { region: `CA`, upsell: false, env: `live`, url: `https://offer.thepetlabco.ca` },
         { region: `DE`, upsell: false, env: `live`, url: `https://offer.thepetlabco.de` },
@@ -21,7 +25,7 @@ export const getSiteUrl = (region:string = `US`, upsell:boolean = false, env:str
         { region: `DE`, upsell: false, env: `local`, url: `http://localhost:8000` },
 
         // upsell
-        { region: `US`, upsell: true, env: `live`, url: `https://ups.thepetlabco.com` },
+        defaultUpsell,
         { region: `UK`, upsell: true, env: `live`, url: `https://ups.petlabco.co.uk` },
         { region: `CA`, upsell: true, env: `live`, url: `https://ups.thepetlabco.ca` },
         { region: `DE`, upsell: true, env: `live`, url: `https://ups.thepetlabco.de` },
@@ -36,6 +40,6 @@ export const getSiteUrl = (region:string = `US`, upsell:boolean = false, env:str
     ]
 
     const selected = siteUrls.find((site: Site) => site.region === region && site.upsell === upsell && site.env === env)
-    console.log(selected);
-    return selected ? selected.url : defaultSite.url
+    
+    return selected ? selected.url : (upsell ? defaultUpsell.url : defaultFunnel.url)
 }

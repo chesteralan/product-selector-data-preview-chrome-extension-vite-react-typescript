@@ -4,8 +4,7 @@ export const isUpsell = (window: Window): boolean => {
         'ups.thepetlabco.ca',
         'ups.thepetlabco.de',
         'ups.petlabco.co.uk',
-        'staging-upsell.netlify.app',
-        '127.0.0.1'
+        'staging-upsell.netlify.app'
     ]
-    return upsellSites.includes(window.location.hostname);
+    return upsellSites.includes(window.location.hostname) || window.location.hostname.includes('upsell');
 }

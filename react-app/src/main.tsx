@@ -20,7 +20,7 @@ window.petLabChromeExt = setInterval(() => {
     const funnelId = metaTags.namedItem('funnel-id');
     const productSelectorId = metaTags.namedItem('product-selector-id');
     if( funnelId && productSelectorId ) {
-      console.log("Funnel ID found... Petlab tool rendered...");
+      console.log("PetLab Funnel detected...");
 
       const targetElement = document.createElement('div');
 
