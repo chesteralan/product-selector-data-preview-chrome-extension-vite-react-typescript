@@ -48,8 +48,8 @@ const FunnelSelector = ({ data, setShow }: Props) => {
             </p>
             <ul>
               {data.subscription.products.map((product:any, index:number) => (
-                <li key={index} style={{ paddingBottom: `20px`}}>
-                  {product.checkoutData.title}
+                <li key={index} style={{ marginBottom: 20}}>
+                  <strong>{product.checkoutData.title}</strong>
                   <br />
                   {product.checkoutData.variant_id} -{' '}
                   {product.checkoutData.quantity}x -{' '}
@@ -65,8 +65,23 @@ const FunnelSelector = ({ data, setShow }: Props) => {
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
                     ).toFixed(2)}
-                    )
-                  </small>
+                    {' - '}
+                    {(
+                      ((product.checkoutData.perceived_rrp -
+                      product.checkoutData.discounted_price) / product.checkoutData.perceived_rrp) * 100
+                    ).toFixed(0)}%)
+                  </small><br />
+                  <strong>Price per chew <small>({(30 * product.checkoutData.quantity)} chews)</small></strong>: {data.currency.symbol}{(
+                      (product.checkoutData.discounted_price / (30 * product.checkoutData.quantity) )
+                    ).toFixed(2)}
+                    {' '}
+                    <small>
+                    (Savings: {data.currency.symbol}
+                    {(
+                      (product.checkoutData.perceived_rrp -
+                      product.checkoutData.discounted_price) / (30 * product.checkoutData.quantity)
+                    ).toFixed(2)})
+                    </small>
                   {product.freeGiftData.variantId && (
                     <>
                       <br />
@@ -75,11 +90,11 @@ const FunnelSelector = ({ data, setShow }: Props) => {
                       {product.free_gift_value}
                     </>
                   )}
-                  <br /> <strong>Discount Code</strong>: {product.discount_code_override.join(', ')}
-                  <br /> <strong>Higher Initial Discount</strong>: {product.higher_initial_discount.join(', ')}
-                  <br /> <strong>Rebill Code</strong>: {product.rebill_discount.join(', ')}
-                  <br /> <strong>Price Setting Tag</strong>: {product.priceSettingTag}
-                  <br /> <strong>Upsell URL</strong>: <a href={`${product.upsell_url}/token`} target="_blank">{product.upsell_url}</a>
+                  {product.discount_code_override.length > 0 && <><br /> <strong>Discount Code Override</strong>: {product.discount_code_override.join(', ')}</>}
+                  {product.higher_initial_discount.length > 0 && <><br /> <strong>Higher Initial Discount</strong>: {product.higher_initial_discount.join(', ')}</>}
+                  {product.rebill_discount.length > 0 && <><br /> <strong>Rebill Code</strong>: {product.rebill_discount.join(', ')}</>}
+                  {product.priceSettingTag && <><br /> <strong>Price Setting Tag</strong>: {product.priceSettingTag}</>}
+                  {product.upsell_url && <><br /> <strong>Upsell URL Override</strong>: <small><a href={`${product.upsell_url}/token`} target="_blank">{product.upsell_url}</a></small></>}
                 </li>
               ))}
             </ul>
@@ -89,7 +104,7 @@ const FunnelSelector = ({ data, setShow }: Props) => {
             <ul>
               {data.subscription.bumpoffers.map((product:any, index:number) => (
                 <li key={index}>
-                  {product.checkoutData.title}
+                  <strong>{product.checkoutData.title}</strong>
                   <br />
                   {product.checkoutData.variant_id} -{' '}
                   {product.checkoutData.quantity}x -{' '}
@@ -105,11 +120,15 @@ const FunnelSelector = ({ data, setShow }: Props) => {
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
                     ).toFixed(2)}
-                    )
+                    {' - '}
+                    {(
+                      ((product.checkoutData.perceived_rrp -
+                      product.checkoutData.discounted_price) / product.checkoutData.perceived_rrp) * 100
+                    ).toFixed(0)}%)
                   </small>{' '}
                   <br /> <strong>Discount Code</strong>: {product.productRef.product.discountCode}
-                  <br /> <strong>Higher Initial Discount</strong>: {product.higher_initial_discount}
-                  <br /> <strong>Rebill Code</strong>: {product.rebill_discount}
+                  {product.higher_initial_discount && <><br /> <strong>Higher Initial Discount</strong>: {product.higher_initial_discount}</>}
+                  {product.rebill_discount && <><br /> <strong>Rebill Code</strong>: {product.rebill_discount}</>}
                 </li>
               ))}
             </ul>
@@ -124,8 +143,8 @@ const FunnelSelector = ({ data, setShow }: Props) => {
             </p>
             <ul>
               {data.onetime.products.map((product:any, index:number) => (
-                <li key={index}>
-                  {product.checkoutData.title}
+                <li key={index} style={{ marginBottom: 20 }}>
+                  <strong>{product.checkoutData.title}</strong>
                   <br />
                   {product.checkoutData.variant_id} -{' '}
                   {product.checkoutData.quantity}x -{' '}
@@ -141,9 +160,24 @@ const FunnelSelector = ({ data, setShow }: Props) => {
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
                     ).toFixed(2)}
-                    )
-                  </small>
-                  <br /> <strong>Upsell URL</strong>: <a href={`${product.upsell_url}/token`} target="_blank">{product.upsell_url}</a>
+                    {' - '}
+                    {(
+                      ((product.checkoutData.perceived_rrp -
+                      product.checkoutData.discounted_price) / product.checkoutData.perceived_rrp) * 100
+                    ).toFixed(0)}%)
+                  </small><br />
+                  <strong>Price per chew <small>({(30 * product.checkoutData.quantity)} chews)</small></strong>: {data.currency.symbol}{(
+                      (product.checkoutData.discounted_price / (30 * product.checkoutData.quantity) )
+                    ).toFixed(2)}
+                    {' '}
+                    <small>
+                    (Savings: {data.currency.symbol}
+                    {(
+                      (product.checkoutData.perceived_rrp -
+                      product.checkoutData.discounted_price) / (30 * product.checkoutData.quantity)
+                    ).toFixed(2)})
+                    </small>
+                  {product.upsell_url && <><br /> <strong>Upsell URL Override</strong>: <small><a href={`${product.upsell_url}/token`} target="_blank">{product.upsell_url}</a></small></>}
                 </li>
               ))}
             </ul>
@@ -153,7 +187,7 @@ const FunnelSelector = ({ data, setShow }: Props) => {
             <ul>
               {data.onetime.bumpoffers.map((product:any, index:number) => (
                 <li key={index}>
-                  {product.checkoutData.title}
+                  <strong>{product.checkoutData.title}</strong>
                   <br />
                   {product.checkoutData.variant_id} -{' '}
                   {product.checkoutData.quantity}x -{' '}
@@ -169,11 +203,15 @@ const FunnelSelector = ({ data, setShow }: Props) => {
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
                     ).toFixed(2)}
-                    )
+                    {' - '}
+                    {(
+                      ((product.checkoutData.perceived_rrp -
+                      product.checkoutData.discounted_price) / product.checkoutData.perceived_rrp) * 100
+                    ).toFixed(0)}%)
                   </small>{' '}
                   <br /> <strong>Discount Code</strong>: {product.productRef.product.discountCode}
-                  <br /> <strong>Higher Initial Discount</strong>: {product.higher_initial_discount}
-                  <br /> <strong>Rebill Code</strong>: {product.rebill_discount}
+                  {product.higher_initial_discount && <><br /> <strong>Higher Initial Discount</strong>: {product.higher_initial_discount}</>}
+                  {product.rebill_discount && <><br /> <strong>Rebill Code</strong>: {product.rebill_discount}</>}
                 </li>
               ))}
             </ul>

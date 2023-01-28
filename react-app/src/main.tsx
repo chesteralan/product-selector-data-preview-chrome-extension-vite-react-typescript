@@ -42,4 +42,4 @@ window.petLabChromeExt = setInterval(() => {
 
 setTimeout(() => {
   clearInterval(window.petLabChromeExt);
-},120000);
+},60000);
