@@ -6,7 +6,7 @@ type Props = {
   productSelectorId: string;
 }
 
-function App(props: Props) {
+function AppGatsby(props: Props) {
   
   return (
     <>
@@ -16,4 +16,4 @@ function App(props: Props) {
   )
 }
 
-export default App
+export default AppGatsby
