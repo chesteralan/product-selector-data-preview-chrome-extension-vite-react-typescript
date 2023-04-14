@@ -20,7 +20,7 @@ const FloatingNavBuilder = ({ entryId }: Props) => {
   useEffect(() => {
     const elements = document.getElementsByTagName("a");
     const ctas = Array.from(new Set(Array.from(elements).map((element) => {
-        if ((/^(https:\/\/offer\.thepetlabco\.com)/g).test(element.href)) {
+        if ((/^(https:\/\/offer\.(thepetlabco\.com|petlabco\.co\.uk|thepetlabco\.de|thepetlabco\.ca))/g).test(element.href)) {
             return element.href
         }
     }).filter(Boolean)));
