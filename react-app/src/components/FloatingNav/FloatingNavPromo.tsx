@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import EditButton from "../Buttons/EditButton";
 import CtaButton from "../Buttons/CtaButton";
 
 type Props = {
-  entryId: string;
+  
 };
 
 const styles: React.CSSProperties = {
@@ -15,7 +14,7 @@ const styles: React.CSSProperties = {
   zIndex: 9999,
 };
 
-const FloatingNavBuilder = ({ entryId }: Props) => {
+const FloatingNavPromo = (props: Props) => {
   const [cta, setCta] = useState<string[]>([]);
   useEffect(() => {
     const elements = document.getElementsByTagName("a");
@@ -31,10 +30,9 @@ const FloatingNavBuilder = ({ entryId }: Props) => {
   }, [setCta]);
   return (
     <div style={styles}>
-      <EditButton funnelId={entryId} />
       {cta.map((offerCta) => <CtaButton link={offerCta} />)}
     </div>
   );
 };
 
-export default FloatingNavBuilder;
+export default FloatingNavPromo;
