@@ -42,27 +42,30 @@ const UpsellSelector = ({ data, setShow }: Props) => {
         <ul>
           {data.offers.map((offer: any, index: number) => {
             const savings =
-              offer.checkoutData.price - offer.checkoutData.discounted_price;
+              offer.checkoutData?.price - offer.checkoutData?.discounted_price;
             const savingsPercentage =
-              (savings / offer.checkoutData.price) * 100;
+              (savings / offer.checkoutData?.price) * 100;
 
             return (
               <li key={index} style={{ paddingBottom: `20px` }}>
                 <strong>Offer ID</strong>: {offer.offerId} <br />
                 <strong>Product Name</strong>: {offer.productName}
                 <br />
-                <strong>Checkout Title</strong>: {offer.checkoutData.title}
+                <strong>Checkout Title</strong>: {offer.checkoutData?.title}
                 <br />
                 <strong>Checkout Variant ID</strong>:{" "}
-                {offer.checkoutData.variant_id}
+                {offer.checkoutData?.variant_id}
                 <br />
-                <strong>Quantity</strong>: {offer.checkoutData.quantity}
+                <strong>Quantity</strong>: {offer.checkoutData?.quantity}
                 <br />
                 <strong>Retail Price</strong>: {data.currency.symbol}
-                {offer.checkoutData.price}
+                {offer.checkoutData?.price}
+                <br />
+                <strong>Perceived Retail Price</strong>: {data.currency.symbol}
+                {offer.checkoutData?.perceived_rrp}
                 <br />
                 <strong>Discounted Price</strong>: {data.currency.symbol}
-                {offer.checkoutData.discounted_price}
+                {offer.checkoutData?.discounted_price}
                 <br />
                 <strong>Savings</strong>: {data.currency.symbol}
                 {savings.toFixed(2)}{" "}
