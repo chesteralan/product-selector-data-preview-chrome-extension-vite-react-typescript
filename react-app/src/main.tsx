@@ -99,11 +99,10 @@ const startScanningPromo = () => {
   }, 1000);
 };
 
-window.addEventListener("load", startScanningGatsby);
-window.addEventListener("load", startScanningBuilder);
-window.addEventListener("load", startScanningPromo);
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    clearIntervals();
-  }, 10000);
-});
+startScanningGatsby();
+startScanningBuilder();
+startScanningPromo();
+setTimeout(() => {
+  clearIntervals();
+}, 10000);
+
