@@ -1,3 +1,5 @@
+import formatPrice from "../../utils/formatPrice";
+
 type Props = {
   data: any;
   setShow: (value: boolean) => void;
@@ -32,7 +34,7 @@ const PriceStrike: React.CSSProperties = {
   textDecoration: `line-through`
 };
 
-const FunnelSelector = ({ data, setShow }: Props) => {
+const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
   console.log(data)
   const extraData = JSON.parse(data.extra);
   return <>
@@ -54,40 +56,44 @@ const FunnelSelector = ({ data, setShow }: Props) => {
                   {product.checkoutData.variant_id} -{' '}
                   {product.checkoutData.quantity}x -{' '}
                   <span style={PriceStrike}>
-                    {data.currency.symbol}
+                    
                     {product.checkoutData.perceived_rrp}
                   </span>{' '}
-                  {data.currency.symbol}
+                  
                   {product.checkoutData.discounted_price}{' '}
                   <small>
-                    (Savings: {data.currency.symbol}
-                    {(
+                    (Savings: 
+                      {' '}{formatPrice(
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
-                    ).toFixed(2)}
+                    )}
                     {' - '}
                     {(
                       ((product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price) / product.checkoutData.perceived_rrp) * 100
                     ).toFixed(0)}%)
                   </small><br />
-                  <strong>Price per chew <small>({(30 * product.checkoutData.quantity)} chews)</small></strong>: {data.currency.symbol}{(
+                  <strong>Price per chew <small>({(30 * product.checkoutData.quantity)} chews)</small></strong>: {formatPrice(
                       (product.checkoutData.discounted_price / (30 * product.checkoutData.quantity) )
-                    ).toFixed(2)}
-                    {' '}
+                    )}
+                    {' '} 
                     <small>
-                    (Savings: {data.currency.symbol}
-                    {(
+                    (Savings: 
+                      {' '}{formatPrice(
                       (product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price) / (30 * product.checkoutData.quantity)
-                    ).toFixed(2)})
-                    </small>
+                    )})
+                    </small><br />
+                    <strong>Price per tub</strong>: {formatPrice(
+                      (product.checkoutData.discounted_price / (product.checkoutData.quantity) )
+                    )}
+                    {' '}
                   {product.freeGiftData.variantId && (
                     <>
                       <br />
                       <strong>Free Gift</strong>: {product.freeGiftData.variantId} -{' '}
-                      {data.currency.symbol}
-                      {product.free_gift_value}
+                      
+                      {formatPrice(product.free_gift_value)}
                     </>
                   )}
                   {product.discount_code_override.length > 0 && <><br /> <strong>Discount Code Override</strong>: {product.discount_code_override.join(', ')}</>}
@@ -109,22 +115,22 @@ const FunnelSelector = ({ data, setShow }: Props) => {
                   {product.checkoutData.variant_id} -{' '}
                   {product.checkoutData.quantity}x -{' '}
                   <span style={PriceStrike}>
-                    {data.currency.symbol}
+                    
                     {product.checkoutData.perceived_rrp}
                   </span>{' '}
-                  {data.currency.symbol}
+                  
                   {product.checkoutData.discounted_price}{' '}
                   <small>
-                    (Savings: {data.currency.symbol}
-                    {(
+                    (Savings: 
+                      {' '}{formatPrice(
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
-                    ).toFixed(2)}
+                    )}
                     {' - '}
                     {(
                       ((product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price) / product.checkoutData.perceived_rrp) * 100
-                    ).toFixed(0)}%)
+                    ).toFixed(2)}%)
                   </small>{' '}
                   <br /> <strong>Discount Code</strong>: {product.productRef.product.discountCode}
                   {product.higher_initial_discount && <><br /> <strong>Higher Initial Discount</strong>: {product.higher_initial_discount}</>}
@@ -149,33 +155,33 @@ const FunnelSelector = ({ data, setShow }: Props) => {
                   {product.checkoutData.variant_id} -{' '}
                   {product.checkoutData.quantity}x -{' '}
                   <span style={PriceStrike}>
-                    {data.currency.symbol}
+                    
                     {product.checkoutData.perceived_rrp}
                   </span>{' '}
-                  {data.currency.symbol}
+                  
                   {product.checkoutData.discounted_price}{' '}
                   <small>
-                    (Savings: {data.currency.symbol}
-                    {(
+                    (Savings: 
+                      {' '}{formatPrice(
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
-                    ).toFixed(2)}
+                    )}
                     {' - '}
                     {(
                       ((product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price) / product.checkoutData.perceived_rrp) * 100
                     ).toFixed(0)}%)
                   </small><br />
-                  <strong>Price per chew <small>({(30 * product.checkoutData.quantity)} chews)</small></strong>: {data.currency.symbol}{(
+                  <strong>Price per chew <small>({(30 * product.checkoutData.quantity)} chews)</small></strong>: {formatPrice(
                       (product.checkoutData.discounted_price / (30 * product.checkoutData.quantity) )
-                    ).toFixed(2)}
+                    )}
                     {' '}
                     <small>
-                    (Savings: {data.currency.symbol}
-                    {(
+                    (Savings: 
+                      {' '}{formatPrice(
                       (product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price) / (30 * product.checkoutData.quantity)
-                    ).toFixed(2)})
+                    )})
                     </small>
                   {product.upsell_url && <><br /> <strong>Upsell URL Override</strong>: <small><a href={`${product.upsell_url}/token`} target="_blank">{product.upsell_url}</a></small></>}
                 </li>
@@ -192,22 +198,22 @@ const FunnelSelector = ({ data, setShow }: Props) => {
                   {product.checkoutData.variant_id} -{' '}
                   {product.checkoutData.quantity}x -{' '}
                   <span style={PriceStrike}>
-                    {data.currency.symbol}
+                    
                     {product.checkoutData.perceived_rrp}
                   </span>{' '}
-                  {data.currency.symbol}
+                  
                   {product.checkoutData.discounted_price}{' '}
                   <small>
-                    (Savings: {data.currency.symbol}
-                    {(
+                    (Savings: 
+                      {' '}{formatPrice(
                       product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price
-                    ).toFixed(2)}
+                    )}
                     {' - '}
                     {(
                       ((product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price) / product.checkoutData.perceived_rrp) * 100
-                    ).toFixed(0)}%)
+                    ).toFixed(2)}%)
                   </small>{' '}
                   <br /> <strong>Discount Code</strong>: {product.productRef.product.discountCode}
                   {product.higher_initial_discount && <><br /> <strong>Higher Initial Discount</strong>: {product.higher_initial_discount}</>}
@@ -230,7 +236,7 @@ const FunnelSelector = ({ data, setShow }: Props) => {
             <p>
               <u>Currency:</u>{' '}
               <strong>
-                {data.currency.code} - {data.currency.symbol}
+                {data.currency.code} - 
               </strong>
             </p>
             <p>
@@ -247,4 +253,4 @@ const FunnelSelector = ({ data, setShow }: Props) => {
   </>;
 }
 
-export default FunnelSelector;
+export default FunnelSelectorGatsby;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { hasProductData, hasUpsellData, hasFunnelData } from "../../utils/hasProductData";
 import { isUpsell } from "../../utils/isUpsell";
-import FunnelSelector from "../FunnelSelector/FunnelSelector";
+import FunnelSelector from "../FunnelSelector/FunnelSelectorGatsby";
 import UpsellSelector from "../UpsellSelector/UpsellSelector";
 import { getPathname } from '../../utils/getPathname';
 
@@ -30,7 +30,7 @@ const styles: React.CSSProperties = {
   left: `0px`,
   zIndex: 9999,
 };
-const ProductsData = (props: Props) => {
+const ProductsDataGatsby = (props: Props) => {
   const [found, setFound] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [showUpsell, setShowUpsell] = useState<boolean>(false);
@@ -77,4 +77,4 @@ const ProductsData = (props: Props) => {
   ) : null;
 };
 
-export default ProductsData;
+export default ProductsDataGatsby;
