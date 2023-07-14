@@ -87,13 +87,17 @@ const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
                 <br />
                 <strong>Quantity</strong>: {item.quantity}
                 <br />
-                <strong>RRP</strong>: {formatPrice(item.perceived_rrp)}
+                <strong>RRP</strong>:{" "}
+                {formatPrice(item.perceived_rrp, item.country)}
                 <br />
                 <strong>Sales Price</strong>:{" "}
-                {formatPrice(item.discounted_price)}
+                {formatPrice(item.discounted_price, item.country)}
                 <br />
                 <strong>Savings</strong>:{" "}
-                {formatPrice(item.perceived_rrp - item.discounted_price)}{" "}
+                {formatPrice(
+                  item.perceived_rrp - item.discounted_price,
+                  item.country
+                )}{" "}
                 {" - "}
                 <small>
                   {(
@@ -107,18 +111,26 @@ const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
                 <strong>
                   Price per chew <small>({30 * item.quantity} chews)</small>
                 </strong>
-                : {formatPrice(item.discounted_price / (30 * item.quantity))}{" "}
+                :{" "}
+                {formatPrice(
+                  item.discounted_price / (30 * item.quantity),
+                  item.country
+                )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     (item.perceived_rrp - item.discounted_price) /
-                      (30 * item.quantity)
+                      (30 * item.quantity),
+                    item.country
                   )}
                   )
                 </small>
                 <br />
                 <strong>Price per tub</strong>:{" "}
-                {formatPrice(item.discounted_price / item.quantity)}
+                {formatPrice(
+                  item.discounted_price / item.quantity,
+                  item.country
+                )}
                 <br />
                 <strong>Discount Code Override</strong>: no data
                 <br /> <strong>Higher Initial Discount</strong>: no data
@@ -141,16 +153,15 @@ const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
               const bumpOfferDC = bumpOffer.discountCode.data.attributes.code;
 
               const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?variant_id=${bumpOffer.price.variantID}&discount_code=${bumpOfferDC}&quantity=1`;
-            
+
               return (
                 <li key={index} style={UListItem}>
                   <strong>Name</strong>: {bumpOffer.label}
                   <br />
-                  <strong>Variant ID</strong>: {" "}
+                  <strong>Variant ID</strong>:{" "}
                   <a href={variantLink} target="_blank" style={ALink}>
-                  {bumpOffer.price.variantID}
-                </a>
-                 
+                    {bumpOffer.price.variantID}
+                  </a>
                   <br />
                   <strong>Quantity</strong>: 1
                   <br />
@@ -195,13 +206,17 @@ const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
                 <br />
                 <strong>Quantity</strong>: {item.quantity}
                 <br />
-                <strong>RRP</strong>: {formatPrice(item.perceived_rrp)}
+                <strong>RRP</strong>:{" "}
+                {formatPrice(item.perceived_rrp, item.country)}
                 <br />
                 <strong>Sales Price</strong>:{" "}
-                {formatPrice(item.discounted_price)}
+                {formatPrice(item.discounted_price, item.country)}
                 <br />
                 <strong>Savings</strong>:{" "}
-                {formatPrice(item.perceived_rrp - item.discounted_price)}{" "}
+                {formatPrice(
+                  item.perceived_rrp - item.discounted_price,
+                  item.country
+                )}{" "}
                 {" - "}
                 <small>
                   {(
@@ -215,19 +230,27 @@ const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
                 <strong>
                   Price per chew <small>({30 * item.quantity} chews)</small>
                 </strong>
-                : {formatPrice(item.discounted_price / (30 * item.quantity))}{" "}
+                :{" "}
+                {formatPrice(
+                  item.discounted_price / (30 * item.quantity),
+                  item.country
+                )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     (item.perceived_rrp - item.discounted_price) /
-                      (30 * item.quantity)
+                      (30 * item.quantity),
+                    item.country
                   )}
                   )
                 </small>
                 <br />
                 <strong>Price per tub</strong>:{" "}
-                {formatPrice(item.discounted_price / item.quantity)} <br />{" "}
-                <strong>Discount Code Override</strong>: no data
+                {formatPrice(
+                  item.discounted_price / item.quantity,
+                  item.country
+                )}{" "}
+                <br /> <strong>Discount Code Override</strong>: no data
                 <br /> <strong>Higher Initial Discount</strong>: no data
                 <br /> <strong>Rebill Code</strong>: no data
                 <br /> <strong>Price Setting Tag</strong>: no data
@@ -248,15 +271,15 @@ const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
               const bumpOfferDC = bumpOffer.discountCode.data.attributes.code;
 
               const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?variant_id=${bumpOffer.price.variantID}&discount_code=${bumpOfferDC}&quantity=1`;
-            
+
               return (
                 <li key={index} style={UListItem}>
                   <strong>Name</strong>: {bumpOffer.label}
                   <br />
-                  <strong>Variant ID</strong>: {" "}
+                  <strong>Variant ID</strong>:{" "}
                   <a href={variantLink} target="_blank" style={ALink}>
-                  {bumpOffer.price.variantID}
-                </a>
+                    {bumpOffer.price.variantID}
+                  </a>
                   <br />
                   <strong>Quantity</strong>: 1
                   <br />

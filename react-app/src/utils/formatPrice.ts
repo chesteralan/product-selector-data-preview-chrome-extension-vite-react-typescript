@@ -1,5 +1,9 @@
 const locale = (region:string = 'US'):string => {
     switch(region) {
+        case 'CA':
+            return 'en-US';
+        case 'GB':
+            return 'en-US';
         case 'US':
         default:
             return 'en-US';
@@ -8,6 +12,10 @@ const locale = (region:string = 'US'):string => {
 
 const currency = (region:string = 'US'):string => {
     switch(region) {
+        case 'CA':
+            return 'CAD';
+        case 'GB':
+            return 'GBP';
         case 'US':
         default:
             return 'USD';

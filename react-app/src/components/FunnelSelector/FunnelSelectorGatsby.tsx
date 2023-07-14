@@ -77,15 +77,22 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 {product.checkoutData.perceived_rrp !==
                 product.checkoutData.discounted_price ? (
                   <span style={PriceStrike}>
-                    {formatPrice(product.checkoutData.perceived_rrp)}
+                    {formatPrice(
+                      product.checkoutData.perceived_rrp,
+                      product.checkoutData.country
+                    )}
                   </span>
                 ) : null}{" "}
-                {formatPrice(product.checkoutData.discounted_price)}{" "}
+                {formatPrice(
+                  product.checkoutData.discounted_price,
+                  product.checkoutData.country
+                )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     product.checkoutData.perceived_rrp -
-                      product.checkoutData.discounted_price
+                      product.checkoutData.discounted_price,
+                    product.checkoutData.country
                   )}
                   {" - "}
                   {(
@@ -104,14 +111,16 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 :{" "}
                 {formatPrice(
                   product.checkoutData.discounted_price /
-                    (30 * product.checkoutData.quantity)
+                    (30 * product.checkoutData.quantity),
+                  product.checkoutData.country
                 )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     (product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price) /
-                      (30 * product.checkoutData.quantity)
+                      (30 * product.checkoutData.quantity),
+                    product.checkoutData.country
                   )}
                   )
                 </small>
@@ -119,13 +128,15 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 <strong>Price per tub</strong>:{" "}
                 {formatPrice(
                   product.checkoutData.discounted_price /
-                    product.checkoutData.quantity
+                    product.checkoutData.quantity,
+                  product.checkoutData.country
                 )}{" "}
                 {product.freeGiftData.variantId && (
                   <>
                     <br />
-                    <strong>Free Gift</strong>: {product.freeGiftData.variantId}{" "}
-                    - {formatPrice(product.free_gift_value)}
+                    <strong>Free Gift</strong>: 
+                    {product.freeGiftData.variantId}{" "}
+                    - {formatPrice(product.free_gift_value,product.checkoutData.country)}
                   </>
                 )}
                 {product.discount_code_override.length > 0 && (
@@ -182,14 +193,21 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 </a>{" "}
                 - {product.checkoutData.quantity}x -{" "}
                 <span style={PriceStrike}>
-                  {formatPrice(product.checkoutData.perceived_rrp)}
+                  {formatPrice(
+                    product.checkoutData.perceived_rrp,
+                    product.checkoutData.country
+                  )}
                 </span>{" "}
-                {formatPrice(product.checkoutData.discounted_price)}{" "}
+                {formatPrice(
+                  product.checkoutData.discounted_price,
+                  product.checkoutData.country
+                )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     product.checkoutData.perceived_rrp -
-                      product.checkoutData.discounted_price
+                      product.checkoutData.discounted_price,
+                    product.checkoutData.country
                   )}
                   {" - "}
                   {(
@@ -248,15 +266,22 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 {product.checkoutData.perceived_rrp !==
                 product.checkoutData.discounted_price ? (
                   <span style={PriceStrike}>
-                    {formatPrice(product.checkoutData.perceived_rrp)}
+                    {formatPrice(
+                      product.checkoutData.perceived_rrp,
+                      product.checkoutData.country
+                    )}
                   </span>
                 ) : null}{" "}
-                {formatPrice(product.checkoutData.discounted_price)}{" "}
+                {formatPrice(
+                  product.checkoutData.discounted_price,
+                  product.checkoutData.country
+                )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     product.checkoutData.perceived_rrp -
-                      product.checkoutData.discounted_price
+                      product.checkoutData.discounted_price,
+                    product.checkoutData.country
                   )}
                   {" - "}
                   {(
@@ -275,14 +300,16 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 :{" "}
                 {formatPrice(
                   product.checkoutData.discounted_price /
-                    (30 * product.checkoutData.quantity)
+                    (30 * product.checkoutData.quantity),
+                  product.checkoutData.country
                 )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     (product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price) /
-                      (30 * product.checkoutData.quantity)
+                      (30 * product.checkoutData.quantity),
+                    product.checkoutData.country
                   )}
                   )
                 </small>
@@ -290,7 +317,8 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 <strong>Price per tub</strong>:{" "}
                 {formatPrice(
                   product.checkoutData.discounted_price /
-                    product.checkoutData.quantity
+                    product.checkoutData.quantity,
+                  product.checkoutData.country
                 )}{" "}
                 {product.upsell_url && (
                   <>
@@ -322,14 +350,21 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 </a>{" "}
                 - {product.checkoutData.quantity}x -{" "}
                 <span style={PriceStrike}>
-                  {formatPrice(product.checkoutData.perceived_rrp)}
+                  {formatPrice(
+                    product.checkoutData.perceived_rrp,
+                    product.checkoutData.country
+                  )}
                 </span>{" "}
-                {formatPrice(product.checkoutData.discounted_price)}{" "}
+                {formatPrice(
+                  product.checkoutData.discounted_price,
+                  product.checkoutData.country
+                )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     product.checkoutData.perceived_rrp -
-                      product.checkoutData.discounted_price
+                      product.checkoutData.discounted_price,
+                    product.checkoutData.country
                   )}
                   {" - "}
                   {(
