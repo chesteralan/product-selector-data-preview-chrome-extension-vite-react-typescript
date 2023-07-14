@@ -33,6 +33,19 @@ const PriceStrike: React.CSSProperties = {
   textDecoration: `line-through`,
 };
 
+const UList: React.CSSProperties = {
+  paddingLeft: 20,
+  listStyle: "disc",
+};
+
+const UListItem: React.CSSProperties = {
+  marginBottom: 20,
+};
+
+const ALink: React.CSSProperties = {
+  textDecoration: "underline",
+};
+
 const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
   console.log(data);
 
@@ -49,178 +62,226 @@ const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
     <>
       <div style={DataWrapper} onClick={() => setShow(false)} />
       <div style={DataContainer}>
-        <h3>Subscriptions:</h3>
         <p>
-              <u>Discount Code:</u>{' '}
-              <strong>{discountCodes}</strong>
-            </p>
-        <p>
-              <u>Products</u>
-            </p>
-            <ul>
-              {subPrices.map((item:any,index:number) => {
-
-
-                return (
-                <li key={index} style={{ marginBottom: 20}}>
-                  <strong>{item.title}</strong>
-                  <br />
-                  {item.variant_id} -{' '}
-                  {item.quantity}x -{' '}
-                  <span style={PriceStrike}>
-                    {formatPrice(item.perceived_rrp)}
-                  </span>{' '}
-                  {formatPrice(item.discounted_price)}{' '}
-                  <small>
-                    (Savings:
-                      {' '}{formatPrice(
-                      item.perceived_rrp -
-                      item.discounted_price
-                    )}
-                    {' - '}
-                    {(
-                      ((item.perceived_rrp -
-                      item.discounted_price) / item.perceived_rrp) * 100
-                    ).toFixed(2)}%)
-                  </small><br />
-                  <strong>Price per chew <small>({(30 * item.quantity)} chews)</small></strong>: {formatPrice(
-                      (item.discounted_price / (30 * item.quantity))
-                    )}
-                    {' '}
-                    <small>
-                    (Savings: 
-                      {' '}{formatPrice(
-                      (item.perceived_rrp -
-                      item.discounted_price) / (30 * item.quantity)
-                    )})
-                    </small>
-                    <br />
-                    <strong>Price per tub</strong>: {formatPrice(
-                      (item.discounted_price / (item.quantity) )
-                    )}
-                    {' '}
-                 </li>
-              )})}
-            </ul>
-          <p><u>Bump Offer</u></p>
-          <p>
-          <ul>
-              {subBumpOffers.map((item:any, index:number) => {
-                const bumpOffer = item.attributes;
-                const bumpOfferDC = bumpOffer.discountCode.data.attributes.code;
-                return (
-                <li key={index}>
-                  <strong>{bumpOffer.label}</strong>
-                  <br />
-                  {' '}{bumpOffer.subscriptionVariantID} - 1x -{' '}
-                  <span style={PriceStrike}>
-                    {formatPrice(bumpOffer.price.rrp)}
-                  </span>{' '}
-                  
-                  {formatPrice(bumpOffer.price.salePrice)}{' '}
-                  <small>
-                    (Savings: 
-                      {' '}{formatPrice(
-                      bumpOffer.price.rrp -
-                      bumpOffer.price.salePrice
-                    )}
-                    {' - '}
-                    {(
-                      ((bumpOffer.price.rrp -
-                        bumpOffer.price.salePrice) / bumpOffer.price.rrp) * 100
-                    ).toFixed(2)}%)
-                  </small>{' '}
-                  <br /> <strong>Discount Code</strong>: {bumpOfferDC}
-                </li>
-              )
-              })}
-            </ul>
-            </p>
-        <h3>Onetime:</h3>
-        
-        <p>
-              <u>Products</u>
-            </p>
-            <ul>
-              {otpPrices.map((item:any,index:number) => (
-                <li key={index} style={{ marginBottom: 20}}>
-                  <strong>{item.title}</strong>
-                  <br />
-                  {item.variant_id} -{' '}
-                  {item.quantity}x -{' '}
-                  <span style={PriceStrike}>
-                    {formatPrice(item.perceived_rrp)}
-                  </span>{' '}
-                  {formatPrice(item.discounted_price)}{' '}
-                  <small>
-                    (Savings:
-                      {' '}{formatPrice(
-                      item.perceived_rrp -
-                      item.discounted_price
-                    )}
-                    {' - '}
-                    {(
-                      ((item.perceived_rrp -
-                      item.discounted_price) / item.perceived_rrp) * 100
-                    ).toFixed(2)}%)
-                  </small><br />
-                  <strong>Price per chew <small>({(30 * item.quantity)} chews)</small></strong>: {formatPrice(
-                      (item.discounted_price / (30 * item.quantity))
-                    )}
-                    {' '}
-                    <small>
-                    (Savings: 
-                      {' '}{formatPrice(
-                      (item.perceived_rrp -
-                      item.discounted_price) / (30 * item.quantity)
-                    )})
-                    </small>
-                    <br />
-                    <strong>Price per tub</strong>: {formatPrice(
-                      (item.discounted_price / (item.quantity) )
-                    )}
-                    {' '}
-                 </li>
-              ))}
-            </ul>
-
-
-        <p>
-          <u>Bump Offer</u>
+          <u>Discount Code:</u> <strong>{discountCodes}</strong>
         </p>
         <p>
-          <ul>
-              {otpBumpOffers.map((item:any, index:number) => {
-                const bumpOffer = item.attributes;
-                const bumpOfferDC = bumpOffer.discountCode.data.attributes.code;
-                return (
-                <li key={index}>
-                  <strong>{bumpOffer.label}</strong>
+          <u>Common Upsell URL:</u> <strong>{`no data`}</strong>
+        </p>
+        <br />
+        <h3>Subscriptions:</h3>
+        <p>
+          <u>Products</u>
+        </p>
+        <ul style={UList}>
+          {subPrices.map((item: any, index: number) => {
+            const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?country=${item.country}&variant_id=${item.variant_id}&discount_code=${discountCodes}&quantity=${item.quantity}`;
+            return (
+              <li key={index} style={UListItem}>
+                <strong>Name</strong>: {item.title}
+                <br />
+                <strong>Variant ID</strong>:{" "}
+                <a href={variantLink} target="_blank" style={ALink}>
+                  {item.variant_id}
+                </a>
+                <br />
+                <strong>Quantity</strong>: {item.quantity}
+                <br />
+                <strong>RRP</strong>: {formatPrice(item.perceived_rrp)}
+                <br />
+                <strong>Sales Price</strong>:{" "}
+                {formatPrice(item.discounted_price)}
+                <br />
+                <strong>Savings</strong>:{" "}
+                {formatPrice(item.perceived_rrp - item.discounted_price)}{" "}
+                {" - "}
+                <small>
+                  {(
+                    ((item.perceived_rrp - item.discounted_price) /
+                      item.perceived_rrp) *
+                    100
+                  ).toFixed(2)}
+                  %
+                </small>
+                <br />
+                <strong>
+                  Price per chew <small>({30 * item.quantity} chews)</small>
+                </strong>
+                : {formatPrice(item.discounted_price / (30 * item.quantity))}{" "}
+                <small>
+                  (Savings:{" "}
+                  {formatPrice(
+                    (item.perceived_rrp - item.discounted_price) /
+                      (30 * item.quantity)
+                  )}
+                  )
+                </small>
+                <br />
+                <strong>Price per tub</strong>:{" "}
+                {formatPrice(item.discounted_price / item.quantity)}
+                <br />
+                <strong>Discount Code Override</strong>: no data
+                <br /> <strong>Higher Initial Discount</strong>: no data
+                <br /> <strong>Rebill Code</strong>: no data
+                <br /> <strong>Price Setting Tag</strong>: no data
+                <br />
+                <strong>Upsell URL:</strong>: {`no data`}
+                <br />
+              </li>
+            );
+          })}
+        </ul>
+        <p>
+          <u>Bump Offers</u>
+        </p>
+        <p>
+          <ul style={UList}>
+            {subBumpOffers.map((item: any, index: number) => {
+              const bumpOffer = item.attributes;
+              const bumpOfferDC = bumpOffer.discountCode.data.attributes.code;
+
+              const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?variant_id=${bumpOffer.price.variantID}&discount_code=${bumpOfferDC}&quantity=1`;
+            
+              return (
+                <li key={index} style={UListItem}>
+                  <strong>Name</strong>: {bumpOffer.label}
                   <br />
-                  {' '}{bumpOffer.price.variantID} - 1x -{' '}
-                  <span style={PriceStrike}>
-                    {formatPrice(bumpOffer.price.rrp)}
-                  </span>{' '}
-                  
-                  {formatPrice(bumpOffer.price.salePrice)}{' '}
+                  <strong>Variant ID</strong>: {" "}
+                  <a href={variantLink} target="_blank" style={ALink}>
+                  {bumpOffer.price.variantID}
+                </a>
+                 
+                  <br />
+                  <strong>Quantity</strong>: 1
+                  <br />
+                  <strong>RRP</strong>: {formatPrice(bumpOffer.price.rrp)}
+                  <br />
+                  <strong>Sales Price</strong>:{" "}
+                  {formatPrice(bumpOffer.price.salePrice)}
+                  <br />
+                  <strong>Savings</strong>:{" "}
+                  {formatPrice(bumpOffer.price.rrp - bumpOffer.price.salePrice)}{" "}
+                  {" - "}
                   <small>
-                    (Savings: 
-                      {' '}{formatPrice(
-                      bumpOffer.price.rrp -
-                      bumpOffer.price.salePrice
-                    )}
-                    {' - '}
                     {(
-                      ((bumpOffer.price.rrp -
-                        bumpOffer.price.salePrice) / bumpOffer.price.rrp) * 100
-                    ).toFixed(2)}%)
-                  </small>{' '}
+                      ((bumpOffer.price.rrp - bumpOffer.price.salePrice) /
+                        bumpOffer.price.rrp) *
+                      100
+                    ).toFixed(2)}
+                    %
+                  </small>
                   <br /> <strong>Discount Code</strong>: {bumpOfferDC}
                 </li>
-              )
-              })}
-            </ul>
-            </p>
+              );
+            })}
+          </ul>
+        </p>
+        <br /> <h3>Onetime:</h3>
+        <p>
+          <u>Products</u>
+        </p>
+        <ul style={UList}>
+          {otpPrices.map((item: any, index: number) => {
+            const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?country=${item.country}&variant_id=${item.variant_id}&discount_code=${discountCodes}&quantity=${item.quantity}`;
+
+            return (
+              <li key={index} style={UListItem}>
+                <strong>Name</strong>: {item.title}
+                <br />
+                <strong>Variant ID</strong>:{" "}
+                <a href={variantLink} target="_blank" style={ALink}>
+                  {item.variant_id}
+                </a>
+                <br />
+                <strong>Quantity</strong>: {item.quantity}
+                <br />
+                <strong>RRP</strong>: {formatPrice(item.perceived_rrp)}
+                <br />
+                <strong>Sales Price</strong>:{" "}
+                {formatPrice(item.discounted_price)}
+                <br />
+                <strong>Savings</strong>:{" "}
+                {formatPrice(item.perceived_rrp - item.discounted_price)}{" "}
+                {" - "}
+                <small>
+                  {(
+                    ((item.perceived_rrp - item.discounted_price) /
+                      item.perceived_rrp) *
+                    100
+                  ).toFixed(2)}
+                  %
+                </small>
+                <br />
+                <strong>
+                  Price per chew <small>({30 * item.quantity} chews)</small>
+                </strong>
+                : {formatPrice(item.discounted_price / (30 * item.quantity))}{" "}
+                <small>
+                  (Savings:{" "}
+                  {formatPrice(
+                    (item.perceived_rrp - item.discounted_price) /
+                      (30 * item.quantity)
+                  )}
+                  )
+                </small>
+                <br />
+                <strong>Price per tub</strong>:{" "}
+                {formatPrice(item.discounted_price / item.quantity)} <br />{" "}
+                <strong>Discount Code Override</strong>: no data
+                <br /> <strong>Higher Initial Discount</strong>: no data
+                <br /> <strong>Rebill Code</strong>: no data
+                <br /> <strong>Price Setting Tag</strong>: no data
+                <br />
+                <strong>Upsell URL:</strong>: {`no data`}
+                <br />
+              </li>
+            );
+          })}
+        </ul>
+        <p>
+          <u>Bump Offers</u>
+        </p>
+        <p>
+          <ul style={UList}>
+            {otpBumpOffers.map((item: any, index: number) => {
+              const bumpOffer = item.attributes;
+              const bumpOfferDC = bumpOffer.discountCode.data.attributes.code;
+
+              const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?variant_id=${bumpOffer.price.variantID}&discount_code=${bumpOfferDC}&quantity=1`;
+            
+              return (
+                <li key={index} style={UListItem}>
+                  <strong>Name</strong>: {bumpOffer.label}
+                  <br />
+                  <strong>Variant ID</strong>: {" "}
+                  <a href={variantLink} target="_blank" style={ALink}>
+                  {bumpOffer.price.variantID}
+                </a>
+                  <br />
+                  <strong>Quantity</strong>: 1
+                  <br />
+                  <strong>RRP</strong>: {formatPrice(bumpOffer.price.rrp)}
+                  <br />
+                  <strong>Sales Price</strong>:{" "}
+                  {formatPrice(bumpOffer.price.salePrice)}
+                  <br />
+                  <strong>Savings</strong>:{" "}
+                  {formatPrice(bumpOffer.price.rrp - bumpOffer.price.salePrice)}{" "}
+                  {" - "}
+                  <small>
+                    {(
+                      ((bumpOffer.price.rrp - bumpOffer.price.salePrice) /
+                        bumpOffer.price.rrp) *
+                      100
+                    ).toFixed(2)}
+                    %
+                  </small>
+                  <br /> <strong>Discount Code</strong>: {bumpOfferDC}
+                </li>
+              );
+            })}
+          </ul>
+        </p>
       </div>
     </>
   );

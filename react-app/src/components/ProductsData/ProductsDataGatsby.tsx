@@ -38,7 +38,9 @@ const ProductsDataGatsby = (props: Props) => {
   const [selectorData, setSelectorData] = useState(null);
 
   useEffect(() => {
-    const pageData = `/page-data${getPathname(window)}/page-data.json`;
+    const pathname = getPathname(window);
+    if(pathname.length <= 1) return () => {};
+    const pageData = `/page-data${pathname}/page-data.json`;
     try {
       fetch(pageData)
         .then(async (response) => {

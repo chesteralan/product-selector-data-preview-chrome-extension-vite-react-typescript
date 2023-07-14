@@ -34,6 +34,7 @@ const startScanningGatsby = () => {
   window.petLabChromeExtGatsby = setInterval(() => {
     const gatsbyElement = document.getElementById("___gatsby") as HTMLElement;
     if (gatsbyElement) {
+      console.log("Gatsby.js Found!");
       const metaTags = document.getElementsByTagName(
         "meta"
       ) as HTMLCollectionOf<HTMLMetaElement>;
@@ -108,13 +109,12 @@ const startScanningNextJs = () => {
   window.petLabChromeExtNextJs = setInterval(() => {
     const nextJsElement = document.getElementById("__next") as HTMLElement;
     if (nextJsElement) {
+      console.log("Next.js Found!");
       const nextJsData = document.getElementById("__NEXT_DATA__") as HTMLScriptElement;
       const metaTags = document.getElementsByTagName(
         "meta"
       ) as HTMLCollectionOf<HTMLMetaElement>;
-      const funnelId = metaTags.namedItem("funnel-id");
-      const productSelectorId = metaTags.namedItem("product-selector-id");
-      if (funnelId && productSelectorId) {
+      
         console.log("PetLab Funnel detected...");
 
         const targetElement = document.createElement("div");
@@ -122,8 +122,6 @@ const startScanningNextJs = () => {
         ReactDOM.createRoot(targetElement).render(
           <React.StrictMode>
             <AppNextJs
-              funnelId={funnelId?.content}
-              productSelectorId={productSelectorId?.content}
               data={JSON.parse(nextJsData.outerText)}
             />
           </React.StrictMode>
@@ -131,14 +129,14 @@ const startScanningNextJs = () => {
 
         document.body.appendChild(targetElement);
         clearIntervals();
-      }
+      
     }
   }, 1000);
 };
 
-// startScanningGatsby();
-// startScanningBuilder();
-// startScanningPromo();
+startScanningGatsby();
+startScanningBuilder();
+startScanningPromo();
 startScanningNextJs();
 setTimeout(() => {
   clearIntervals();
