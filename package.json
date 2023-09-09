@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "yarn --cwd ./react-app build",
-    "dev": "yarn --cwd ./react-app dev"
+    "dev": "yarn --cwd ./react-app dev",
+    "zip": "node archive.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript/issues"
   },
-  "homepage": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript#readme"
+  "homepage": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript#readme",
+  "dependencies": {
+    "archiver": "^6.0.1"
+  }
 }
