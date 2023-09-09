@@ -59,13 +59,12 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
         </p>
         <ul style={UList}>
           {data.subscription.products.map((product: any, index: number) => {
+            const productDC = product.discount_code_override.length > 0 ? product.discount_code_override.join(",") : data.subscription.discounts.join(",")
             const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?country=${
               product.checkoutData.country
             }&variant_id=${
               product.checkoutData.variant_id
-            }&discount_code=${data.subscription.discounts.join(
-              ", "
-            )}&quantity=${product.checkoutData.quantity}`;
+            }&discount_code=${productDC}&quantity=${product.checkoutData.quantity}`;
             return (
               <li key={index} style={UListItem}>
                 <strong>{product.checkoutData.title}</strong>
@@ -252,7 +251,7 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
             }&variant_id=${
               product.checkoutData.variant_id
             }&discount_code=${data.subscription.discounts.join(
-              ", "
+              ","
             )}&quantity=${product.checkoutData.quantity}`;
 
             return (
