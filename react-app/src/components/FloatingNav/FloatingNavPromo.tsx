@@ -19,7 +19,7 @@ const FloatingNavPromo = (props: Props) => {
   useEffect(() => {
     const elements = document.getElementsByTagName("a");
     const ctas = Array.from(new Set(Array.from(elements).map((element) => {
-      if((/(\/\/offer\.thepetlabco\.com|\/\/offer\.thepetlabco\.ca|\/\/offer\.thepetlabco\.de|\/\/offer\.petlabco\.co\.uk)/g).test(element.href)) {
+      if((/(\/\/offer\.thepetlabco\.com|\/\/offer\.thepetlabco\.ca|\/\/offer\.thepetlabco\.de|\/\/offer\.petlabco\.co\.uk|\/\/offers\.thepetlabco\.com|\/\/offers\.thepetlabco\.ca|\/\/offers\.thepetlabco\.de|\/\/offers\.petlabco\.co\.uk)/g).test(element.href)) {
             return element.href
         }
     }).filter(Boolean)));
