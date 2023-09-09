@@ -1,5 +1,5 @@
 import FloatingNav from './components/FloatingNav/FloatingNav';
-import ProductsData from './components/ProductsData/ProductsData';
+import ProductsDataGatsby from './components/ProductsData/ProductsDataGatsby';
 
 type Props = {
   funnelId: string;
@@ -11,7 +11,7 @@ function AppGatsby(props: Props) {
   return (
     <>
       <FloatingNav {...props} />
-      <ProductsData />
+      <ProductsDataGatsby />
     </>
   )
 }

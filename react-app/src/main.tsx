@@ -3,12 +3,14 @@ import ReactDOM from "react-dom/client";
 import AppGatsby from "./AppGatsby";
 import AppBuilder from "./AppBuilder";
 import AppPromo from "./AppPromo";
+import AppNextJs from "./AppNextJs";
 
 declare global {
   interface Window {
     petLabChromeExtGatsby: any;
     petLabChromeExtBuilder: any;
     petLabChromeExtPromo: any;
+    petLabChromeExtNextJs: any;
   }
 }
 
@@ -23,12 +25,16 @@ const clearIntervals = () => {
   if (window.petLabChromeExtPromo) {
     clearInterval(window.petLabChromeExtPromo);
   }
+  if (window.petLabChromeExtNextJs) {
+    clearInterval(window.petLabChromeExtNextJs);
+  }
 };
 
 const startScanningGatsby = () => {
   window.petLabChromeExtGatsby = setInterval(() => {
     const gatsbyElement = document.getElementById("___gatsby") as HTMLElement;
     if (gatsbyElement) {
+      console.log("Gatsby.js Found!");
       const metaTags = document.getElementsByTagName(
         "meta"
       ) as HTMLCollectionOf<HTMLMetaElement>;
@@ -99,9 +105,39 @@ const startScanningPromo = () => {
   }, 1000);
 };
 
+const startScanningNextJs = () => {
+  window.petLabChromeExtNextJs = setInterval(() => {
+    const nextJsElement = document.getElementById("__next") as HTMLElement;
+    if (nextJsElement) {
+      console.log("Next.js Found!");
+      const nextJsData = document.getElementById("__NEXT_DATA__") as HTMLScriptElement;
+      const metaTags = document.getElementsByTagName(
+        "meta"
+      ) as HTMLCollectionOf<HTMLMetaElement>;
+      
+        console.log("PetLab Funnel detected...");
+
+        const targetElement = document.createElement("div");
+
+        ReactDOM.createRoot(targetElement).render(
+          <React.StrictMode>
+            <AppNextJs
+              data={JSON.parse(nextJsData.outerText)}
+            />
+          </React.StrictMode>
+        );
+
+        document.body.appendChild(targetElement);
+        clearIntervals();
+      
+    }
+  }, 1000);
+};
+
 startScanningGatsby();
 startScanningBuilder();
 startScanningPromo();
+startScanningNextJs();
 setTimeout(() => {
   clearIntervals();
 }, 10000);
