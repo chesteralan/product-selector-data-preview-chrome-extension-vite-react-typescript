@@ -4,6 +4,7 @@ import AppGatsby from "./AppGatsby";
 import AppBuilder from "./AppBuilder";
 import AppPromo from "./AppPromo";
 import AppNextJs from "./AppNextJs";
+import { PRESELL_SITES } from "./utils/constants/presells";
 
 declare global {
   interface Window {
@@ -88,8 +89,8 @@ const startScanningBuilder = () => {
 
 const startScanningPromo = () => {
   window.petLabChromeExtPromo = setInterval(() => {
-    if (["https://promo.thepetlabco.com","https://campaigns.thepetlabco.com"].includes(window.origin)) {
-      console.log("Promo Presell detected...");
+    if (PRESELL_SITES.some(v => window.origin.includes(v))) {
+      console.log("Presell Site detected...");
 
       const targetElement = document.createElement("div");
 
@@ -115,7 +116,7 @@ const startScanningNextJs = () => {
         "meta"
       ) as HTMLCollectionOf<HTMLMetaElement>;
       
-        console.log("PetLab Funnel detected...");
+        console.log("PetLab Funnel detected...", JSON.parse(nextJsData.outerText));
 
         const targetElement = document.createElement("div");
 
@@ -129,7 +130,6 @@ const startScanningNextJs = () => {
 
         document.body.appendChild(targetElement);
         clearIntervals();
-      
     }
   }, 1000);
 };
