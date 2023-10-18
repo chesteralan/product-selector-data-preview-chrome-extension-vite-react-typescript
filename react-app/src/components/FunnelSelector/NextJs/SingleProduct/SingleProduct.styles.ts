@@ -38,3 +38,9 @@ export const UListItem: React.CSSProperties = {
 export const ALink: React.CSSProperties = {
   textDecoration: "underline",
 };
+
+export const LocaleLink: React.CSSProperties = {
+  textDecoration: "underline",
+  marginRight: 10,
+  textTransform: "uppercase"
+};

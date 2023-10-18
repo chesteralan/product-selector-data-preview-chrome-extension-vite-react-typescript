@@ -13,6 +13,14 @@ export const getSiteRegion = (window: Window): string => {
         "uk-gatsby-funnels.netlify.app": `UK`,
         "canada-funnels-production.netlify.app": `CA`,
 
+        // next.js funnels
+        "offers.thepetlabco.com": `US`,
+        "offers.thepetlabco.ca": `CA`,
+        "offers.thepetlabco.de": `DE`,
+        "offers.petlabco.co.uk": `UK`,
+        "d2fccznrf67q1x.amplifyapp.com": `US`,
+        "d36g79b46uppe6.amplifyapp.com": `CA`,
+
         // upsells
         "ups.thepetlabco.com": `US`,
         "ups.thepetlabco.ca": `CA`,

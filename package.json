@@ -1,12 +1,12 @@
 {
   "name": "product-selector-data-preview-chrome",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "yarn --cwd ./react-app build",
     "dev": "yarn --cwd ./react-app dev",
-    "zip": "node archive.js"
+    "zip": "yarn --cwd ./react-app export && node archive.js"
   },
   "repository": {
     "type": "git",

@@ -1,9 +1,11 @@
 import * as S from './SingleProduct.styles'
-import formatPrice from "../../../utils/formatPrice";
+import formatPrice from "../../../../utils/formatPrice";
 
 type Props = {
     setShow: any;
     discountCodes: string;
+    rebillDiscountCode: string;
+    higherInitialDiscountCode: string;
     subPrices: any;
     subBumpOffers: any;
     otpPrices: any;
@@ -11,12 +13,16 @@ type Props = {
     subUpsellUrl: string;
     otpUpsellUrl: string;
     klaviyoListId: string;
+    locales: string[];
+    slug: string;
 }
 
 const SingleProduct = (props: Props) => {
     
     const { setShow,
         discountCodes,
+        rebillDiscountCode,
+        higherInitialDiscountCode,
         subPrices,
         subBumpOffers,
         otpPrices,
@@ -24,6 +30,8 @@ const SingleProduct = (props: Props) => {
         subUpsellUrl,
         otpUpsellUrl,
         klaviyoListId,
+        locales,
+        slug
     } = props;
 
     return (
@@ -31,8 +39,17 @@ const SingleProduct = (props: Props) => {
           <div style={S.DataWrapper} onClick={() => setShow(false)} />
           <div style={S.DataContainer}>
             <p>
+              <u>Locales:</u> {locales.map((locale) => (<strong><a target="_blank" style={S.LocaleLink} href={`/${locale}/${slug}`}>{locale}</a></strong>))}
+            </p><hr /><br />
+            <p>
               <u>Discount Code:</u> <strong>{discountCodes}</strong>
             </p>
+            {rebillDiscountCode && (<p>
+              <u>Rebill Discount Code:</u> <strong>{rebillDiscountCode}</strong>
+            </p>)}
+            {higherInitialDiscountCode && (<p>
+              <u>Higher Initial Discount Code:</u> <strong>{higherInitialDiscountCode}</strong>
+            </p>)}
             <p>
               <u>Klaviyo List ID:</u> <strong>{klaviyoListId}</strong>
             </p>
@@ -105,11 +122,6 @@ const SingleProduct = (props: Props) => {
                       item.country
                     )}
                     <br />
-                    <strong>Discount Code Override</strong>: no data
-                    <br /> <strong>Higher Initial Discount</strong>: no data
-                    <br /> <strong>Rebill Code</strong>: no data
-                    <br /> <strong>Price Setting Tag</strong>: no data
-                    <br />
                     
                   </li>
                 );
@@ -120,9 +132,8 @@ const SingleProduct = (props: Props) => {
             </p>
             <p>
               <ul style={S.UList}>
-                {subBumpOffers.map((item: any, index: number) => {
-                  const bumpOffer = item.attributes;
-                  const bumpOfferDC = bumpOffer.discountCode.data.attributes.code;
+                {subBumpOffers.map((bumpOffer: any, index: number) => {
+                  const bumpOfferDC = bumpOffer.discountCode.code;
     
                   const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?variant_id=${bumpOffer.subscriptionVariantID}&discount_code=${bumpOfferDC}&quantity=1`;
     
@@ -226,10 +237,6 @@ const SingleProduct = (props: Props) => {
                       item.discounted_price / item.quantity,
                       item.country
                     )}{" "}
-                    <br /> <strong>Discount Code Override</strong>: no data
-                    <br /> <strong>Higher Initial Discount</strong>: no data
-                    <br /> <strong>Rebill Code</strong>: no data
-                    <br /> <strong>Price Setting Tag</strong>: no data
                     <br />
                     
                   </li>
@@ -241,9 +248,8 @@ const SingleProduct = (props: Props) => {
             </p>
             <p>
               <ul style={S.UList}>
-                {otpBumpOffers.map((item: any, index: number) => {
-                  const bumpOffer = item.attributes;
-                  const bumpOfferDC = bumpOffer.discountCode.data.attributes.code;
+                {otpBumpOffers.map((bumpOffer: any, index: number) => {
+                  const bumpOfferDC = bumpOffer.discountCode.code;
     
                   const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?variant_id=${bumpOffer.otpVariantID}&discount_code=${bumpOfferDC}&quantity=1`;
     

@@ -1,6 +1,6 @@
 {
   "name": "Product Selector Preview",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "manifest_version": 3,
   "icons": {
     "16": "/images/16.png",

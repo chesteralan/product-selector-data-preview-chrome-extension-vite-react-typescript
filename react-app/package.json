@@ -1,11 +1,12 @@
 {
   "name": "product-selector-data-preview-chrome",
   "private": true,
-  "version": "1.0.12",
+  "version": "1.0.14",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build --watch",
+    "export": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
