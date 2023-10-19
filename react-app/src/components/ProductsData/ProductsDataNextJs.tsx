@@ -41,14 +41,18 @@ const ProductsDataNextJs = (props: Props) => {
 
     const [show, setShow] = useState<boolean>(false);
 
+    const page = data.props.pageProps?.page;
+    
   return (
     <>
+    {page && <>
       <div style={styles} onClick={() => setShow(!show)}>
         Product Data
       </div>
       {show ? (<>
           <FunnelSelector data={data} setShow={setShow} />
         </>) : null}
+        </>}
       <StrapiEditLinks data={data} />
     </>
   );

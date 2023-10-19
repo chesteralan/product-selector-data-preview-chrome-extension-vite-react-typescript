@@ -10,7 +10,10 @@ type Props = {
 const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
   console.log(data);
 
-  const page = data.props.pageProps.page;
+  const page = data.props.pageProps?.page;
+
+  if(!page) return null;
+
   const product = page.products[0];
   const discountCodes = page.productDiscountCode.code;
   const rebillDiscountCode = page.rebillDiscountCode?.code;
@@ -22,7 +25,6 @@ const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
   const subUpsellUrl = product.subUpsellUrl;
   const otpUpsellUrl = product.otpUpsellUrl;
   const klaviyoListId = product.klaviyoListId;
-
   const locales = data.locales;
   const slug = data.query.slug;
   

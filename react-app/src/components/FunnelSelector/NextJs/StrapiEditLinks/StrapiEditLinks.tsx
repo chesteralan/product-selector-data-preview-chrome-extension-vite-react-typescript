@@ -12,14 +12,14 @@ const StrapiEditLinks = ({ data }: Props) => {
 
     const locale = data.locale;
     const locales = data.locales;
-    const pageId = data.props.pageProps.page.id;
-    const slug = data.query.slug;
+    const pageId = data.props.pageProps?.page?.id;
+    const slug = data.query?.slug;
 
   return (
     <div style={S.Container}>
         <a href={`${strapiServerUrl}/admin`} target="_blank" style={S.Link}>Admin Panel</a>
-        <a href={`${strapiServerUrl}/admin/content-manager/collectionType/api::page.page/${pageId}?plugins[i18n][locale]=${locale}`} target="_blank" style={S.Link}>Edit Page</a>
-        {locales.map((loc:string) => loc !== locale && (<a href={`/${loc}/${slug}`} style={S.Link}>{loc}</a>))}
+        {pageId && (<a href={`${strapiServerUrl}/admin/content-manager/collectionType/api::page.page/${pageId}?plugins[i18n][locale]=${locale}`} target="_blank" style={S.Link}>Edit Page</a>)}
+        {slug && locales.map((loc:string) => loc !== locale && (<a href={`/${loc}/${slug}`} style={S.Link}>{loc}</a>))}
     </div>
   )
 }
