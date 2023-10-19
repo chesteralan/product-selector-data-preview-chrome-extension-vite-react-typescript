@@ -1,5 +1,6 @@
 import * as S from './SingleProduct.styles'
 import formatPrice from "../../../../utils/formatPrice";
+import ShortcutSettings from '../ShortcutSettings/ShortcutSettings';
 
 type Props = {
     setShow: any;
@@ -38,6 +39,7 @@ const SingleProduct = (props: Props) => {
         <>
           <div style={S.DataWrapper} onClick={() => setShow(false)} />
           <div style={S.DataContainer}>
+            <ShortcutSettings />
             <p>
               <u>Locales:</u> {locales.map((locale) => (<strong><a target="_blank" style={S.LocaleLink} href={`/${locale}/${slug}`}>{locale}</a></strong>))}
             </p><hr /><br />

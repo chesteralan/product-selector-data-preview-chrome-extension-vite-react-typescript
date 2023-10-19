@@ -20,6 +20,7 @@ export const DataContainer: React.CSSProperties = {
   left: `calc(50% - 350px)`,
   padding: `30px`,
   overflow: `auto`,
+  fontFamily: "sans-serif",
 };
 
 export const PriceStrike: React.CSSProperties = {

@@ -4,6 +4,7 @@ import { isUpsell } from "../../utils/isUpsell";
 import FunnelSelector from "../FunnelSelector/FunnelSelectorNextJs";
 import UpsellSelector from "../UpsellSelector/UpsellSelector";
 import { getPathname } from '../../utils/getPathname';
+import StrapiEditLinks from "../FunnelSelector/NextJs/StrapiEditLinks/StrapiEditLinks";
 
 type Props = {
     data: any;
@@ -23,14 +24,15 @@ const styles: React.CSSProperties = {
   marginLeft: `10px`,
   borderBottomStyle: `initial`,
   borderBottomColor: `initial`,
-  padding: `10px 10px 5px`,
-  background: `rgb(0, 28, 114)`,
+  padding: `8px 8px 5px`,
+  background: `#2196F3`,
   borderRadius: `10px 10px 0px 0px`,
   color: `rgb(255, 255, 255)`,
   position: `fixed`,
   bottom: `0px`,
   left: `0px`,
   zIndex: 9999,
+  fontSize: 12
 };
 
 const ProductsDataNextJs = (props: Props) => {
@@ -39,16 +41,15 @@ const ProductsDataNextJs = (props: Props) => {
 
     const [show, setShow] = useState<boolean>(false);
 
-
   return (
     <>
       <div style={styles} onClick={() => setShow(!show)}>
         Product Data
       </div>
       {show ? (<>
-        <FunnelSelector data={data} setShow={setShow} />
-        </>
-      ) : null}
+          <FunnelSelector data={data} setShow={setShow} />
+        </>) : null}
+      <StrapiEditLinks data={data} />
     </>
   );
 };
