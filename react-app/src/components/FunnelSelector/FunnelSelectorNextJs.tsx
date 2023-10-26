@@ -9,7 +9,7 @@ type Props = {
 
 const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
   console.log(data);
-
+ 
   const page = data.props.pageProps?.page;
 
   if(!page) return null;

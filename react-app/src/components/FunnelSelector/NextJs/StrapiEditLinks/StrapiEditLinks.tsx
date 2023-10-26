@@ -1,4 +1,4 @@
-import useLocalStorage from '../../../../hooks/useLocalStorage';
+import { useEffect, useState } from 'react';
 import * as S from './StrapiEditLinks.styles'
 
 type Props = {
@@ -6,20 +6,43 @@ type Props = {
 }
 
 const StrapiEditLinks = ({ data }: Props) => {
-    const [strapiServerUrl] = useLocalStorage("strapi-server-url", "");
+    
+    const [strapiServerUrl, setStrapiServerUrl] = useState<string | null>(null);
+    const [stagingUrl, setStagingUrl] = useState<string | null>(null);
+    const [localUrl, setLocalUrl] = useState<string | null>(null);
+    const [liveUrl, setLiveUrl] = useState<string | null>(null);
 
-    if(!strapiServerUrl || strapiServerUrl === "") return null;
+    useEffect(() => {
+      chrome.storage.local.get(["strapiServerUrl","nextjsStagingUrl","nextjsLocalUrl","nextjsLiveUrl"]).then((items) => {
+        setStrapiServerUrl(items.strapiServerUrl);
+        setStagingUrl(items.nextjsStagingUrl);
+        setLocalUrl(items.nextjsLocalUrl);
+        setLiveUrl(items.nextjsLiveUrl);
+      });
+    },[])
 
     const locale = data.locale;
     const locales = data.locales;
     const pageId = data.props.pageProps?.page?.id;
-    const slug = data.query?.slug;
+    const slug = data.query?.slug || null;
+    const variant = data.query?.variant || null;
 
   return (
     <div style={S.Container}>
+      {strapiServerUrl && (<>
         <a href={`${strapiServerUrl}/admin`} target="_blank" style={S.Link}>Admin Panel</a>
         {pageId && (<a href={`${strapiServerUrl}/admin/content-manager/collectionType/api::page.page/${pageId}?plugins[i18n][locale]=${locale}`} target="_blank" style={S.Link}>Edit Page</a>)}
-        {slug && locales.map((loc:string) => loc !== locale && (<a href={`/${loc}/${slug}`} style={S.Link}>{loc}</a>))}
+        {slug && locales.map((loc:string) => loc !== locale && (<a href={`/${loc}/${slug}${variant ? `/${variant}` : ``}`} style={S.Link}>{loc}</a>))}
+        </>)}
+        {stagingUrl && slug && (<>
+          <a href={`${stagingUrl}/${slug}${variant ? `/${variant}` : ``}`} target="_blank" style={S.Link}>Staging</a>
+        </>)}
+        {localUrl && slug && (<>
+          <a href={`${localUrl}/${slug}${variant ? `/${variant}` : ``}`} target="_blank" style={S.Link}>Local</a>
+        </>)}
+        {liveUrl && slug && (<>
+          <a href={`${liveUrl}/${slug}${variant ? `/${variant}` : ``}`} target="_blank" style={S.Link}>Live</a>
+        </>)}
     </div>
   )
 }

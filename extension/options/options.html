@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Product Selector Preview Options</title>
+    <style>
+        .input {
+            padding: 5px;
+            width: 90%;
+        }
+        #save {
+            padding: 5px;
+            margin-top: 10px;
+        }
+    </style>
+  </head>
+  <body>
+    <label>
+        <div>Strapi Server URL</div>
+        <input type="text" id="strapi-server-url" class="input" placeholder="Strapi Server URL"/>
+    </label>
+    <label>
+        <div>Next.js Staging Url</div>
+        <input type="text" id="nextjs-staging-url" class="input" placeholder="Next.js Staging Url"/>
+    </label>
+    <label>
+        <div>Next.js Local Url</div>
+        <input type="text" id="nextjs-local-url" class="input" placeholder="Next.js Local Url"/>
+    </label>
+    <label>
+        <div>Next.js Live Url</div>
+        <input type="text" id="nextjs-live-url" class="input" placeholder="Next.js Live Url"/>
+    </label>
+
+    <div id="status"></div>
+    <button id="save">Save</button>
+
+    <script src="options.js"></script>
+  </body>
+</html>
