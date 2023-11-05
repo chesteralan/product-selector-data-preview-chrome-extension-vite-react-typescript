@@ -1,10 +1,11 @@
-import * as S from '../styles'
-import formatPrice from "../../../../utils/formatPrice";
-import Product from '../Product/Product';
+import { useState } from 'react';
 import BumpOffers from '../BumpOffers/BumpOffers';
+import Product from '../Product/Product';
+import Selector from '../Selector/Selector';
+import * as S from '../styles'
 
 type Props = {
-    setShow: any;
+    setShow: (value: boolean) => void;
     discountCodes: string;
     rebillDiscountCode: string;
     higherInitialDiscountCode: string;
@@ -12,11 +13,11 @@ type Props = {
     otpBumpOffers: any;
     locales: string[];
     slug: string;
-    product:any;
+    products:any[];
 }
 
-const SingleProduct = (props: Props) => {
-    
+const MultipleProducts = (props: Props) => {
+    const [currentProduct, setCurrentProduct] = useState<number>(0)
     const { setShow,
         discountCodes,
         rebillDiscountCode,
@@ -25,19 +26,18 @@ const SingleProduct = (props: Props) => {
         otpBumpOffers,
         locales,
         slug,
-        product
+        products
     } = props;
 
-    const otpPrices = product.prices.otpPrices;
-    const subPrices = product.prices.subPrices;
-    const subUpsellUrl = product.subUpsellUrl;
+    const otpPrices = products[currentProduct].prices.otpPrices;
+    const subPrices = products[currentProduct].prices.subPrices;
+    const subUpsellUrl = products[currentProduct].subUpsellUrl;
 
-    const otpUpsellUrl = product.otpUpsellUrl;
-    const klaviyoListId = product.klaviyoListId;
+    const otpUpsellUrl = products[currentProduct].otpUpsellUrl;
+    const klaviyoListId = products[currentProduct].klaviyoListId;
 
-    return (
-        <>
-          <div style={S.DataWrapper} onClick={() => setShow(false)} />
+  return (<>
+    <div style={S.DataWrapper} onClick={() => setShow(false)} />
           <div style={S.DataContainer}>
             <p>
               <u>Discount Code:</u> <strong>{discountCodes}</strong>
@@ -52,6 +52,8 @@ const SingleProduct = (props: Props) => {
               <u>Klaviyo List ID:</u> <strong>{klaviyoListId}</strong>
             </p>
            
+            <Selector products={products} setCurrentProduct={setCurrentProduct} currentProduct={currentProduct} />
+
             <br />
             <h3>SUBSCRIPTIONS:</h3>
             <hr />
@@ -62,8 +64,8 @@ const SingleProduct = (props: Props) => {
             <Product prices={otpPrices} discountCodes={discountCodes} upsellUrl={otpUpsellUrl} />
             <BumpOffers bumpOffers={otpBumpOffers} />
           </div>
-        </>
-      );
+    </>
+  )
 }
 
-export default SingleProduct
+export default MultipleProducts

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as S from './StrapiEditLinks.styles'
+import { getSiteRegion } from '../../../../utils/getSiteRegion';
 
 type Props = {
     data: any;
@@ -13,12 +14,36 @@ const StrapiEditLinks = ({ data }: Props) => {
     const [liveUrl, setLiveUrl] = useState<string | null>(null);
 
     useEffect(() => {
-      chrome.storage.local.get(["strapiServerUrl","nextjsStagingUrl","nextjsLocalUrl","nextjsLiveUrl"]).then((items) => {
-        setStrapiServerUrl(items.strapiServerUrl);
-        setStagingUrl(items.nextjsStagingUrl);
+
+      chrome.storage.local.get(["nextjsLocalUrl"]).then((items) => {
         setLocalUrl(items.nextjsLocalUrl);
-        setLiveUrl(items.nextjsLiveUrl);
       });
+
+      const region = getSiteRegion(window,true) || "US";
+      console.log(region)
+      switch(region) {
+        case "US":
+          chrome.storage.local.get(["usStrapiServerUrl","usNextjsStagingUrl","usNextjsLiveUrl"]).then((items:any) => {
+            setStrapiServerUrl(items.usStrapiServerUrl);
+            setStagingUrl(items.usNextjsStagingUrl);
+            setLiveUrl(items.usNextjsLiveUrl);
+          });
+          break;
+        case "CA":
+          chrome.storage.local.get(["caStrapiServerUrl","caNextjsStagingUrl","caNextjsLiveUrl"]).then((items:any) => {
+            setStrapiServerUrl(items.caStrapiServerUrl);
+            setStagingUrl(items.caNextjsStagingUrl);
+            setLiveUrl(items.caNextjsLiveUrl);
+          });
+          break;
+        case "UK":
+          chrome.storage.local.get(["ukStrapiServerUrl","ukNextjsStagingUrl","ukNextjsLiveUrl"]).then((items:any) => {
+            setStrapiServerUrl(items.ukStrapiServerUrl);
+            setStagingUrl(items.ukNextjsStagingUrl);
+            setLiveUrl(items.ukNextjsLiveUrl);
+          });
+          break;
+      }
     },[])
 
     const locale = data.locale;

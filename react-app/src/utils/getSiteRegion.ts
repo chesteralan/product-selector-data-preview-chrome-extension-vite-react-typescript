@@ -1,6 +1,18 @@
 type Sites = { [hostname:string]: string }
-export const getSiteRegion = (window: Window): string => {
+export const getSiteRegion = (window: Window, nextjs:boolean = false): string => {
+    
+    const nextjsSites:Sites = {
+        // next.js funnels
+        "offers.thepetlabco.com": `US`,
+        "offers.thepetlabco.ca": `CA`,
+        "offers.thepetlabco.de": `DE`,
+        "offers.petlabco.co.uk": `UK`,
+        "d2fccznrf67q1x.amplifyapp.com": `US`,
+        "d36g79b46uppe6.amplifyapp.com": `CA`,
+    }
+
     const sites:Sites = {
+        ...nextjsSites,
 
         // funnels
         "offer.thepetlabco.com": `US`,
@@ -12,14 +24,6 @@ export const getSiteRegion = (window: Window): string => {
         "petlab-germany-funnels.netlify.app": `DE`,
         "uk-gatsby-funnels.netlify.app": `UK`,
         "canada-funnels-production.netlify.app": `CA`,
-
-        // next.js funnels
-        "offers.thepetlabco.com": `US`,
-        "offers.thepetlabco.ca": `CA`,
-        "offers.thepetlabco.de": `DE`,
-        "offers.petlabco.co.uk": `UK`,
-        "d2fccznrf67q1x.amplifyapp.com": `US`,
-        "d36g79b46uppe6.amplifyapp.com": `CA`,
 
         // upsells
         "ups.thepetlabco.com": `US`,
@@ -39,5 +43,15 @@ export const getSiteRegion = (window: Window): string => {
         hostname = hostname.split("--")[1]
     }
 
-    return sites[hostname] || `US`;
+    let region = sites[hostname] || `US`;
+
+    if(nextjs) {
+        Object.keys(nextjsSites).forEach((site:string) => {
+            if(hostname.includes(site)) {
+                region = nextjsSites[site];
+            }
+        })
+    }
+
+    return region;
 }

@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-import { hasProductData, hasUpsellData, hasFunnelData } from "../../utils/hasProductData";
-import { isUpsell } from "../../utils/isUpsell";
+import {  useState } from "react";
 import FunnelSelector from "../FunnelSelector/FunnelSelectorNextJs";
-import UpsellSelector from "../UpsellSelector/UpsellSelector";
-import { getPathname } from '../../utils/getPathname';
 import StrapiEditLinks from "../FunnelSelector/NextJs/StrapiEditLinks/StrapiEditLinks";
 
 type Props = {

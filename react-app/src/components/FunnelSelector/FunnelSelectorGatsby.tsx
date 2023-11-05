@@ -43,7 +43,7 @@ const UListItem: React.CSSProperties = {
 };
 
 const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
-  console.log(data);
+
   const extraData = JSON.parse(data.extra);
   return (
     <>

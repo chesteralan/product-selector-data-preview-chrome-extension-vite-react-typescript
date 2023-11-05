@@ -7,12 +7,14 @@ export const Container: React.CSSProperties = {
     borderRadius: `0 0 5px 5px`,
     boxShadow: `0 0 5px #5d5d5d`,
     top: 0,
-    left: `calc(50% - 80px)`,
+    left: '50%',
+    transform: 'translateX(-50%)',
     padding: `5px`,
     overflow: `auto`,
     fontSize: 10,
     color: "#FFF",
     fontFamily: "sans-serif",
+    width: "max-content"
   };
 
   export const Link: React.CSSProperties = {

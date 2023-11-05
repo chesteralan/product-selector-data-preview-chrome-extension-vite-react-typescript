@@ -112,11 +112,8 @@ const startScanningNextJs = () => {
     if (nextJsElement) {
       console.log("Next.js Found!");
       const nextJsData = document.getElementById("__NEXT_DATA__") as HTMLScriptElement;
-      const metaTags = document.getElementsByTagName(
-        "meta"
-      ) as HTMLCollectionOf<HTMLMetaElement>;
       
-        console.log("PetLab Funnel detected...", JSON.parse(nextJsData.outerText));
+        console.log("PetLab Next.js Funnel detected...", JSON.parse(nextJsData.outerText));
 
         const targetElement = document.createElement("div");
 

@@ -5,6 +5,8 @@ export const DataWrapper: React.CSSProperties = {
   top: 0,
   left: 0,
   zIndex: 9998,
+  backgroundColor: "#CCC",
+  opacity: 0.5,
 };
 
 export const DataContainer: React.CSSProperties = {
@@ -21,6 +23,7 @@ export const DataContainer: React.CSSProperties = {
   padding: `30px`,
   overflow: `auto`,
   fontFamily: "sans-serif",
+  fontSize: "12px"
 };
 
 export const PriceStrike: React.CSSProperties = {
@@ -45,3 +48,39 @@ export const LocaleLink: React.CSSProperties = {
   marginRight: 10,
   textTransform: "uppercase"
 };
+
+export const SelectorContainer: React.CSSProperties = {
+    marginTop: 20,
+    display: "flex",
+    justifyContent: "space-between",
+    gap: "15px"
+}
+
+export const SelectorItem: React.CSSProperties = {
+  padding: 10,
+  border: "1px solid #000",
+  cursor: "pointer",
+  borderRadius: "10px",
+  width: "calc(1/3 * 100%)",
+  textAlign: "center",
+}
+
+export const SelectorItemSelected: React.CSSProperties = {
+  ...SelectorItem,
+  backgroundColor: '#CCC',
+  fontWeight: "bold"
+}
+
+export const ProductsContainer: React.CSSProperties = {
+  marginTop: 10,
+  padding: 15,
+  borderRadius: "10px",
+  backgroundColor: "#f7f7f7",
+}
+
+export const BumpOffersContainer: React.CSSProperties = {
+  marginTop: 10,
+  padding: 15,
+  borderRadius: "10px",
+  backgroundColor: "#f7f7f7",
+}
