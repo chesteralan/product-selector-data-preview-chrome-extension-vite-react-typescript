@@ -1,16 +1,25 @@
 import * as S from '../styles'
 import formatPrice from '../../../../utils/formatPrice';
+import useConfig from '../../../../hooks/useConfig';
 
 type Props = {
+    productId: string;
     prices: any;
     discountCodes: any;
     upsellUrl: string;
 }
 
-const Product = ({ prices, discountCodes, upsellUrl }: Props) => {
+const Product = ({ productId, prices, discountCodes, upsellUrl }: Props) => {
 
+  const { devToolUrl, strapiServerUrl } = useConfig();
+
+  const editProductHandler = () => {
+    window.open(`${strapiServerUrl}/admin/content-manager/collectionType/api::product.product/${productId}`, "_blank");
+  }
+  
   return (
-    <div style={S.ProductsContainer}>
+    <div style={S.ProductsContainer}> 
+    <a href="#" style={S.EditProduct} onClick={editProductHandler}>Edit Product</a>
     <p>
             <u>Upsell URL:</u> <strong><a href={`${upsellUrl}/token`} target="_blank" style={S.ALink}>{upsellUrl}</a></strong>
             </p>
@@ -19,7 +28,7 @@ const Product = ({ prices, discountCodes, upsellUrl }: Props) => {
             </p>
             <ul style={S.UList}>
               {prices.map((item: any, index: number) => {
-                const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?country=${item.country}&variant_id=${item.variant_id}&discount_code=${discountCodes}&quantity=${item.quantity}`;
+                const variantLink = `${devToolUrl}/checkout-data-checker?country=${item.country}&variant_id=${item.variant_id}&discount_code=${discountCodes}&quantity=${item.quantity}`;
                 return (
                   <li key={index} style={S.UListItem}>
                     <strong>Name</strong>: {item.title}

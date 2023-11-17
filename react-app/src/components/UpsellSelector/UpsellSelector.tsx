@@ -32,7 +32,6 @@ const PriceStrike: React.CSSProperties = {
 };
 
 const UpsellSelector = ({ data, setShow }: Props) => {
-  console.log(data);
 
   return (
     <>

@@ -14,7 +14,7 @@ const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
 
   if(!page) return null;
   const isMultipleProducts = page.products?.length > 1 || false
-console.log(isMultipleProducts)
+
   const discountCodes = page.productDiscountCode.code;
   const rebillDiscountCode = page.rebillDiscountCode?.code;
   const higherInitialDiscountCode = page.higherInitialDiscountCode?.code;
