@@ -76,6 +76,7 @@ export const ProductsContainer: React.CSSProperties = {
   padding: 15,
   borderRadius: "10px",
   backgroundColor: "#f7f7f7",
+  position: "relative"
 }
 
 export const BumpOffersContainer: React.CSSProperties = {
@@ -83,4 +84,10 @@ export const BumpOffersContainer: React.CSSProperties = {
   padding: 15,
   borderRadius: "10px",
   backgroundColor: "#f7f7f7",
+}
+
+export const EditProduct: React.CSSProperties = {
+  position: "absolute",
+  right: 10,
+  top: 10,
 }

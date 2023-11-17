@@ -13,6 +13,7 @@ const loadOptions = (action = "save") => {
     const ukNextjsLiveUrl = document.getElementById('uk-nextjs-live-url')?.value;
 
     const nextjsLocalUrl = document.getElementById('nextjs-local-url')?.value;
+    const developerToolUrl = document.getElementById('developer-tool-url')?.value;
     
     const storageOptions = { 
       usStrapiServerUrl: usStrapiServerUrl,
@@ -28,6 +29,7 @@ const loadOptions = (action = "save") => {
       ukNextjsLiveUrl: ukNextjsLiveUrl,
 
       nextjsLocalUrl: nextjsLocalUrl,
+      developerToolUrl: developerToolUrl,
     };
 
     switch(action) {
@@ -37,7 +39,7 @@ const loadOptions = (action = "save") => {
           status.textContent = 'Options saved.';
           setTimeout(() => {
             status.textContent = '';
-          }, 750);
+          }, 1000);
         });
       break;
       case "restore":
@@ -56,6 +58,7 @@ const loadOptions = (action = "save") => {
           document.getElementById('uk-nextjs-live-url').value = items.ukNextjsLiveUrl || "";
           
           document.getElementById('nextjs-local-url').value = items.nextjsLocalUrl || "";
+          document.getElementById('developer-tool-url').value = items.developerToolUrl || "";
         });
         break;
     }

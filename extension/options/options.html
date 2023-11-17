@@ -5,11 +5,16 @@
     <style>
         .input {
             padding: 5px;
-            width: 90%;
+            width: 100%;
+            max-width: 500px;
         }
         #save {
             padding: 5px;
-            margin-top: 10px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 515px;
+            background-color: green;
+            color:#FFF;
         }
     </style>
   </head>
@@ -56,13 +61,19 @@
         <div>Next.js Live Url</div>
         <input type="text" id="uk-nextjs-live-url" class="input" placeholder="UK Next.js Live Url"/>
     </label>
-    <hr />
+
+    <H2>Others</H2>
     <label>
         <div>Next.js Local Url</div>
         <input type="text" id="nextjs-local-url" class="input" placeholder="Next.js Local Url"/>
     </label>
+    <label>
+        <div>Developer Tool Url</div>
+        <input type="text" id="developer-tool-url" class="input" placeholder="Developer Tool Url"/>
+    </label>
+    
+    <div><button id="save">Save</button></div>
     <div id="status"></div>
-    <button id="save">Save</button>
 
     <script src="options.js"></script>
   </body>
