@@ -9,6 +9,7 @@ export const getSiteRegion = (window: Window, nextjs:boolean = false): string =>
         "offers.petlabco.co.uk": `UK`,
         "d2fccznrf67q1x.amplifyapp.com": `US`,
         "d36g79b46uppe6.amplifyapp.com": `CA`,
+        "d9tzezqsks4u4.amplifyapp.com": `UK`,
     }
 
     const sites:Sites = {
