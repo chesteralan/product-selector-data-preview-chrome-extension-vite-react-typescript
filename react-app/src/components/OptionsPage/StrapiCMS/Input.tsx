@@ -1,0 +1,28 @@
+import { useEffect, useState } from 'react';
+import * as S from './StrapiCMS.style'
+
+type Props = {
+    storeKey: string;
+    title?: string;
+}
+
+const Input = ({ title = "", storeKey = "" }: Props) => {
+    const [value, setValue] = useState("");
+
+    useEffect(() => {
+        chrome.storage.local.get([storeKey]).then((items) => setValue(items[storeKey]));
+    }, [storeKey,setValue]);
+
+    const handleChange = (e:any) => {
+        chrome.storage.local.set({ [storeKey]: e.target.value }).then(() => {});
+    }
+
+  return (
+    <label>
+        <div>{title}</div>
+        <input type="text" style={S.Input} placeholder={title} defaultValue={value} onBlur={handleChange} />
+    </label>
+  )
+}
+
+export default Input

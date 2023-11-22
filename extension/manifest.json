@@ -13,13 +13,13 @@
     {
       "matches": ["<all_urls>"],
       "run_at": "document_end",
-      "js": ["content-script/index.js"]
+      "js": ["content-script/main.js","content-script/options.js","content-script/client.js"]
     }
   ],
   "homepage_url": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript",
   "permissions": [
     "storage"
   ],
-  "options_page": "options/options.html"
+  "options_page": "content-script/options.html"
   
 }
