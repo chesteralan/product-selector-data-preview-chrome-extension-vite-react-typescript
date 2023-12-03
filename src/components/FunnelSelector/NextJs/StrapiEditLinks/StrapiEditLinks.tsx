@@ -20,11 +20,11 @@ const StrapiEditLinks = ({ data }: Props) => {
   return (
     <div style={S.Container}>
       {strapiServerUrl && (<>
-        <a href={`${strapiServerUrl}/admin`} target="_blank" style={S.Link}>Admin Panel</a>
+        <a href={`${strapiServerUrl}/admin`} style={S.Link}>Admin Panel</a>
         |
-        {pageId && (<a href={`${strapiServerUrl}/admin/content-manager/collectionType/api::page.page/${pageId}?plugins[i18n][locale]=${locale}`} target="_blank" style={S.Link}>Edit Page</a>)}
-        {pageVariantId && (<a href={`${strapiServerUrl}/admin/content-manager/collectionType/api::page-variant.page-variant/${pageVariantId}?plugins[i18n][locale]=${locale}`} target="_blank" style={S.Link}>Edit Variant</a>)}
-        {promoId && (<a href={`${strapiServerUrl}/admin/content-manager/collectionType/api::promo.promo/${promoId}?plugins[i18n][locale]=${locale}`} target="_blank" style={S.Link}>Edit Promo</a>)}
+        {pageId && (<a href={`${strapiServerUrl}/admin/content-manager/collectionType/api::page.page/${pageId}?plugins[i18n][locale]=${locale}`} style={S.Link}>Edit Page</a>)}
+        {pageVariantId && (<a href={`${strapiServerUrl}/admin/content-manager/collectionType/api::page-variant.page-variant/${pageVariantId}?plugins[i18n][locale]=${locale}`} style={S.Link}>Edit Variant</a>)}
+        {promoId && (<a href={`${strapiServerUrl}/admin/content-manager/collectionType/api::promo.promo/${promoId}?plugins[i18n][locale]=${locale}`} style={S.Link}>Edit Promo</a>)}
         |
         {slug && locales.map((loc:string) => loc !== locale && (<a href={`/${loc}/${slug}${variant ? `/${variant}` : ``}`} style={S.Link}>{loc}</a>))}
         </>)}

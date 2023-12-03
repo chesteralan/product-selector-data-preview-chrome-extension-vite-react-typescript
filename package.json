@@ -1,24 +1,30 @@
 {
   "name": "product-selector-data-preview-chrome",
+  "private": true,
   "version": "1.0.21",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "yarn --cwd ./react-app build",
-    "dev": "yarn --cwd ./react-app dev",
-    "zip": "yarn --cwd ./react-app export && node archive.js"
+    "dev": "vite --config app.config.ts",
+    "dev-options": "vite --config options.config.ts",
+    "build": "concurrently \"tsc && vite --config app.config.ts build --watch\" \"tsc && vite --config options.config.ts build --watch\"",
+    "export": "tsc && vite --config app.config.ts build",
+    "export-options": "tsc && vite --config options.config.ts build",
+    "preview": "vite preview",
+    "zip": "yarn export && yarn export-options && node archive.cjs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript/issues"
-  },
-  "homepage": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript#readme",
   "dependencies": {
-    "archiver": "^6.0.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.209",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.9",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "archiver": "^6.0.1",
+    "concurrently": "^8.2.2",
+    "typescript": "^4.9.3",
+    "vite": "^4.0.0"
   }
 }

@@ -6,13 +6,12 @@ import { resolve } from 'path'
 export default defineConfig({
   plugins: [react()],
   base: "",
-  // publicDir: false,
+  publicDir: false,
   build: {
-    outDir: '../extension/content-script',
+    outDir: 'extension/options',
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
         options: resolve(__dirname, 'options.html'),
       },
       output: {

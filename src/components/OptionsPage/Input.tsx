@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import * as S from './StrapiCMS.style'
+import * as S from './MainOptions/MainOptions.style'
 
 type Props = {
     storeKey: string;
@@ -20,7 +20,7 @@ const Input = ({ title = "", storeKey = "" }: Props) => {
   return (
     <label>
         <div>{title}</div>
-        <input type="text" style={S.Input} placeholder={title} defaultValue={value} onBlur={handleChange} />
+        <input type="text" style={S.Input} placeholder={title} defaultValue={value} onChange={handleChange} />
     </label>
   )
 }
