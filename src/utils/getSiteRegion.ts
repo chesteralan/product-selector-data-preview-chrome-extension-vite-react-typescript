@@ -1,5 +1,7 @@
+import { IS_STRAPI, IS_STRAPI_CA, IS_STRAPI_UK, IS_STRAPI_US } from "./constants/strapi";
+
 type Sites = { [hostname:string]: string }
-export const getSiteRegion = (window: Window, nextjs:boolean = false): string => {
+export const getSiteRegion = (nextjs:boolean = false): string => {
     
     const nextjsSites:Sites = {
         // next.js funnels
@@ -9,6 +11,7 @@ export const getSiteRegion = (window: Window, nextjs:boolean = false): string =>
         "offers.petlabco.co.uk": `UK`,
         "d2fccznrf67q1x.amplifyapp.com": `US`,
         "d36g79b46uppe6.amplifyapp.com": `CA`,
+        "d9tzezqsks4u4.amplifyapp.com": `UK`,
     }
 
     const sites:Sites = {
@@ -51,6 +54,12 @@ export const getSiteRegion = (window: Window, nextjs:boolean = false): string =>
                 region = nextjsSites[site];
             }
         })
+    }
+
+    if (IS_STRAPI) {
+        if(IS_STRAPI_US) return 'US';
+        if(IS_STRAPI_CA) return 'CA';
+        if(IS_STRAPI_UK) return 'UK';
     }
 
     return region;

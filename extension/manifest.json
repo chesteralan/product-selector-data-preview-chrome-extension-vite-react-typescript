@@ -1,6 +1,6 @@
 {
   "name": "Product Selector Preview",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "manifest_version": 3,
   "icons": {
     "16": "/images/16.png",
@@ -13,7 +13,7 @@
     {
       "matches": ["<all_urls>"],
       "run_at": "document_end",
-      "js": ["content-script/index.js"]
+      "js": ["content-script/main.js"]
     }
   ],
   "homepage_url": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript",

@@ -25,14 +25,14 @@ const styles: React.CSSProperties = {
   zIndex: 9999,
 };
 
-const FloatingNav = ({ funnelId, productSelectorId }: Props) => {
+const FloatingNavNextJs = ({ funnelId, productSelectorId }: Props) => {
   const [pathname, setPathname] = useState<string>("");
   const [region, setRegion] = useState<string>(`US`);
   const [upsell, setUpsell] = useState<boolean>(false);
 
   useEffect(() => {
     setPathname(getPathname(window));
-    setRegion(getSiteRegion(window));
+    setRegion(getSiteRegion());
     setUpsell(isUpsell(window));
   }, []);
 
@@ -54,4 +54,4 @@ const FloatingNav = ({ funnelId, productSelectorId }: Props) => {
   );
 };
 
-export default FloatingNav;
+export default FloatingNavNextJs;

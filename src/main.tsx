@@ -4,7 +4,9 @@ import AppGatsby from "./AppGatsby";
 import AppBuilder from "./AppBuilder";
 import AppPromo from "./AppPromo";
 import AppNextJs from "./AppNextJs";
+import AppStrapiCMS from "./AppStrapiCMS";
 import { PRESELL_SITES } from "./utils/constants/presells";
+import { IS_STRAPI } from "./utils/constants/strapi";
 
 declare global {
   interface Window {
@@ -12,11 +14,16 @@ declare global {
     petLabChromeExtBuilder: any;
     petLabChromeExtPromo: any;
     petLabChromeExtNextJs: any;
+    petLabChromeExtStrapi: any;
+    strapi:any;
   }
 }
 
 const clearIntervals = () => {
   console.log("Clearing intervals...");
+  if (window.petLabChromeExtStrapi) {
+    clearInterval(window.petLabChromeExtStrapi);
+  }
   if (window.petLabChromeExtGatsby) {
     clearInterval(window.petLabChromeExtGatsby);
   }
@@ -131,6 +138,26 @@ const startScanningNextJs = () => {
   }, 1000);
 };
 
+const startScanningStrapiCMS = () => {
+  window.petLabChromeExtStrapi = setInterval(() => {
+    if (IS_STRAPI) {
+      console.log("Strapi CMS Site detected...");
+
+      const targetElement = document.createElement("div");
+
+      ReactDOM.createRoot(targetElement).render(
+        <React.StrictMode>
+          <AppStrapiCMS />
+        </React.StrictMode>
+      );
+
+      document.body.appendChild(targetElement);
+      clearIntervals();
+    }
+  }, 1000);
+};
+
+startScanningStrapiCMS();
 startScanningGatsby();
 startScanningBuilder();
 startScanningPromo();
