@@ -1,66 +1,27 @@
 import { IS_STRAPI, IS_STRAPI_CA, IS_STRAPI_UK, IS_STRAPI_US } from "./constants/strapi";
+import { SITES } from "./constants/sites";
+import { REGION_CA, REGION_UK, REGION_US } from "./constants/region";
 
-type Sites = { [hostname:string]: string }
-export const getSiteRegion = (nextjs:boolean = false): string => {
+export const getSiteRegion = (): string => {
     
-    const nextjsSites:Sites = {
-        // next.js funnels
-        "offers.thepetlabco.com": `US`,
-        "offers.thepetlabco.ca": `CA`,
-        "offers.thepetlabco.de": `DE`,
-        "offers.petlabco.co.uk": `UK`,
-        "d2fccznrf67q1x.amplifyapp.com": `US`,
-        "d36g79b46uppe6.amplifyapp.com": `CA`,
-        "d9tzezqsks4u4.amplifyapp.com": `UK`,
+    if (IS_STRAPI) {
+        if(IS_STRAPI_US) return REGION_US;
+        if(IS_STRAPI_CA) return REGION_CA;
+        if(IS_STRAPI_UK) return REGION_UK;
     }
 
-    const sites:Sites = {
-        ...nextjsSites,
+    const match = Object.keys(SITES).find((site:string) => window.location.hostname.includes(site));
 
-        // funnels
-        "offer.thepetlabco.com": `US`,
-        "offer.thepetlabco.ca": `CA`,
-        "offer.thepetlabco.de": `DE`,
-        "offer.petlabco.co.uk": `UK`,
-        "prod-builder-gatsby-funnel.netlify.app": `US`,
-        "staging-builder-gatsby-funnel.netlify.app": `US`,
-        "petlab-germany-funnels.netlify.app": `DE`,
-        "uk-gatsby-funnels.netlify.app": `UK`,
-        "canada-funnels-production.netlify.app": `CA`,
-
-        // upsells
-        "ups.thepetlabco.com": `US`,
-        "ups.thepetlabco.ca": `CA`,
-        "ups.thepetlabco.de": `DE`,
-        "ups.petlabco.co.uk": `UK`,
-        "staging-upsell.netlify.app": `US`,
-        "us-gatsby-upsell.netlify.app": `US`,
-        "uk-gatsby-upsell.netlify.app": `UK`,
-        "ca-gatsby-upsell.netlify.app": `CA`,
-        "de-gatsby-upsell.netlify.app": `DE`,
+    if(match) {
+        return SITES[match] || REGION_US;
     }
 
     let hostname = window.location.hostname;
-
     if( hostname.includes('--') ) {
         hostname = hostname.split("--")[1]
     }
 
-    let region = sites[hostname] || `US`;
-
-    if(nextjs) {
-        Object.keys(nextjsSites).forEach((site:string) => {
-            if(hostname.includes(site)) {
-                region = nextjsSites[site];
-            }
-        })
-    }
-
-    if (IS_STRAPI) {
-        if(IS_STRAPI_US) return 'US';
-        if(IS_STRAPI_CA) return 'CA';
-        if(IS_STRAPI_UK) return 'UK';
-    }
+    let region = SITES[hostname] || REGION_US;
 
     return region;
 }
