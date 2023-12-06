@@ -5,22 +5,28 @@ import { REGION_CA, REGION_UK, REGION_US } from "../utils/constants/region";
 const useConfig = () => {
   const [strapiServerUrl, setStrapiServerUrl] = useState<string | null>(null);
   const [stagingUrl, setStagingUrl] = useState<string | null>(null);
+  const [usStagingUrl, setUsStagingUrl] = useState<string | null>(null);
+  const [caStagingUrl, setCaStagingUrl] = useState<string | null>(null);
+  const [ukStagingUrl, setUkStagingUrl] = useState<string | null>(null);
   const [liveUrl, setLiveUrl] = useState<string | null>(null);
+  const [usLiveUrl, setUsLiveUrl] = useState<string | null>(null);
+  const [caLiveUrl, setCaLiveUrl] = useState<string | null>(null);
+  const [ukLiveUrl, setUkLiveUrl] = useState<string | null>(null);
   const [localUrl, setLocalUrl] = useState<string | null>(null);
   const [devToolUrl, setDevToolUrl] = useState<string | null>(null);
 
   // strapi cms
   const [strapiProdOrangeUrl, setStrapiProdOrangeUrl] = useState<string | null>(
-    null
+    null,
   );
   const [strapiProdGreenUrl, setStrapiProdGreenUrl] = useState<string | null>(
-    null
+    null,
   );
   const [strapiProdBlueUrl, setStrapiProdBlueUrl] = useState<string | null>(
-    null
+    null,
   );
   const [strapiDevGreenUrl, setStrapiDevGreenUrl] = useState<string | null>(
-    null
+    null,
   );
   const [strapiDevBlueUrl, setStrapiDevBlueUrl] = useState<string | null>(null);
 
@@ -31,12 +37,24 @@ const useConfig = () => {
         "developerToolUrl",
         "devStrapiGreenUrl",
         "devStrapiBlueUrl",
+        "usNextjsStagingUrl",
+        "usNextjsLiveUrl",
+        "caNextjsStagingUrl",
+        "caNextjsLiveUrl",
+        "ukNextjsStagingUrl",
+        "ukNextjsLiveUrl",
       ])
       .then((items) => {
         setLocalUrl(items.nextjsLocalUrl);
         setDevToolUrl(items.developerToolUrl);
         setStrapiDevGreenUrl(items.devStrapiGreenUrl);
         setStrapiDevBlueUrl(items.devStrapiBlueUrl);
+        setUsStagingUrl(items.usNextjsStagingUrl);
+        setUsLiveUrl(items.usNextjsLiveUrl);
+        setCaStagingUrl(items.caNextjsStagingUrl);
+        setCaLiveUrl(items.caNextjsLiveUrl);
+        setUkStagingUrl(items.ukNextjsStagingUrl);
+        setUkLiveUrl(items.ukNextjsLiveUrl);
       });
 
     const region = getSiteRegion();
@@ -111,6 +129,12 @@ const useConfig = () => {
     strapiProdOrangeUrl,
     strapiProdGreenUrl,
     strapiProdBlueUrl,
+    usStagingUrl,
+    caStagingUrl,
+    ukStagingUrl,
+    usLiveUrl,
+    caLiveUrl,
+    ukLiveUrl,
   };
 };
 

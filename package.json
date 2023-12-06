@@ -1,7 +1,8 @@
 {
   "name": "product-selector-data-preview-chrome",
+  "description": "Product Selector Preview",
   "private": true,
-  "version": "1.0.23",
+  "version": "1.0.24",
   "type": "module",
   "scripts": {
     "dev": "vite --config app.config.ts",
@@ -10,7 +11,9 @@
     "export": "tsc && vite --config app.config.ts build",
     "export-options": "tsc && vite --config options.config.ts build",
     "preview": "vite preview",
-    "zip": "yarn export && yarn export-options && node archive.cjs"
+    "manifest": "node manifest.cjs",
+    "zip": "yarn export && yarn export-options && yarn manifest && node archive.cjs",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -24,7 +27,11 @@
     "@vitejs/plugin-react-swc": "^3.0.0",
     "archiver": "^6.0.1",
     "concurrently": "^8.2.2",
+    "prettier": "3.1.0",
     "typescript": "^4.9.3",
     "vite": "^4.0.0"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
