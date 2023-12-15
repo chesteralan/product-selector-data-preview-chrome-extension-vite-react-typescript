@@ -22,11 +22,14 @@ const StrapiEditLinks = ({ data }: Props) => {
     ukStagingUrl,
   } = useConfig();
 
+  const page = data.props.pageProps?.initialPageStore?.page;
+  const pageVariant = data.props.pageProps?.pageVariant;
+
   const locale = data.locale;
   const locales = data.locales;
-  const pageId = data.props.pageProps?.page?.id;
-  const pageVariantId = data.props.pageProps?.pageVariant?.id;
-  const promoId = data.props.pageProps?.page?.promo?.id;
+  const pageId = page?.id;
+  const pageVariantId = pageVariant?.id;
+  const promoId = page?.promo?.id;
   const slug = data.query?.slug || null;
   const variant = data.query?.variant || null;
 

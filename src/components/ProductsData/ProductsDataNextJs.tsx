@@ -1,9 +1,9 @@
-import {  useState } from "react";
+import { useState } from "react";
 import FunnelSelector from "../FunnelSelector/FunnelSelectorNextJs";
 import StrapiEditLinks from "../FunnelSelector/NextJs/StrapiEditLinks/StrapiEditLinks";
 
 type Props = {
-    data: any;
+  data: any;
 };
 
 const styles: React.CSSProperties = {
@@ -28,27 +28,30 @@ const styles: React.CSSProperties = {
   bottom: `0px`,
   left: `0px`,
   zIndex: 9999,
-  fontSize: 12
+  fontSize: 12,
 };
 
 const ProductsDataNextJs = (props: Props) => {
+  const { data } = props;
 
-    const { data } = props;
+  const [show, setShow] = useState<boolean>(false);
 
-    const [show, setShow] = useState<boolean>(false);
+  const page = data.props.pageProps?.initialPageStore?.page;
 
-    const page = data.props.pageProps?.page;
-    
   return (
     <>
-    {page && <>
-      <div style={styles} onClick={() => setShow(!show)}>
-        Product Data
-      </div>
-      {show ? (<>
-          <FunnelSelector data={data} setShow={setShow} />
-        </>) : null}
-        </>}
+      {page && (
+        <>
+          <div style={styles} onClick={() => setShow(!show)}>
+            Product Data
+          </div>
+          {show ? (
+            <>
+              <FunnelSelector data={data} setShow={setShow} />
+            </>
+          ) : null}
+        </>
+      )}
       <StrapiEditLinks data={data} />
     </>
   );
