@@ -5,7 +5,7 @@ const archiver = require("archiver");
 const zipFile = __dirname + "/extension.zip";
 
 // delete existing
-fs.unlink(zipFile, function(err) {
+fs.unlink(zipFile, function (err) {
   // create a file to stream archive data to.
   const output = fs.createWriteStream(zipFile);
   const archive = archiver("zip", {
@@ -14,4 +14,5 @@ fs.unlink(zipFile, function(err) {
   archive.pipe(output);
   archive.directory("extension/", false);
   archive.finalize();
+  console.log("Bundle `extension.zip` created and ready to upload!");
 });
