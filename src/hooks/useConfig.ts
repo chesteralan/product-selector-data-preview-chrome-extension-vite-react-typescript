@@ -14,6 +14,7 @@ const useConfig = () => {
   const [ukLiveUrl, setUkLiveUrl] = useState<string | null>(null);
   const [localUrl, setLocalUrl] = useState<string | null>(null);
   const [devToolUrl, setDevToolUrl] = useState<string | null>(null);
+  const [strapiLocalUrl, setStrapiLocalUrl] = useState<string | null>(null);
 
   // strapi cms
   const [strapiProdOrangeUrl, setStrapiProdOrangeUrl] = useState<string | null>(
@@ -35,6 +36,7 @@ const useConfig = () => {
       .get([
         "nextjsLocalUrl",
         "developerToolUrl",
+        "strapiLocalUrl",
         "devStrapiGreenUrl",
         "devStrapiBlueUrl",
         "usNextjsStagingUrl",
@@ -47,6 +49,7 @@ const useConfig = () => {
       .then((items) => {
         setLocalUrl(items.nextjsLocalUrl);
         setDevToolUrl(items.developerToolUrl);
+        setStrapiLocalUrl(items.strapiLocalUrl);
         setStrapiDevGreenUrl(items.devStrapiGreenUrl);
         setStrapiDevBlueUrl(items.devStrapiBlueUrl);
         setUsStagingUrl(items.usNextjsStagingUrl);
@@ -135,6 +138,7 @@ const useConfig = () => {
     usLiveUrl,
     caLiveUrl,
     ukLiveUrl,
+    strapiLocalUrl,
   };
 };
 
