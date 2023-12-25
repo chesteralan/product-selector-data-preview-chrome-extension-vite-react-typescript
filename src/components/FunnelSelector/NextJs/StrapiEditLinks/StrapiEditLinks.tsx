@@ -32,9 +32,13 @@ const StrapiEditLinks = ({ data }: Props) => {
   const promoId = page?.promo?.id;
   const slug = data.query?.slug || null;
   const variant = data.query?.variant || null;
+  const isEcom = page?.isEcom || false;
 
   const region = getSiteRegion();
   const pathname = window.location.pathname;
+  const currentPath = `/${isEcom ? "products" : ""}/${slug}${
+    variant ? `/${variant}` : ``
+  }`;
 
   return (
     <div style={S.Container}>
@@ -95,10 +99,7 @@ const StrapiEditLinks = ({ data }: Props) => {
             locales.map(
               (loc: string) =>
                 loc !== locale && (
-                  <a
-                    href={`/${loc}/${slug}${variant ? `/${variant}` : ``}`}
-                    style={S.Link}
-                  >
+                  <a href={`/${loc}${currentPath}`} style={S.Link}>
                     {loc}
                   </a>
                 ),
@@ -106,30 +107,21 @@ const StrapiEditLinks = ({ data }: Props) => {
           |
           {stagingUrl && slug && (
             <>
-              <a
-                href={`${stagingUrl}/${slug}${variant ? `/${variant}` : ``}`}
-                style={S.Link}
-              >
+              <a href={`${stagingUrl}${currentPath}`} style={S.Link}>
                 Staging
               </a>
             </>
           )}
           {localUrl && slug && (
             <>
-              <a
-                href={`${localUrl}/${slug}${variant ? `/${variant}` : ``}`}
-                style={S.Link}
-              >
+              <a href={`${localUrl}${currentPath}`} style={S.Link}>
                 Local
               </a>
             </>
           )}
           {liveUrl && slug && (
             <>
-              <a
-                href={`${liveUrl}/${slug}${variant ? `/${variant}` : ``}`}
-                style={S.Link}
-              >
+              <a href={`${liveUrl}${currentPath}`} style={S.Link}>
                 Live
               </a>
             </>
