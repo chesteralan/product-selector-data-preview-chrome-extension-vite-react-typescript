@@ -1,15 +1,11 @@
-import FloatingNavPromo from './components/FloatingNav/FloatingNavPromo';
+import FloatingNavPromo from "./components/FloatingNav/FloatingNavPromo";
 
-type Props = {
-}
-
-function AppPromo(props: Props) {
-  
+function AppPromo() {
   return (
     <>
-      <FloatingNavPromo {...props} />
+      <FloatingNavPromo />
     </>
-  )
+  );
 }
 
-export default AppPromo
+export default AppPromo;
