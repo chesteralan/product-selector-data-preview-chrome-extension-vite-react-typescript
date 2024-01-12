@@ -36,7 +36,7 @@ const StrapiEditLinks = ({ data }: Props) => {
 
   const region = getSiteRegion();
   const pathname = window.location.pathname;
-  const currentPath = `/${isEcom ? "products" : ""}/${slug}${
+  const currentPath = `${isEcom ? "/products/" : "/"}${slug}${
     variant ? `/${variant}` : ``
   }`;
 
