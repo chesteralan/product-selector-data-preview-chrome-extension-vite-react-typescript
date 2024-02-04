@@ -5,13 +5,21 @@ import {
   TYPE_SUB_LABEL,
 } from "../../../../utils/constants/purchaseType";
 import * as S from "./PurchaseTypeTabs.styles";
+import { TYPE_BUMPOFFER_LABEL } from "../../../../utils/constants/bumpoffer";
 
 type Props = {
   selected: string;
   setSelected: (v: string) => void;
+  showBumpoffers: boolean;
+  setShowBumpoffers: (v: boolean) => void;
 };
 
-const PurchaseTypeTabs = ({ selected = TYPE_SUB, setSelected }: Props) => {
+const PurchaseTypeTabs = ({
+  selected = TYPE_SUB,
+  setSelected,
+  showBumpoffers,
+  setShowBumpoffers,
+}: Props) => {
   return (
     <div style={S.Container}>
       <div
@@ -29,6 +37,12 @@ const PurchaseTypeTabs = ({ selected = TYPE_SUB, setSelected }: Props) => {
         onClick={() => setSelected(TYPE_OTP)}
       >
         {TYPE_OTP_LABEL}
+      </div>
+      <div
+        style={showBumpoffers ? { ...S.Item, ...S.ItemSelected } : S.Item}
+        onClick={() => setShowBumpoffers(!showBumpoffers)}
+      >
+        {TYPE_BUMPOFFER_LABEL}
       </div>
     </div>
   );

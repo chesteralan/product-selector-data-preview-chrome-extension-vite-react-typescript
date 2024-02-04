@@ -2,7 +2,7 @@
   "name": "product-selector-data-preview-chrome",
   "description": "Product Selector Preview",
   "private": true,
-  "version": "1.0.27",
+  "version": "1.0.28",
   "type": "module",
   "scripts": {
     "dev": "vite --config app.config.ts",
@@ -13,7 +13,8 @@
     "preview": "vite preview",
     "manifest": "node manifest.cjs",
     "zip": "yarn export && yarn export-options && yarn manifest && node archive.cjs",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^18.2.0",

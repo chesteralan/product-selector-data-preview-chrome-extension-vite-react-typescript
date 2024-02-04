@@ -1,33 +1,34 @@
 import * as S from "../styles";
 import formatPrice from "../../../../utils/formatPrice";
 import useConfig from "../../../../hooks/useConfig";
+import { TYPE_SUB } from "../../../../utils/constants/purchaseType";
 
 type Props = {
   bumpOffers: any;
+  purchaseTab: string;
 };
 
-const BumpOffers = ({ bumpOffers }: Props) => {
-
+const BumpOffers = ({ bumpOffers, purchaseTab = TYPE_SUB }: Props) => {
   const { devToolUrl, strapiServerUrl } = useConfig();
 
   const editBumpOfferHandler = (id: string) => {
     window.open(
       `${strapiServerUrl}/admin/content-manager/collectionType/api::bump-offer.bump-offer/${id}`,
-      "_blank"
+      "_blank",
     );
   };
 
   const editProductHandler = (id: string) => {
     window.open(
       `${strapiServerUrl}/admin/content-manager/collectionType/api::product.product/${id}`,
-      "_blank"
+      "_blank",
     );
   };
-  
+
   const variantLinkHandler = (variantId: string, bumpOfferDC: string) => {
     window.open(
       `${devToolUrl}/checkout-data-checker?variant_id=${variantId}&discount_code=${bumpOfferDC}&quantity=1`,
-      "_blank"
+      "_blank",
     );
   };
 
@@ -47,15 +48,36 @@ const BumpOffers = ({ bumpOffers }: Props) => {
               <li key={index} style={S.UListItem}>
                 <strong>Name</strong>: {bumpOffer.label}
                 <br />
-                <strong>SUB Variant ID</strong>:{" "}
-                <a href="#" onClick={() => variantLinkHandler(bumpOffer.subscriptionVariantID, bumpOfferDC)} style={S.ALink}>
-                  {bumpOffer.subscriptionVariantID}
-                </a>
-                <br />
-                <strong>OTP Variant ID</strong>:{" "}
-                <a href="#" onClick={() => variantLinkHandler(bumpOffer.otpVariantID, bumpOfferDC)} style={S.ALink}>
-                  {bumpOffer.otpVariantID}
-                </a>
+                {TYPE_SUB === purchaseTab ? (
+                  <>
+                    <strong>SUB Variant ID</strong>:{" "}
+                    <a
+                      href="#"
+                      onClick={() =>
+                        variantLinkHandler(
+                          bumpOffer.subscriptionVariantID,
+                          bumpOfferDC,
+                        )
+                      }
+                      style={S.ALink}
+                    >
+                      {bumpOffer.subscriptionVariantID}
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <strong>OTP Variant ID</strong>:{" "}
+                    <a
+                      href="#"
+                      onClick={() =>
+                        variantLinkHandler(bumpOffer.otpVariantID, bumpOfferDC)
+                      }
+                      style={S.ALink}
+                    >
+                      {bumpOffer.otpVariantID}
+                    </a>
+                  </>
+                )}
                 <br />
                 <strong>Quantity</strong>: 1
                 <br />
