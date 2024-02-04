@@ -23,7 +23,7 @@ export const DataContainer: React.CSSProperties = {
   padding: `30px`,
   overflow: `auto`,
   fontFamily: "sans-serif",
-  fontSize: "12px"
+  fontSize: "12px",
 };
 
 export const PriceStrike: React.CSSProperties = {
@@ -46,15 +46,15 @@ export const ALink: React.CSSProperties = {
 export const LocaleLink: React.CSSProperties = {
   textDecoration: "underline",
   marginRight: 10,
-  textTransform: "uppercase"
+  textTransform: "uppercase",
 };
 
 export const SelectorContainer: React.CSSProperties = {
-    marginTop: 20,
-    display: "flex",
-    justifyContent: "space-between",
-    gap: "15px"
-}
+  marginBottom: 20,
+  display: "flex",
+  justifyContent: "space-between",
+  gap: "15px",
+};
 
 export const SelectorItem: React.CSSProperties = {
   padding: 10,
@@ -63,31 +63,31 @@ export const SelectorItem: React.CSSProperties = {
   borderRadius: "10px",
   width: "calc(1/3 * 100%)",
   textAlign: "center",
-}
+};
 
 export const SelectorItemSelected: React.CSSProperties = {
   ...SelectorItem,
-  backgroundColor: '#CCC',
-  fontWeight: "bold"
-}
+  backgroundColor: "#CCC",
+  fontWeight: "bold",
+};
 
 export const ProductsContainer: React.CSSProperties = {
   marginTop: 10,
   padding: 15,
   borderRadius: "10px",
   backgroundColor: "#f7f7f7",
-  position: "relative"
-}
+  position: "relative",
+};
 
 export const BumpOffersContainer: React.CSSProperties = {
   marginTop: 10,
   padding: 15,
   borderRadius: "10px",
   backgroundColor: "#f7f7f7",
-}
+};
 
 export const EditProduct: React.CSSProperties = {
   position: "absolute",
   right: 10,
   top: 10,
-}
+};
