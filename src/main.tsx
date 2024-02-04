@@ -7,6 +7,7 @@ import AppNextJs from "./AppNextJs";
 import AppStrapiCMS from "./AppStrapiCMS";
 import { PRESELL_SITES } from "./utils/constants/presells";
 import { IS_STRAPI } from "./utils/constants/strapi";
+import packageJson from "../package.json";
 
 declare global {
   interface Window {
@@ -15,7 +16,7 @@ declare global {
     petLabChromeExtPromo: any;
     petLabChromeExtNextJs: any;
     petLabChromeExtStrapi: any;
-    strapi:any;
+    strapi: any;
   }
 }
 
@@ -36,6 +37,7 @@ const clearIntervals = () => {
   if (window.petLabChromeExtNextJs) {
     clearInterval(window.petLabChromeExtNextJs);
   }
+  console.log(`Version ${packageJson.version}`);
 };
 
 const startScanningGatsby = () => {
@@ -44,7 +46,7 @@ const startScanningGatsby = () => {
     if (gatsbyElement) {
       console.log("Gatsby.js Found!");
       const metaTags = document.getElementsByTagName(
-        "meta"
+        "meta",
       ) as HTMLCollectionOf<HTMLMetaElement>;
       const funnelId = metaTags.namedItem("funnel-id");
       const productSelectorId = metaTags.namedItem("product-selector-id");
@@ -59,7 +61,7 @@ const startScanningGatsby = () => {
               funnelId={funnelId?.content}
               productSelectorId={productSelectorId?.content}
             />
-          </React.StrictMode>
+          </React.StrictMode>,
         );
 
         document.body.appendChild(targetElement);
@@ -72,7 +74,7 @@ const startScanningGatsby = () => {
 const startScanningBuilder = () => {
   window.petLabChromeExtBuilder = setInterval(() => {
     const builderComponent = document.getElementsByTagName(
-      "builder-component"
+      "builder-component",
     ) as HTMLCollectionOf<Element>;
     if (builderComponent.length > 0) {
       console.log("Builder Page detected...");
@@ -85,7 +87,7 @@ const startScanningBuilder = () => {
       ReactDOM.createRoot(targetElement).render(
         <React.StrictMode>
           <AppBuilder entryId={entryId} />
-        </React.StrictMode>
+        </React.StrictMode>,
       );
 
       document.body.appendChild(targetElement);
@@ -96,7 +98,7 @@ const startScanningBuilder = () => {
 
 const startScanningPromo = () => {
   window.petLabChromeExtPromo = setInterval(() => {
-    if (PRESELL_SITES.some(v => window.origin.includes(v))) {
+    if (PRESELL_SITES.some((v) => window.origin.includes(v))) {
       console.log("Presell Site detected...");
 
       const targetElement = document.createElement("div");
@@ -104,7 +106,7 @@ const startScanningPromo = () => {
       ReactDOM.createRoot(targetElement).render(
         <React.StrictMode>
           <AppPromo />
-        </React.StrictMode>
+        </React.StrictMode>,
       );
 
       document.body.appendChild(targetElement);
@@ -118,22 +120,25 @@ const startScanningNextJs = () => {
     const nextJsElement = document.getElementById("__next") as HTMLElement;
     if (nextJsElement) {
       console.log("Next.js Found!");
-      const nextJsData = document.getElementById("__NEXT_DATA__") as HTMLScriptElement;
-      
-        console.log("PetLab Next.js Funnel detected...", JSON.parse(nextJsData.outerText));
+      const nextJsData = document.getElementById(
+        "__NEXT_DATA__",
+      ) as HTMLScriptElement;
 
-        const targetElement = document.createElement("div");
+      console.log(
+        "PetLab Next.js Funnel detected...",
+        JSON.parse(nextJsData.outerText),
+      );
 
-        ReactDOM.createRoot(targetElement).render(
-          <React.StrictMode>
-            <AppNextJs
-              data={JSON.parse(nextJsData.outerText)}
-            />
-          </React.StrictMode>
-        );
+      const targetElement = document.createElement("div");
 
-        document.body.appendChild(targetElement);
-        clearIntervals();
+      ReactDOM.createRoot(targetElement).render(
+        <React.StrictMode>
+          <AppNextJs data={JSON.parse(nextJsData.outerText)} />
+        </React.StrictMode>,
+      );
+
+      document.body.appendChild(targetElement);
+      clearIntervals();
     }
   }, 1000);
 };
@@ -148,7 +153,7 @@ const startScanningStrapiCMS = () => {
       ReactDOM.createRoot(targetElement).render(
         <React.StrictMode>
           <AppStrapiCMS />
-        </React.StrictMode>
+        </React.StrictMode>,
       );
 
       document.body.appendChild(targetElement);
@@ -165,4 +170,3 @@ startScanningNextJs();
 setTimeout(() => {
   clearIntervals();
 }, 10000);
-

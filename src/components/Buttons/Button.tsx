@@ -1,6 +1,7 @@
 type Props = {
   link: string;
   children: any;
+  target?: string;
 };
 
 const styles: React.CSSProperties = {
@@ -26,9 +27,9 @@ const styles: React.CSSProperties = {
   cursor: "pointer",
 };
 
-const Button = ({ link, children }: Props) => {
+const Button = ({ link, children, target = "_blank" }: Props) => {
   return (
-    <a style={styles} target="_blank" href={link}>
+    <a style={styles} target={target} href={link}>
       {children}
     </a>
   );

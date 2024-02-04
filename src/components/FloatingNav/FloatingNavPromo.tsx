@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
 import CtaButton from "../Buttons/CtaButton";
+import usePetlabCta from "../../hooks/usePetlabCta";
+import PresellListButton from "../Buttons/PresellListButton";
 
-type Props = {
-  
-};
+type Props = {};
 
 const styles: React.CSSProperties = {
   position: "fixed",
@@ -15,22 +14,13 @@ const styles: React.CSSProperties = {
 };
 
 const FloatingNavPromo = (props: Props) => {
-  const [cta, setCta] = useState<string[]>([]);
-  useEffect(() => {
-    const elements = document.getElementsByTagName("a");
-    const ctas = Array.from(new Set(Array.from(elements).map((element) => {
-      if((/(\/\/offer\.thepetlabco\.com|\/\/offer\.thepetlabco\.ca|\/\/offer\.thepetlabco\.de|\/\/offer\.petlabco\.co\.uk|\/\/offers\.thepetlabco\.com|\/\/offers\.thepetlabco\.ca|\/\/offers\.thepetlabco\.de|\/\/offers\.petlabco\.co\.uk)/g).test(element.href)) {
-            return element.href
-        }
-    }).filter(Boolean)));
-    if(ctas.length > 0) {
-        console.log(`CTAs Found: ${ctas}`);
-        setCta(ctas as string[]);
-    }
-  }, [setCta]);
+  const cta = usePetlabCta();
   return (
     <div style={styles}>
-      {cta.map((offerCta) => <CtaButton link={offerCta} />)}
+      {cta.map((offerCta) => (
+        <CtaButton link={offerCta} />
+      ))}
+      <PresellListButton link={`/presell-list`} />
     </div>
   );
 };
