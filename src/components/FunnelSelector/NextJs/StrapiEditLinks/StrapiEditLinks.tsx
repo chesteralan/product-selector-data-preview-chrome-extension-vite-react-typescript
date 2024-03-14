@@ -20,10 +20,13 @@ const StrapiEditLinks = ({ data }: Props) => {
     usStagingUrl,
     caStagingUrl,
     ukStagingUrl,
+    strapiLocalUrl,
   } = useConfig();
 
   const page = data.props.pageProps?.initialPageStore?.page;
-  const pageVariant = data.props.pageProps?.pageVariant;
+  const pageVariant =
+    data.props.pageProps?.pageVariant || data.props.pageProps?.emailCampaign;
+  const isEmailCampaign = data.props.pageProps.hasOwnProperty("emailCampaign");
 
   const locale = data.locale;
   const locales = data.locales;
@@ -31,14 +34,14 @@ const StrapiEditLinks = ({ data }: Props) => {
   const pageVariantId = pageVariant?.id;
   const promoId = page?.promo?.id;
   const slug = data.query?.slug || null;
-  const variant = data.query?.variant || null;
+  const variant = data.query?.variant || data.query?.campaignId || null;
   const isEcom = page?.isEcom || false;
 
   const region = getSiteRegion();
   const pathname = window.location.pathname;
-  const currentPath = `${isEcom ? "/products/" : "/"}${slug}${
-    variant ? `/${variant}` : ``
-  }`;
+  const currentPath = `${isEmailCampaign ? "/email" : ""}${
+    isEcom ? "/products/" : "/"
+  }${slug}${variant ? `/${variant}` : ``}`;
 
   return (
     <div style={S.Container}>
@@ -69,15 +72,20 @@ const StrapiEditLinks = ({ data }: Props) => {
               <a
                 href={`${strapiServerUrl}/admin/content-manager/collectionType/api::page.page/${pageId}?plugins[i18n][locale]=${locale}`}
                 style={S.Link}
+                target="_blank"
               >
                 Edit Page
               </a>
               {pageVariantId && (
                 <a
-                  href={`${strapiServerUrl}/admin/content-manager/collectionType/api::page-variant.page-variant/${pageVariantId}?plugins[i18n][locale]=${locale}`}
+                  href={`${strapiServerUrl}/admin/content-manager/collectionType/api::${
+                    isEmailCampaign
+                      ? "email-campaign.email-campaign"
+                      : "page-variant.page-variant"
+                  }/${pageVariantId}?plugins[i18n][locale]=${locale}`}
                   style={S.Link}
                 >
-                  Edit Variant
+                  Edit {isEmailCampaign ? "Email" : "Variant"}
                 </a>
               )}
               {promoId && (
@@ -86,6 +94,39 @@ const StrapiEditLinks = ({ data }: Props) => {
                   style={S.Link}
                 >
                   Edit Promo
+                </a>
+              )}
+            </>
+          )}
+          {pageId && strapiLocalUrl && (
+            <>
+              |
+              <a
+                href={`${strapiLocalUrl}/admin/content-manager/collectionType/api::page.page/${pageId}?plugins[i18n][locale]=${locale}`}
+                style={S.Link}
+                target="_blank"
+              >
+                Edit Page (L)
+              </a>
+              {pageVariantId && (
+                <a
+                  href={`${strapiLocalUrl}/admin/content-manager/collectionType/api::${
+                    isEmailCampaign
+                      ? "email-campaign.email-campaign"
+                      : "page-variant.page-variant"
+                  }/${pageVariantId}?plugins[i18n][locale]=${locale}`}
+                  style={S.Link}
+                >
+                  Edit {isEmailCampaign ? "Email" : "Variant"} (L)
+                </a>
+              )}
+              {promoId && (
+                <a
+                  href={`${strapiLocalUrl}/admin/content-manager/collectionType/api::promo.promo/${promoId}?plugins[i18n][locale]=${locale}`}
+                  style={S.Link}
+                  target="_blank"
+                >
+                  Edit Promo (L)
                 </a>
               )}
             </>
