@@ -8,7 +8,9 @@ type Props = {
 
 const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
   const page = data.props.pageProps?.initialPageStore?.page;
-  const override = data.props.pageProps?.emailCampaign?.pageOverride;
+  const override =
+    data.props.pageProps?.emailCampaign?.pageOverride ||
+    data.props.pageProps?.pageVariant?.pageOverride;
 
   if (!page) return null;
   const isMultipleProducts = page.products?.length > 1 || false;
