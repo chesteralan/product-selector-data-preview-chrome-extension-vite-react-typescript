@@ -28,6 +28,10 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: export-options
+      - name: Export Manifest
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: manifest
       - name: Zip Extension
         run: |-
           zip -r chrome-extension-${{ github.sha }}.zip extension
