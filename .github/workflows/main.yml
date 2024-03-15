@@ -16,16 +16,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: "npm"
-      - run: npm install
-      - run: npm run export
-      - run: npm run export-options
-      - name: Build
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+      - name: Export App
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: export
+      - name: Export Options
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: export-options
+      - name: Zip Extension
         run: |-
-          npm run export
-          npm run export-options
-          # fill in your build steps here...
-          # we archive the dist folder and include SHA commit as the last step
           zip -r chrome-extension-${{ github.sha }}.zip extension
 
       - name: Archive chrome-extension artifact
