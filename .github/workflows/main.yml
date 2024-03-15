@@ -67,3 +67,5 @@ jobs:
       - name: Upload step
         run: |-
           chrome-webstore-upload upload --source chrome-extension-${{ github.sha }}.zip --extension-id ${{ secrets.EXTENSION_ID }} --client-id ${{ secrets.CI_GOOGLE_CLIENT_ID }} --client-secret ${{ secrets.CI_GOOGLE_CLIENT_SECRET }} --refresh-token ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
+      - name: Go to Chrome Developer Dashboard to submit the uploaded file
+        run: echo "https://chrome.google.com/webstore/devconsole"
