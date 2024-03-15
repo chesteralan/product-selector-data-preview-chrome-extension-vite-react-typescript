@@ -54,5 +54,4 @@ jobs:
           --extension-id ${{ secrets.EXTENSION_ID }} \\
           --client-id ${{ secrets.CI_GOOGLE_CLIENT_ID }} \\
           --client-secret ${{ secrets.CI_GOOGLE_CLIENT_SECRET }} \\
-          --refresh-token ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }} 
-          --auto-publish
+          --refresh-token ${{ secrets.CI_GOOGLE_REFRESH_TOKEN }}
