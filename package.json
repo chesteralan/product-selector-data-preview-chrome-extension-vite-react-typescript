@@ -2,7 +2,7 @@
   "name": "product-selector-data-preview-chrome",
   "description": "Product Selector Preview",
   "private": true,
-  "version": "1.0.31.1",
+  "version": "1.0.31.8",
   "type": "module",
   "scripts": {
     "dev": "vite --config app.config.ts",
