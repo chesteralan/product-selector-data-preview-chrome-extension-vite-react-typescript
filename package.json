@@ -13,7 +13,6 @@
     "preview": "vite preview",
     "manifest": "node manifest.cjs",
     "zip": "yarn export && yarn export-options && yarn manifest && node archive.cjs",
-    "prepare": "husky install",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
