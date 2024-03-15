@@ -84,6 +84,7 @@ const StrapiEditLinks = ({ data }: Props) => {
                       : "page-variant.page-variant"
                   }/${pageVariantId}?plugins[i18n][locale]=${locale}`}
                   style={S.Link}
+                  target="_blank"
                 >
                   Edit {isEmailCampaign ? "Email" : "Variant"}
                 </a>
@@ -116,6 +117,7 @@ const StrapiEditLinks = ({ data }: Props) => {
                       : "page-variant.page-variant"
                   }/${pageVariantId}?plugins[i18n][locale]=${locale}`}
                   style={S.Link}
+                  target="_blank"
                 >
                   Edit {isEmailCampaign ? "Email" : "Variant"} (L)
                 </a>
