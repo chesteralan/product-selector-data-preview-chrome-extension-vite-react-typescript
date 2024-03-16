@@ -6,12 +6,14 @@ import {
   REGION_UK,
   REGION_US,
 } from "../../../../utils/constants/region";
+import useCheckSite from "../../../../hooks/useCheckSite";
 
 type Props = {
   data: any;
+  toggleMatrix: any;
 };
 
-const StrapiEditLinks = ({ data }: Props) => {
+const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
   const {
     strapiServerUrl,
     stagingUrl,
@@ -43,8 +45,18 @@ const StrapiEditLinks = ({ data }: Props) => {
     isEcom ? "/products/" : "/"
   }${slug}${variant ? `/${variant}` : ``}`;
 
+  const { isCollectionPage } = useCheckSite();
+
   return (
     <div style={S.Container}>
+      {isCollectionPage && (
+        <>
+          <span style={S.Link} onClick={toggleMatrix}>
+            Collection Page Matrix
+          </span>{" "}
+          |{" "}
+        </>
+      )}
       {region !== REGION_US && (
         <a href={usStagingUrl as string} style={S.Link}>
           US
@@ -135,7 +147,7 @@ const StrapiEditLinks = ({ data }: Props) => {
           )}
         </>
       )}
-      {pathname !== "/" && (
+      {pathname !== "/" && pageId && (
         <>
           |
           {slug &&
