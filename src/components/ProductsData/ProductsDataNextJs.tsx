@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FunnelSelector from "../FunnelSelector/FunnelSelectorNextJs";
 import StrapiEditLinks from "../FunnelSelector/NextJs/StrapiEditLinks/StrapiEditLinks";
+import CollectionPage from "../CollectionPage/CollectionPage";
 
 type Props = {
   data: any;
@@ -35,6 +36,7 @@ const ProductsDataNextJs = (props: Props) => {
   const { data } = props;
 
   const [show, setShow] = useState<boolean>(false);
+  const [showMatrix, setShowMatrix] = useState<boolean>(false);
 
   const page = data.props.pageProps?.initialPageStore?.page;
 
@@ -52,7 +54,16 @@ const ProductsDataNextJs = (props: Props) => {
           ) : null}
         </>
       )}
-      <StrapiEditLinks data={data} />
+      <StrapiEditLinks
+        data={data}
+        toggleMatrix={() => setShowMatrix(!showMatrix)}
+      />
+      {showMatrix && (
+        <CollectionPage
+          data={data}
+          toggleMatrix={() => setShowMatrix(!showMatrix)}
+        />
+      )}
     </>
   );
 };

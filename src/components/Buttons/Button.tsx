@@ -1,6 +1,6 @@
 type Props = {
-  link: string;
-  children: any;
+  link?: string;
+  children: React.ReactNode;
   target?: string;
 };
 
