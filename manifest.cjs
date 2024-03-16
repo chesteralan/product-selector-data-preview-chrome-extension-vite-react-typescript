@@ -29,7 +29,10 @@ const content = {
   // },
   homepage_url:
     "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript",
-  permissions: ["storage", "activeTab", "scripting"],
+  permissions: [
+    "storage",
+    // "activeTab", "scripting" - this is used for the background option
+  ],
   options_page: "options/options.html",
 };
 
