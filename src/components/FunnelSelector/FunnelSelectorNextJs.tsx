@@ -18,10 +18,14 @@ const FunnelSelectorNextJs = ({ data, setShow }: Props) => {
   const discountCodes = override
     ? override.discountCode.code
     : page.productDiscountCode.code;
-  const rebillDiscountCode = page.rebillDiscountCode?.code;
-  const higherInitialDiscountCode = page.higherInitialDiscountCode?.code;
-  const otpBumpOffers = page.otpBumpOffers;
-  const subBumpOffers = page.subBumpOffers;
+  const rebillDiscountCode =
+    override?.rebillDiscount?.code || page.rebillDiscountCode?.code;
+  const higherInitialDiscountCode =
+    override?.higherDiscount?.code || page.higherInitialDiscountCode?.code;
+  const otpBumpOffers =
+    override?.otpBump.length > 0 ? override?.otpBump : page.otpBumpOffers;
+  const subBumpOffers =
+    override?.subBump.length > 0 ? override?.subBump : page.subBumpOffers;
 
   const locales = data.locales;
   const slug = data.query.slug;

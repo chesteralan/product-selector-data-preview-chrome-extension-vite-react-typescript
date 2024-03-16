@@ -21,9 +21,15 @@ const content = {
       js: ["content-script/main.js"],
     },
   ],
+  action: {
+    default_title: "Show / Hide Panels",
+  },
+  // background: {
+  //   service_worker: "background.js"
+  // },
   homepage_url:
     "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript",
-  permissions: ["storage"],
+  permissions: ["storage", "activeTab", "scripting"],
   options_page: "options/options.html",
 };
 

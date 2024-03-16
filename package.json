@@ -2,17 +2,18 @@
   "name": "product-selector-data-preview-chrome",
   "description": "Product Selector Preview",
   "private": true,
-  "version": "1.0.31.10",
+  "version": "1.0.32",
   "type": "module",
   "scripts": {
     "dev": "vite --config app.config.ts",
     "dev-options": "vite --config options.config.ts",
-    "build": "concurrently \"tsc && vite --config app.config.ts build --watch\" \"tsc && vite --config options.config.ts build --watch\" \"node manifest.cjs\"",
+    "build": "concurrently \"tsc && vite --config app.config.ts build --watch\" \"tsc && vite --config options.config.ts build --watch\" \"node --watch manifest.cjs\" \"tsc src/background.ts --outDir extension --watch\"",
     "export": "tsc && vite --config app.config.ts build",
     "export-options": "tsc && vite --config options.config.ts build",
     "preview": "vite preview",
     "manifest": "node manifest.cjs",
-    "zip": "yarn export && yarn export-options && yarn manifest && node archive.cjs",
+    "background": "tsc src/background.ts --outDir extension",
+    "zip": "yarn export && yarn export-options && yarn manifest && yarn background && node archive.cjs",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "Product Selector Preview",
-  "version": "1.0.31.8",
+  "version": "1.0.32",
   "manifest_version": 3,
   "icons": {
     "16": "/images/16.png",
@@ -16,7 +16,8 @@
       "js": ["content-script/main.js"]
     }
   ],
+  "action": { "default_title": "Show / Hide Panels" },
   "homepage_url": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript",
-  "permissions": ["storage"],
+  "permissions": ["storage", "activeTab", "scripting"],
   "options_page": "options/options.html"
 }

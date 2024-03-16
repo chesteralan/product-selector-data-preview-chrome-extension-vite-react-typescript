@@ -86,25 +86,30 @@ const BumpOffers = ({ bumpOffers, purchaseTab = TYPE_SUB }: Props) => {
                 <strong>Sales Price</strong>:{" "}
                 {formatPrice(bumpOffer.price.salePrice)}
                 <br />
+                <strong>Discount Rate</strong>:{" "}
+                {Math.round(
+                  100 - (bumpOffer.price.rrp / bumpOffer.price.salePrice) * 100,
+                )}
+                %
+                <br />
                 <strong>Savings</strong>:{" "}
-                {formatPrice(bumpOffer.price.rrp - bumpOffer.price.salePrice)}{" "}
-                {" - "}
-                <small>
-                  {(
-                    ((bumpOffer.price.rrp - bumpOffer.price.salePrice) /
-                      bumpOffer.price.rrp) *
-                    100
-                  ).toFixed(2)}
-                  %
-                </small>
+                {formatPrice(bumpOffer.price.rrp - bumpOffer.price.salePrice)}
                 <br /> <strong>Discount Code</strong>: {bumpOfferDC}
                 <br />{" "}
                 <small>
-                  <a href="#" onClick={() => editBumpOfferHandler(bumpOfferId)}>
+                  <a
+                    href="#"
+                    onClick={() => editBumpOfferHandler(bumpOfferId)}
+                    style={{ textDecoration: "underline" }}
+                  >
                     Edit Bump Offer
                   </a>{" "}
                   &middot;{" "}
-                  <a href="#" onClick={() => editProductHandler(productId)}>
+                  <a
+                    href="#"
+                    onClick={() => editProductHandler(productId)}
+                    style={{ textDecoration: "underline" }}
+                  >
                     Edit Product
                   </a>
                 </small>

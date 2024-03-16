@@ -15,17 +15,15 @@ const styles: React.CSSProperties = {
   zIndex: 9999,
 };
 
-const FloatingNavPromo = (props: Props) => {
+const FloatingNavFunnel = (props: Props) => {
   const cta = usePetlabCta();
-  const { isPresell } = useCheckSite();
-  return isPresell ? (
+  const { isFunnel } = useCheckSite();
+  return isFunnel ? (
     <div style={styles}>
-      {cta.map((offerCta) => (
-        <CtaButton link={offerCta} />
-      ))}
-      <PresellListButton link={`/presell-list`} />
+      <PresellListButton link={`/all-pdps`} />
+      <PresellListButton link={`/email/_list`} />
     </div>
   ) : null;
 };
 
-export default FloatingNavPromo;
+export default FloatingNavFunnel;

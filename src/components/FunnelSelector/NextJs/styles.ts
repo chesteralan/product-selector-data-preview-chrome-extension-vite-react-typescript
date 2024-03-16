@@ -23,7 +23,7 @@ export const DataContainer: React.CSSProperties = {
   padding: `30px`,
   overflow: `auto`,
   fontFamily: "sans-serif",
-  fontSize: "12px",
+  fontSize: "16px",
 };
 
 export const PriceStrike: React.CSSProperties = {
@@ -54,6 +54,7 @@ export const SelectorContainer: React.CSSProperties = {
   display: "flex",
   justifyContent: "space-between",
   gap: "15px",
+  fontSize: 11,
 };
 
 export const SelectorItem: React.CSSProperties = {
@@ -74,6 +75,7 @@ export const SelectorItemSelected: React.CSSProperties = {
 export const ProductsContainer: React.CSSProperties = {
   marginTop: 10,
   padding: 15,
+  paddingTop: 35,
   borderRadius: "10px",
   backgroundColor: "#f7f7f7",
   position: "relative",
