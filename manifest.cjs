@@ -28,7 +28,7 @@ const content = {
   //   service_worker: "background.js"
   // },
   homepage_url:
-    "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript",
+    "https://chromewebstore.google.com/detail/product-selector-preview/ecikomedalbaejijnoocgboclniljcho",
   permissions: [
     "storage",
     // "activeTab", "scripting" - this is used for the background option

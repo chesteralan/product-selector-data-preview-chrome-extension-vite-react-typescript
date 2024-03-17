@@ -1,6 +1,6 @@
 {
   "name": "Product Selector Preview",
-  "version": "1.0.34",
+  "version": "1.0.35",
   "manifest_version": 3,
   "icons": {
     "16": "/images/16.png",
@@ -17,7 +17,7 @@
     }
   ],
   "action": { "default_title": "Show / Hide Panels" },
-  "homepage_url": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript",
+  "homepage_url": "https://chromewebstore.google.com/detail/product-selector-preview/ecikomedalbaejijnoocgboclniljcho",
   "permissions": ["storage"],
   "options_page": "options/options.html"
 }
