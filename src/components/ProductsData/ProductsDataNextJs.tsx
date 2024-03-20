@@ -49,7 +49,7 @@ const ProductsDataNextJs = (props: Props) => {
           </div>
           {show ? (
             <>
-              <FunnelSelector data={data} setShow={setShow} />
+              <FunnelSelector setShow={setShow} />
             </>
           ) : null}
         </>

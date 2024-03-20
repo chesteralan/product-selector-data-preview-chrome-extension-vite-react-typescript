@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 import { getSiteRegion } from "../utils/getSiteRegion";
-import { REGION_CA, REGION_UK, REGION_US } from "../utils/constants/region";
+import { REGION_US, REGIONS_LIST } from "../utils/constants/region";
 
 const useConfig = () => {
+  const [region, setRegion] = useState<string>(REGION_US);
   const [strapiServerUrl, setStrapiServerUrl] = useState<string | null>(null);
   const [stagingUrl, setStagingUrl] = useState<string | null>(null);
   const [usStagingUrl, setUsStagingUrl] = useState<string | null>(null);
   const [caStagingUrl, setCaStagingUrl] = useState<string | null>(null);
   const [ukStagingUrl, setUkStagingUrl] = useState<string | null>(null);
+  const [deStagingUrl, setDeStagingUrl] = useState<string | null>(null);
+  const [auStagingUrl, setAuStagingUrl] = useState<string | null>(null);
   const [liveUrl, setLiveUrl] = useState<string | null>(null);
   const [usLiveUrl, setUsLiveUrl] = useState<string | null>(null);
   const [caLiveUrl, setCaLiveUrl] = useState<string | null>(null);
   const [ukLiveUrl, setUkLiveUrl] = useState<string | null>(null);
+  const [deLiveUrl, setDeLiveUrl] = useState<string | null>(null);
+  const [auLiveUrl, setAuLiveUrl] = useState<string | null>(null);
   const [localUrl, setLocalUrl] = useState<string | null>(null);
   const [devToolUrl, setDevToolUrl] = useState<string | null>(null);
   const [strapiLocalUrl, setStrapiLocalUrl] = useState<string | null>(null);
@@ -32,8 +37,11 @@ const useConfig = () => {
   const [strapiDevBlueUrl, setStrapiDevBlueUrl] = useState<string | null>(null);
 
   useEffect(() => {
+    const detectedRegion = getSiteRegion();
+    setRegion(detectedRegion || REGION_US);
+
     chrome.storage.local
-      .get([
+      ?.get([
         "nextjsLocalUrl",
         "developerToolUrl",
         "strapiLocalUrl",
@@ -45,6 +53,10 @@ const useConfig = () => {
         "caNextjsLiveUrl",
         "ukNextjsStagingUrl",
         "ukNextjsLiveUrl",
+        "deNextjsStagingUrl",
+        "deNextjsLiveUrl",
+        "auNextjsStagingUrl",
+        "auNextjsLiveUrl",
       ])
       .then((items) => {
         setLocalUrl(items.nextjsLocalUrl);
@@ -58,70 +70,47 @@ const useConfig = () => {
         setCaLiveUrl(items.caNextjsLiveUrl);
         setUkStagingUrl(items.ukNextjsStagingUrl);
         setUkLiveUrl(items.ukNextjsLiveUrl);
+        setDeStagingUrl(items.deNextjsStagingUrl);
+        setDeLiveUrl(items.deNextjsLiveUrl);
+        setAuStagingUrl(items.auNextjsStagingUrl);
+        setAuLiveUrl(items.auNextjsLiveUrl);
       });
 
-    const region = getSiteRegion();
-
-    switch (region) {
-      case REGION_CA:
-        chrome.storage.local
-          .get([
-            "caStrapiServerUrl",
-            "caNextjsStagingUrl",
-            "caNextjsLiveUrl",
-            "caStrapiGreenUrl",
-            "caStrapiBlueUrl",
-          ])
-          .then((items: any) => {
-            setStrapiServerUrl(items.caStrapiServerUrl);
-            setStrapiProdOrangeUrl(items.caStrapiServerUrl);
-            setStagingUrl(items.caNextjsStagingUrl);
-            setLiveUrl(items.caNextjsLiveUrl);
-            setStrapiProdGreenUrl(items.caStrapiGreenUrl);
-            setStrapiProdBlueUrl(items.caStrapiBlueUrl);
-          });
-        break;
-      case REGION_UK:
-        chrome.storage.local
-          .get([
-            "ukStrapiServerUrl",
-            "ukNextjsStagingUrl",
-            "ukNextjsLiveUrl",
-            "ukStrapiGreenUrl",
-            "ukStrapiBlueUrl",
-          ])
-          .then((items: any) => {
-            setStrapiServerUrl(items.ukStrapiServerUrl);
-            setStrapiProdOrangeUrl(items.ukStrapiServerUrl);
-            setStagingUrl(items.ukNextjsStagingUrl);
-            setLiveUrl(items.ukNextjsLiveUrl);
-            setStrapiProdGreenUrl(items.ukStrapiGreenUrl);
-            setStrapiProdBlueUrl(items.ukStrapiBlueUrl);
-          });
-        break;
-      default:
-      case REGION_US:
-        chrome.storage.local
-          .get([
-            "usStrapiServerUrl",
-            "usNextjsStagingUrl",
-            "usNextjsLiveUrl",
-            "usStrapiGreenUrl",
-            "usStrapiBlueUrl",
-          ])
-          .then((items: any) => {
-            setStrapiServerUrl(items.usStrapiServerUrl);
-            setStrapiProdOrangeUrl(items.usStrapiServerUrl);
-            setStagingUrl(items.usNextjsStagingUrl);
-            setLiveUrl(items.usNextjsLiveUrl);
-            setStrapiProdGreenUrl(items.usStrapiGreenUrl);
-            setStrapiProdBlueUrl(items.usStrapiBlueUrl);
-          });
-        break;
+    if (detectedRegion) {
+      chrome.storage?.local
+        ?.get([
+          `${detectedRegion.toLowerCase()}StrapiServerUrl`,
+          `${detectedRegion.toLowerCase()}NextjsStagingUrl`,
+          `${detectedRegion.toLowerCase()}NextjsLiveUrl`,
+          `${detectedRegion.toLowerCase()}StrapiGreenUrl`,
+          `${detectedRegion.toLowerCase()}StrapiBlueUrl`,
+        ])
+        .then((items: any) => {
+          setStrapiServerUrl(
+            items[`${detectedRegion.toLowerCase()}StrapiServerUrl`],
+          );
+          setStrapiProdOrangeUrl(
+            items[`${detectedRegion.toLowerCase()}StrapiServerUrl`],
+          );
+          setStagingUrl(
+            items[`${detectedRegion.toLowerCase()}NextjsStagingUrl`],
+          );
+          setLiveUrl(items[`${detectedRegion.toLowerCase()}NextjsLiveUrl`]);
+          setStrapiProdGreenUrl(
+            items[`${detectedRegion.toLowerCase()}StrapiGreenUrl`],
+          );
+          setStrapiProdBlueUrl(
+            items[`${detectedRegion.toLowerCase()}StrapiBlueUrl`],
+          );
+        });
     }
   }, []);
 
+  const otherRegions = REGIONS_LIST.filter((r) => r !== region);
+
   return {
+    region,
+    otherRegions,
     strapiServerUrl,
     stagingUrl,
     localUrl,
@@ -135,9 +124,13 @@ const useConfig = () => {
     usStagingUrl,
     caStagingUrl,
     ukStagingUrl,
+    deStagingUrl,
+    auStagingUrl,
     usLiveUrl,
     caLiveUrl,
     ukLiveUrl,
+    deLiveUrl,
+    auLiveUrl,
     strapiLocalUrl,
   };
 };

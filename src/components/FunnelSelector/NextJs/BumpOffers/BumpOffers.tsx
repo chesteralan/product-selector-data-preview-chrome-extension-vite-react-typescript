@@ -35,8 +35,12 @@ const BumpOffers = ({ bumpOffers, purchaseTab = TYPE_SUB }: Props) => {
   return (
     <div style={S.BumpOffersContainer}>
       <p>
-        <u>Bump Offers</u>
+        <strong>
+          {TYPE_SUB === purchaseTab ? "Subscription" : "Onetime"} Bump Offers
+        </strong>
       </p>
+      <hr />
+      <br />
       <p>
         <ul style={S.UList}>
           {bumpOffers.map((bumpOffer: any, index: number) => {
@@ -50,7 +54,7 @@ const BumpOffers = ({ bumpOffers, purchaseTab = TYPE_SUB }: Props) => {
                 <br />
                 {TYPE_SUB === purchaseTab ? (
                   <>
-                    <strong>SUB Variant ID</strong>:{" "}
+                    <strong>Variant ID</strong>:{" "}
                     <a
                       href="#"
                       onClick={() =>
@@ -66,7 +70,7 @@ const BumpOffers = ({ bumpOffers, purchaseTab = TYPE_SUB }: Props) => {
                   </>
                 ) : (
                   <>
-                    <strong>OTP Variant ID</strong>:{" "}
+                    <strong>Variant ID</strong>:{" "}
                     <a
                       href="#"
                       onClick={() =>

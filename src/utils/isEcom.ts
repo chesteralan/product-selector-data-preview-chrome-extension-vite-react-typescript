@@ -5,7 +5,7 @@ export const isEcom = (window: Window): boolean => {
     "thepetlabco.de",
     "petlabco.co.uk",
   ];
-  return sites.includes(window.location.hostname);
+  return sites.some((site) => window.location.hostname.includes(site));
 };
 
 export const isCollectionPage = (window: Window): boolean => {

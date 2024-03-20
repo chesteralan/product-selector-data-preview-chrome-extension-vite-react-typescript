@@ -1,24 +1,19 @@
 import Product from "../Product/Product";
 import BumpOffers from "../BumpOffers/BumpOffers";
 import { TYPE_OTP, TYPE_SUB } from "../../../../utils/constants/purchaseType";
+import useNextData from "../../../../hooks/useNextData";
 
 type Props = {
-  productId: any;
-  otpPrices: any;
-  subPrices: any;
-  subUpsellUrl: any;
-  otpUpsellUrl: any;
-  klaviyoListId: any;
-  purchaseTab: any;
-  showBumpoffers: any;
-  discountCodes: any;
-  subBumpOffers: any;
-  otpBumpOffers: any;
-  rebillDiscountCode: any;
-  higherInitialDiscountCode: any;
+  currentProduct?: number;
+  purchaseTab: string;
+  showBumpoffers: boolean;
 };
 
-const ProductDetails = (props: Props) => {
+const ProductDetails = ({
+  currentProduct = 0,
+  purchaseTab,
+  showBumpoffers,
+}: Props) => {
   const {
     productId,
     otpPrices,
@@ -26,14 +21,13 @@ const ProductDetails = (props: Props) => {
     subUpsellUrl,
     otpUpsellUrl,
     klaviyoListId,
-    purchaseTab,
-    showBumpoffers,
     discountCodes,
     subBumpOffers,
     otpBumpOffers,
     rebillDiscountCode,
     higherInitialDiscountCode,
-  } = props;
+    freeGift,
+  } = useNextData(currentProduct);
 
   return (
     <>
@@ -61,6 +55,7 @@ const ProductDetails = (props: Props) => {
             <BumpOffers bumpOffers={subBumpOffers} purchaseTab={purchaseTab} />
           ) : (
             <Product
+              freeGift={freeGift}
               prices={subPrices}
               discountCodes={discountCodes}
               upsellUrl={subUpsellUrl}

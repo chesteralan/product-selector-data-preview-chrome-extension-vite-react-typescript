@@ -7,14 +7,6 @@ import ProductDetails from "../ProductDetails/ProductDetails";
 
 type Props = {
   setShow: (value: boolean) => void;
-  discountCodes: string;
-  rebillDiscountCode: string;
-  higherInitialDiscountCode: string;
-  subBumpOffers: any;
-  otpBumpOffers: any;
-  locales: string[];
-  slug: string;
-  products: any[];
 };
 
 const MultipleProducts = (props: Props) => {
@@ -22,26 +14,11 @@ const MultipleProducts = (props: Props) => {
   const [purchaseTab, setPurchaseTab] = useState<string>(TYPE_SUB);
   const [showBumpoffers, setShowBumpoffers] = useState(false);
 
-  const { setShow, products } = props;
-
-  const productId = products[currentProduct].id;
-  const otpPrices = products[currentProduct].prices.otpPrices;
-  const subPrices = products[currentProduct].prices.subPrices;
-  const subUpsellUrl = products[currentProduct].subUpsellUrl;
-
-  const otpUpsellUrl = products[currentProduct].otpUpsellUrl;
-  const klaviyoListId = products[currentProduct].klaviyoListId;
+  const { setShow } = props;
 
   const productDetails = {
-    productId,
-    otpPrices,
-    subPrices,
-    subUpsellUrl,
-    otpUpsellUrl,
-    klaviyoListId,
     purchaseTab,
     showBumpoffers,
-    ...props,
   };
 
   return (
@@ -50,7 +27,6 @@ const MultipleProducts = (props: Props) => {
       <div style={S.DataContainer}>
         <div style={{ marginBottom: 20 }}>
           <Selector
-            products={products}
             setCurrentProduct={setCurrentProduct}
             currentProduct={currentProduct}
           />
@@ -62,7 +38,11 @@ const MultipleProducts = (props: Props) => {
           showBumpoffers={showBumpoffers}
           setShowBumpoffers={setShowBumpoffers}
         />
-        <ProductDetails {...productDetails} />
+        <ProductDetails
+          currentProduct={currentProduct}
+          showBumpoffers={showBumpoffers}
+          purchaseTab={purchaseTab}
+        />
       </div>
     </>
   );
