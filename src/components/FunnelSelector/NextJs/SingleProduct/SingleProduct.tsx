@@ -3,44 +3,17 @@ import { useState } from "react";
 import { TYPE_SUB } from "../../../../utils/constants/purchaseType";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import * as S from "../styles";
+import useNextData from "../../../../hooks/useNextData";
 
 type Props = {
   setShow: any;
-  discountCodes: string;
-  rebillDiscountCode: string;
-  higherInitialDiscountCode: string;
-  subBumpOffers: any;
-  otpBumpOffers: any;
-  locales: string[];
-  slug: string;
-  product: any;
 };
 
 const SingleProduct = (props: Props) => {
   const [purchaseTab, setPurchaseTab] = useState<string>(TYPE_SUB);
   const [showBumpoffers, setShowBumpoffers] = useState(false);
 
-  const { product, setShow } = props;
-
-  const productId = product.id;
-  const otpPrices = product.prices.otpPrices;
-  const subPrices = product.prices.subPrices;
-  const subUpsellUrl = product.subUpsellUrl;
-
-  const otpUpsellUrl = product.otpUpsellUrl;
-  const klaviyoListId = product.klaviyoListId;
-
-  const productDetails = {
-    productId,
-    otpPrices,
-    subPrices,
-    subUpsellUrl,
-    otpUpsellUrl,
-    klaviyoListId,
-    purchaseTab,
-    showBumpoffers,
-    ...props,
-  };
+  const { setShow } = props;
 
   return (
     <>
@@ -52,7 +25,11 @@ const SingleProduct = (props: Props) => {
           showBumpoffers={showBumpoffers}
           setShowBumpoffers={setShowBumpoffers}
         />
-        <ProductDetails {...productDetails} />
+        <ProductDetails
+          currentProduct={0}
+          showBumpoffers={showBumpoffers}
+          purchaseTab={purchaseTab}
+        />
       </div>
     </>
   );

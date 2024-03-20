@@ -1,8 +1,6 @@
-import CtaButton from "../Buttons/CtaButton";
-import usePetlabCta from "../../hooks/usePetlabCta";
 import PresellListButton from "../Buttons/PresellListButton";
-import { isPresell } from "../../utils/isPresell";
 import useCheckSite from "../../hooks/useCheckSite";
+import { useDataContext } from "../../context/DataContext";
 
 type Props = {};
 
@@ -16,7 +14,6 @@ const styles: React.CSSProperties = {
 };
 
 const FloatingNavFunnel = (props: Props) => {
-  const cta = usePetlabCta();
   const { isFunnel } = useCheckSite();
   return isFunnel ? (
     <div style={styles}>

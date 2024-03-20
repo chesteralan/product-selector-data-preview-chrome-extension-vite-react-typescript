@@ -15,14 +15,14 @@ type Props = {
 
 const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
   const {
+    region,
+    otherRegions,
     strapiServerUrl,
     stagingUrl,
     localUrl,
     liveUrl,
-    usStagingUrl,
-    caStagingUrl,
-    ukStagingUrl,
     strapiLocalUrl,
+    ...otherConfig
   } = useConfig();
 
   const page = data.props.pageProps?.initialPageStore?.page;
@@ -39,7 +39,6 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
   const variant = data.query?.variant || data.query?.campaignId || null;
   const isEcom = page?.isEcom || false;
 
-  const region = getSiteRegion();
   const pathname = window.location.pathname;
   const currentPath = `${isEmailCampaign ? "/email" : ""}${
     isEcom ? "/products/" : "/"
@@ -57,27 +56,29 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
           |{" "}
         </>
       )}
-      {region !== REGION_US && (
-        <a href={usStagingUrl as string} style={S.Link}>
-          US
-        </a>
-      )}
-      {region !== REGION_CA && (
-        <a href={caStagingUrl as string} style={S.Link}>
-          CA
-        </a>
-      )}
-      {region !== REGION_UK && (
-        <a href={ukStagingUrl as string} style={S.Link}>
-          UK
-        </a>
-      )}
+      {otherRegions.map((otherRegion) => {
+        const otherConfigKey =
+          `${otherRegion.toLowerCase()}StagingUrl` as keyof typeof otherConfig;
+        return (
+          <a
+            href={otherConfig[otherConfigKey] as string}
+            style={S.Link}
+            key={otherRegion}
+          >
+            {otherRegion}
+          </a>
+        );
+      })}
       {strapiServerUrl && (
         <>
-          |
-          <a href={`${strapiServerUrl}/admin`} style={S.Link}>
-            Admin Panel
-          </a>
+          {!pageId && (
+            <>
+              |{" "}
+              <a href={`${strapiServerUrl}/admin`} style={S.Link}>
+                Admin Panel
+              </a>
+            </>
+          )}
           {pageId && (
             <>
               |
