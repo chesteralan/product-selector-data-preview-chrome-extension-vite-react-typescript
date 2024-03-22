@@ -10,12 +10,12 @@ const useNextData = (currentProduct = 0) => {
   const promo = page?.promo?.pageOverride;
 
   const freeGift = page?.subFreeGiftOffer;
-  const isMultipleProducts = page.products?.length > 1 || false;
+  const isMultipleProducts = page?.products?.length > 1 || false;
 
   const discountCodes =
-    promo.discountCode.code ||
-    override.discountCode.code ||
-    page.productDiscountCode.code;
+    promo?.discountCode?.code ||
+    override?.discountCode?.code ||
+    page?.productDiscountCode?.code;
   const rebillDiscountCode =
     promo?.rebillDiscount?.code ||
     override?.rebillDiscount?.code ||
