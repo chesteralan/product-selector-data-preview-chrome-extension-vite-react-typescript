@@ -7,6 +7,7 @@ import {
   REGION_US,
 } from "../../../../utils/constants/region";
 import useCheckSite from "../../../../hooks/useCheckSite";
+import { isProd } from "../../../../utils/isProd";
 
 type Props = {
   data: any;
@@ -57,11 +58,12 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
         </>
       )}
       {otherRegions.map((otherRegion) => {
-        const otherConfigKey =
-          `${otherRegion.toLowerCase()}StagingUrl` as keyof typeof otherConfig;
+        const otherConfigKey = `${otherRegion.toLowerCase()}${
+          isProd(window) ? `Live` : `Staging`
+        }Url` as keyof typeof otherConfig;
         return (
           <a
-            href={otherConfig[otherConfigKey] as string}
+            href={`${otherConfig[otherConfigKey] as string}${pathname}`}
             style={S.Link}
             key={otherRegion}
           >
@@ -74,7 +76,11 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
           {!pageId && (
             <>
               |{" "}
-              <a href={`${strapiServerUrl}/admin`} style={S.Link}>
+              <a
+                href={`${strapiServerUrl}/admin`}
+                target="_blank"
+                style={S.Link}
+              >
                 Admin Panel
               </a>
             </>
@@ -106,6 +112,7 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
                 <a
                   href={`${strapiServerUrl}/admin/content-manager/collectionType/api::promo.promo/${promoId}?plugins[i18n][locale]=${locale}`}
                   style={S.Link}
+                  target="_blank"
                 >
                   Edit Promo
                 </a>
@@ -155,7 +162,7 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
             locales.map(
               (loc: string) =>
                 loc !== locale && (
-                  <a href={`/${loc}${currentPath}`} style={S.Link}>
+                  <a href={`/${loc}${pathname}`} style={S.Link}>
                     {loc}
                   </a>
                 ),
@@ -163,21 +170,21 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
           |
           {stagingUrl && slug && (
             <>
-              <a href={`${stagingUrl}${currentPath}`} style={S.Link}>
+              <a href={`${stagingUrl}${pathname}`} style={S.Link}>
                 Staging
               </a>
             </>
           )}
           {localUrl && slug && (
             <>
-              <a href={`${localUrl}${currentPath}`} style={S.Link}>
+              <a href={`${localUrl}${pathname}`} style={S.Link}>
                 Local
               </a>
             </>
           )}
           {liveUrl && slug && (
             <>
-              <a href={`${liveUrl}${currentPath}`} style={S.Link}>
+              <a href={`${liveUrl}${pathname}`} style={S.Link}>
                 Live
               </a>
             </>

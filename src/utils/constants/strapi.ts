@@ -11,6 +11,8 @@ export const IS_STRAPI_DEV =
 export const IS_STRAPI_US = IS_STRAPI && window.location.host.includes("-us-");
 export const IS_STRAPI_CA = IS_STRAPI && window.location.host.includes("-ca-");
 export const IS_STRAPI_UK = IS_STRAPI && window.location.host.includes("-uk-");
+export const IS_STRAPI_DE = IS_STRAPI && window.location.host.includes("-de-");
+export const IS_STRAPI_AU = IS_STRAPI && window.location.host.includes("-au-");
 export const IS_STRAPI_ORANGE =
   IS_STRAPI && window.location.host.includes("orange");
 export const IS_STRAPI_GREEN =

@@ -9,5 +9,5 @@ export const REGIONS_LIST = [
   REGION_CA,
   REGION_UK,
   REGION_DE,
-  REGION_AU,
+  // REGION_AU,
 ];
