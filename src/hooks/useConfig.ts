@@ -40,7 +40,7 @@ const useConfig = () => {
     const detectedRegion = getSiteRegion();
     setRegion(detectedRegion || REGION_US);
 
-    chrome.storage.local
+    chrome.storage?.local
       ?.get([
         "nextjsLocalUrl",
         "developerToolUrl",

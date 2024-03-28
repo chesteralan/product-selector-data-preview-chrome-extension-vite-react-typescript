@@ -1,7 +1,9 @@
 import useConfig from "../../hooks/useConfig";
 import {
+  IS_STRAPI_AU,
   IS_STRAPI_BLUE,
   IS_STRAPI_CA,
+  IS_STRAPI_DE,
   IS_STRAPI_GREEN,
   IS_STRAPI_LOCAL,
   IS_STRAPI_ORANGE,
@@ -12,7 +14,6 @@ import {
 import * as S from "./StrapiCMSNav.styles";
 
 const StrapiCMSNav = () => {
-  console.log(window.location);
   const {
     strapiDevGreenUrl,
     strapiDevBlueUrl,
@@ -22,11 +23,11 @@ const StrapiCMSNav = () => {
     liveUrl,
     stagingUrl,
     strapiLocalUrl,
+    otherRegions,
   } = useConfig();
 
   const replaceHref = (url: string) => {
-    const href = window.location.href.replace(window.location.origin, url);
-    return href;
+    return window.location.href.replace(window.location.origin, url);
   };
 
   const replaceRegion = (region: string) => {
@@ -36,6 +37,8 @@ const StrapiCMSNav = () => {
     if (IS_STRAPI_US) return href.replace("-us-", region);
     if (IS_STRAPI_CA) return href.replace("-ca-", region);
     if (IS_STRAPI_UK) return href.replace("-uk-", region);
+    if (IS_STRAPI_DE) return href.replace("-de-", region);
+    if (IS_STRAPI_AU) return href.replace("-au-", region);
 
     return href;
   };
@@ -55,115 +58,90 @@ const StrapiCMSNav = () => {
     <div style={S.Container}>
       {!IS_STRAPI_ORANGE && strapiProdOrangeUrl && (
         <>
-          <a
+          <span
             style={S.Link}
-            href="#"
             onClick={() => redirect(replaceHref(strapiProdOrangeUrl))}
           >
             Prod-Orange
-          </a>{" "}
+          </span>{" "}
           &middot;{" "}
         </>
       )}
       {!IS_STRAPI_GREEN && strapiProdGreenUrl && (
         <>
-          <a
+          <span
             style={S.Link}
-            href="#"
             onClick={() => redirect(replaceHref(strapiProdGreenUrl))}
           >
             Prod-Green
-          </a>{" "}
+          </span>{" "}
           &middot;{" "}
         </>
       )}
       {!IS_STRAPI_BLUE && strapiProdBlueUrl && (
         <>
-          <a
+          <span
             style={S.Link}
-            href="#"
             onClick={() => redirect(replaceHref(strapiProdBlueUrl))}
           >
             Prod-Blue
-          </a>{" "}
+          </span>{" "}
           &middot;{" "}
         </>
       )}
       {IS_STRAPI_PROD && (
         <>
-          {!IS_STRAPI_US && strapiProdOrangeUrl && (
-            <>
-              <a
-                style={S.Link}
-                href="#"
-                onClick={() => redirect(replaceRegion("-us-"))}
-              >
-                US
-              </a>{" "}
-              &middot;{" "}
-            </>
-          )}
-          {!IS_STRAPI_CA && strapiProdOrangeUrl && (
-            <>
-              <a
-                style={S.Link}
-                href="#"
-                onClick={() => redirect(replaceRegion("-ca-"))}
-              >
-                CA
-              </a>{" "}
-              &middot;{" "}
-            </>
-          )}
-          {!IS_STRAPI_UK && strapiProdOrangeUrl && (
-            <>
-              <a
-                style={S.Link}
-                href="#"
-                onClick={() => redirect(replaceRegion("-uk-"))}
-              >
-                UK
-              </a>{" "}
-              &middot;{" "}
-            </>
-          )}
+          {otherRegions.map((otherRegion) => {
+            return (
+              <>
+                <span
+                  style={S.Link}
+                  onClick={() =>
+                    redirect(replaceRegion(`-${otherRegion.toLowerCase()}-`))
+                  }
+                  key={otherRegion}
+                >
+                  {otherRegion}
+                </span>{" "}
+                &middot;{" "}
+              </>
+            );
+          })}
         </>
       )}
       {strapiDevGreenUrl && (
         <>
-          <a
+          <span
             style={S.Link}
-            href="#"
             onClick={() => redirect(replaceHref(strapiDevGreenUrl))}
           >
             Dev-Green
-          </a>{" "}
+          </span>{" "}
           &middot;{" "}
         </>
       )}
       {strapiDevBlueUrl && (
         <>
-          <a
+          <span
             style={S.Link}
-            href="#"
             onClick={() => redirect(replaceHref(strapiDevBlueUrl))}
           >
             Dev-Blue
-          </a>{" "}
+          </span>{" "}
           &middot;{" "}
         </>
       )}
       {!IS_STRAPI_LOCAL && strapiLocalUrl && (
         <>
-          <a style={S.Link} href="#" onClick={() => redirect(replaceLocal())}>
+          <span style={S.Link} onClick={() => redirect(replaceLocal())}>
             Local CMS
-          </a>{" "}
+          </span>{" "}
           &middot;
         </>
       )}
       {liveUrl && (
         <>
-          <a style={S.Link} href={liveUrl}>
+          <a style={S.Link} href={`${liveUrl}/all-pdps`} target="_blank">
             Live URL
           </a>{" "}
           &middot;{" "}
@@ -171,7 +149,7 @@ const StrapiCMSNav = () => {
       )}
       {stagingUrl && (
         <>
-          <a style={S.Link} href={stagingUrl}>
+          <a style={S.Link} href={`${stagingUrl}/all-pdps`} target="_blank">
             Staging URL
           </a>
         </>

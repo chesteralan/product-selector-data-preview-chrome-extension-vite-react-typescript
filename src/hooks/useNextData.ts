@@ -10,6 +10,7 @@ const useNextData = (currentProduct = 0) => {
   const promo = page?.promo?.pageOverride;
 
   const freeGift = page?.subFreeGiftOffer;
+  const removeFreeGift = override?.removeFreeGift || false;
   const isMultipleProducts = page?.products?.length > 1 || false;
 
   const discountCodes =
@@ -67,6 +68,7 @@ const useNextData = (currentProduct = 0) => {
     otpUpsellUrl,
     klaviyoListId,
     freeGift,
+    removeFreeGift,
   };
 };
 

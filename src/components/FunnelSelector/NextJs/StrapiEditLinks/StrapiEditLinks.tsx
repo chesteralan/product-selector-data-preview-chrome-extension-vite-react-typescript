@@ -1,12 +1,7 @@
 import useConfig from "../../../../hooks/useConfig";
 import * as S from "./StrapiEditLinks.styles";
-import { getSiteRegion } from "../../../../utils/getSiteRegion";
-import {
-  REGION_CA,
-  REGION_UK,
-  REGION_US,
-} from "../../../../utils/constants/region";
 import useCheckSite from "../../../../hooks/useCheckSite";
+import { isProd } from "../../../../utils/isProd";
 
 type Props = {
   data: any;
@@ -36,13 +31,12 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
   const pageVariantId = pageVariant?.id;
   const promoId = page?.promo?.id;
   const slug = data.query?.slug || null;
-  const variant = data.query?.variant || data.query?.campaignId || null;
   const isEcom = page?.isEcom || false;
 
   const pathname = window.location.pathname;
   const currentPath = `${isEmailCampaign ? "/email" : ""}${
-    isEcom ? "/products/" : "/"
-  }${slug}${variant ? `/${variant}` : ``}`;
+    isEcom ? "/products" : ""
+  }${pathname}`;
 
   const { isCollectionPage } = useCheckSite();
 
@@ -57,11 +51,12 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
         </>
       )}
       {otherRegions.map((otherRegion) => {
-        const otherConfigKey =
-          `${otherRegion.toLowerCase()}StagingUrl` as keyof typeof otherConfig;
+        const otherConfigKey = `${otherRegion.toLowerCase()}${
+          isProd(window) ? `Live` : `Staging`
+        }Url` as keyof typeof otherConfig;
         return (
           <a
-            href={otherConfig[otherConfigKey] as string}
+            href={`${otherConfig[otherConfigKey] as string}${currentPath}`}
             style={S.Link}
             key={otherRegion}
           >
@@ -74,7 +69,11 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
           {!pageId && (
             <>
               |{" "}
-              <a href={`${strapiServerUrl}/admin`} style={S.Link}>
+              <a
+                href={`${strapiServerUrl}/admin`}
+                target="_blank"
+                style={S.Link}
+              >
                 Admin Panel
               </a>
             </>
@@ -106,6 +105,7 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
                 <a
                   href={`${strapiServerUrl}/admin/content-manager/collectionType/api::promo.promo/${promoId}?plugins[i18n][locale]=${locale}`}
                   style={S.Link}
+                  target="_blank"
                 >
                   Edit Promo
                 </a>

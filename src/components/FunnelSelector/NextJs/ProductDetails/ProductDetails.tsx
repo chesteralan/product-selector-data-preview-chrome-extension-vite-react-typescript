@@ -27,6 +27,7 @@ const ProductDetails = ({
     rebillDiscountCode,
     higherInitialDiscountCode,
     freeGift,
+    removeFreeGift,
   } = useNextData(currentProduct);
 
   return (
@@ -60,6 +61,7 @@ const ProductDetails = ({
               discountCodes={discountCodes}
               upsellUrl={subUpsellUrl}
               productId={productId}
+              removeFreeGift={removeFreeGift}
             />
           )}
         </>
@@ -74,6 +76,7 @@ const ProductDetails = ({
               discountCodes={discountCodes}
               upsellUrl={otpUpsellUrl}
               productId={productId}
+              removeFreeGift={removeFreeGift}
             />
           )}
         </>

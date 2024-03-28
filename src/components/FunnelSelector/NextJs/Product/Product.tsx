@@ -8,6 +8,7 @@ type Props = {
   freeGift?: any;
   discountCodes: any;
   upsellUrl: string;
+  removeFreeGift: boolean;
 };
 
 const Product = ({
@@ -16,6 +17,7 @@ const Product = ({
   discountCodes,
   upsellUrl,
   freeGift,
+  removeFreeGift = false,
 }: Props) => {
   const { devToolUrl, strapiServerUrl } = useConfig();
 
@@ -28,7 +30,7 @@ const Product = ({
 
   return (
     <>
-      {freeGift && (
+      {!removeFreeGift && freeGift && (
         <div
           style={{ ...S.ProductsContainer, paddingTop: 15, marginBottom: 20 }}
         >

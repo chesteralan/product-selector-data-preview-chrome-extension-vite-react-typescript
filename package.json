@@ -2,7 +2,7 @@
   "name": "product-selector-data-preview-chrome",
   "description": "Product Selector Preview",
   "private": true,
-  "version": "1.0.37",
+  "version": "1.0.38",
   "type": "module",
   "scripts": {
     "dev": "vite --config app.config.ts",
@@ -30,7 +30,7 @@
     "concurrently": "^8.2.2",
     "prettier": "3.1.0",
     "typescript": "^4.9.3",
-    "vite": "^4.0.0"
+    "vite": "^5.2.6"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
