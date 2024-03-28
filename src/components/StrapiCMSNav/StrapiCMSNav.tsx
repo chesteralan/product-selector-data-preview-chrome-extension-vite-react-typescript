@@ -12,7 +12,6 @@ import {
   IS_STRAPI_US,
 } from "../../utils/constants/strapi";
 import * as S from "./StrapiCMSNav.styles";
-import { isProd } from "../../utils/isProd";
 
 const StrapiCMSNav = () => {
   const {
@@ -28,8 +27,7 @@ const StrapiCMSNav = () => {
   } = useConfig();
 
   const replaceHref = (url: string) => {
-    const href = window.location.href.replace(window.location.origin, url);
-    return href;
+    return window.location.href.replace(window.location.origin, url);
   };
 
   const replaceRegion = (region: string) => {

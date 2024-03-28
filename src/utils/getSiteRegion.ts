@@ -37,7 +37,5 @@ export const getSiteRegion = (): string => {
     hostname = hostname.split("--")[1];
   }
 
-  let region = SITES[hostname] || REGION_US;
-
-  return region;
+  return SITES[hostname] || REGION_US;
 };
