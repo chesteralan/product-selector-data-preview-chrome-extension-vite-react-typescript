@@ -1,6 +1,7 @@
 {
   "name": "Product Selector Preview",
-  "version": "1.0.38",
+  "description": "A chrome extension that add shortcuts to funnel and upsell content",
+  "version": "1.0.39",
   "manifest_version": 3,
   "icons": {
     "16": "/images/16.png",
@@ -16,7 +17,7 @@
       "js": ["content-script/main.js"]
     }
   ],
-  "action": { "default_title": "Show / Hide Panels" },
+  "action": { "default_title": "Product Selector Preview" },
   "homepage_url": "https://chromewebstore.google.com/detail/product-selector-preview/ecikomedalbaejijnoocgboclniljcho",
   "permissions": ["storage"],
   "options_page": "options/options.html"

@@ -1,8 +1,10 @@
 {
   "name": "product-selector-data-preview-chrome",
   "description": "Product Selector Preview",
+  "long_description": "A chrome extension that add shortcuts to funnel and upsell content",
+  "homepage": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript",
   "private": true,
-  "version": "1.0.38",
+  "version": "1.0.39",
   "type": "module",
   "scripts": {
     "dev": "vite --config app.config.ts",

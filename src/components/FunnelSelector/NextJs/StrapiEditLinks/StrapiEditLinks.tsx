@@ -31,12 +31,8 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
   const pageVariantId = pageVariant?.id;
   const promoId = page?.promo?.id;
   const slug = data.query?.slug || null;
-  const isEcom = page?.isEcom || false;
 
   const pathname = window.location.pathname;
-  const currentPath = `${isEmailCampaign ? "/email" : ""}${
-    isEcom ? "/products" : ""
-  }${pathname}`;
 
   const { isCollectionPage } = useCheckSite();
 
@@ -56,7 +52,7 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
         }Url` as keyof typeof otherConfig;
         return (
           <a
-            href={`${otherConfig[otherConfigKey] as string}${currentPath}`}
+            href={`${otherConfig[otherConfigKey] as string}${pathname}`}
             style={S.Link}
             key={otherRegion}
           >
@@ -155,7 +151,7 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
             locales.map(
               (loc: string) =>
                 loc !== locale && (
-                  <a href={`/${loc}${currentPath}`} style={S.Link}>
+                  <a href={`/${loc}${pathname}`} style={S.Link}>
                     {loc}
                   </a>
                 ),
@@ -163,21 +159,21 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
           |
           {stagingUrl && slug && (
             <>
-              <a href={`${stagingUrl}${currentPath}`} style={S.Link}>
+              <a href={`${stagingUrl}${pathname}`} style={S.Link}>
                 Staging
               </a>
             </>
           )}
           {localUrl && slug && (
             <>
-              <a href={`${localUrl}${currentPath}`} style={S.Link}>
+              <a href={`${localUrl}${pathname}`} style={S.Link}>
                 Local
               </a>
             </>
           )}
           {liveUrl && slug && (
             <>
-              <a href={`${liveUrl}${currentPath}`} style={S.Link}>
+              <a href={`${liveUrl}${pathname}`} style={S.Link}>
                 Live
               </a>
             </>
