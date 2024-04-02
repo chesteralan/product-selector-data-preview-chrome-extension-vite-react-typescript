@@ -5,6 +5,7 @@ const packageJson = require("./package.json");
 
 const content = {
   name: packageJson.description,
+  description: packageJson.long_description,
   version: packageJson.version,
   manifest_version: 3,
   icons: {
@@ -22,7 +23,7 @@ const content = {
     },
   ],
   action: {
-    default_title: "Show / Hide Panels",
+    default_title: packageJson.description,
   },
   // background: {
   //   service_worker: "background.js"
