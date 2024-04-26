@@ -50,7 +50,7 @@ const UpsellSelector = ({ data, setShow }: Props) => {
                 <br />
                 <strong>Variant ID</strong>: {offer.checkoutData?.variant_id}
                 <br />
-                <strong>Product ID</strong>: {offer.checkoutData?.product_id}
+                <strong>Product ID</strong>: {offer?.productId}
                 <br />
                 <strong>Quantity</strong>: {offer.checkoutData?.quantity}
                 <br />
