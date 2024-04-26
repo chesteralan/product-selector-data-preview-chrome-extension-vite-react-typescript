@@ -38,7 +38,7 @@ const ProductsDataNextJs = (props: Props) => {
   const [show, setShow] = useState<boolean>(false);
   const [showMatrix, setShowMatrix] = useState<boolean>(false);
 
-  const page = data.props.pageProps?.initialPageStore?.page;
+  const page = data.props.pageProps?.initialPageStore?.hasOwnProperty("page");
 
   return (
     <>
@@ -54,10 +54,7 @@ const ProductsDataNextJs = (props: Props) => {
           ) : null}
         </>
       )}
-      <StrapiEditLinks
-        data={data}
-        toggleMatrix={() => setShowMatrix(!showMatrix)}
-      />
+      <StrapiEditLinks toggleMatrix={() => setShowMatrix(!showMatrix)} />
       {showMatrix && (
         <CollectionPage
           data={data}

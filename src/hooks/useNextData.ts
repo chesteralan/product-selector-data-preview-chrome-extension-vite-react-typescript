@@ -2,13 +2,12 @@ import { useDataContext } from "../context/DataContext";
 
 const useNextData = (currentProduct = 0) => {
   const data = useDataContext();
-
-  const page = data.props.pageProps?.initialPageStore?.page;
-  const override =
-    data.props.pageProps?.emailCampaign?.pageOverride ||
-    data.props.pageProps?.pageVariant?.pageOverride;
+  const pageProps = data.props.pageProps;
+  const page = pageProps?.initialPageStore?.page;
+  const pageVariant = pageProps?.initialPageVariantStore.pageVariant;
+  const isPageVariant = pageProps?.initialPageVariantStore.isVariant;
+  const override = pageVariant?.pageOverride;
   const promo = page?.promo?.pageOverride;
-
   const freeGift = page?.subFreeGiftOffer;
   const removeFreeGift = override?.removeFreeGift || false;
   const isMultipleProducts = page?.products?.length > 1 || false;
@@ -35,8 +34,11 @@ const useNextData = (currentProduct = 0) => {
   if (override?.subBump.length > 0) otpBumpOffers = override?.subBump;
   if (promo?.subBump.length > 0) otpBumpOffers = promo?.subBump;
 
+  const locale = data.locale;
   const locales = data.locales;
   const slug = data.query.slug;
+  const pageVariantId = pageVariant?.id;
+  const promoId = page?.promo?.id;
 
   const products = page.products;
   const product = products[currentProduct];
@@ -47,16 +49,26 @@ const useNextData = (currentProduct = 0) => {
 
   const otpUpsellUrl = products[currentProduct].otpUpsellUrl;
   const klaviyoListId = products[currentProduct].klaviyoListId;
+  const isEmailCampaign = data.page.startsWith("/email/");
+  const pageId = page?.id;
 
   return {
+    data,
     page,
+    pageId,
+    pageVariant,
+    pageVariantId,
+    isPageVariant,
     override,
+    promo,
+    promoId,
     isMultipleProducts,
     discountCodes,
     rebillDiscountCode,
     higherInitialDiscountCode,
     otpBumpOffers,
     subBumpOffers,
+    locale,
     locales,
     slug,
     product,
@@ -69,6 +81,7 @@ const useNextData = (currentProduct = 0) => {
     klaviyoListId,
     freeGift,
     removeFreeGift,
+    isEmailCampaign,
   };
 };
 

@@ -15,24 +15,20 @@ const DataWrapper: React.CSSProperties = {
 const DataContainer: React.CSSProperties = {
   position: `fixed`,
   width: `500px`,
-  height: `500px`,
+  height: `540px`,
   background: `#fff`,
   border: `1px solid #000`,
   zIndex: 9999,
   borderRadius: `10px`,
   boxShadow: `0 0 10px #5d5d5d`,
-  top: `calc(50% - 280px)`,
-  left: `calc(50% - 280px)`,
+  top: `50%`,
+  left: `50%`,
   padding: `30px`,
   overflow: `auto`,
-};
-
-const PriceStrike: React.CSSProperties = {
-  textDecoration: `line-through`,
+  transform: `translate(-50%, -50%)`,
 };
 
 const UpsellSelector = ({ data, setShow }: Props) => {
-
   return (
     <>
       <div style={DataWrapper} onClick={() => setShow(false)} />
@@ -50,10 +46,11 @@ const UpsellSelector = ({ data, setShow }: Props) => {
                 <strong>Offer ID</strong>: {offer.offerId} <br />
                 <strong>Product Name</strong>: {offer.productName}
                 <br />
-                <strong>Checkout Title</strong>: {offer.checkoutData?.title}
+                <strong>Title</strong>: {offer.checkoutData?.title}
                 <br />
-                <strong>Checkout Variant ID</strong>:{" "}
-                {offer.checkoutData?.variant_id}
+                <strong>Variant ID</strong>: {offer.checkoutData?.variant_id}
+                <br />
+                <strong>Product ID</strong>: {offer.checkoutData?.product_id}
                 <br />
                 <strong>Quantity</strong>: {offer.checkoutData?.quantity}
                 <br />
@@ -90,6 +87,10 @@ const UpsellSelector = ({ data, setShow }: Props) => {
         </p>
         <p>
           <u>Store:</u> <strong>{data.store}</strong>
+        </p>
+        <p>
+          <u>Checkout API Version 2:</u>{" "}
+          <strong>{data.checkoutApiVersion2 ? "Yes" : "No"}</strong>
         </p>
       </div>
     </>
