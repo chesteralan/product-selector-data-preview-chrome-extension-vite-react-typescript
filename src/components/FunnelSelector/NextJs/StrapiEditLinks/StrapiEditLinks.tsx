@@ -5,10 +5,14 @@ import { isProd } from "../../../../utils/isProd";
 import useNextData from "../../../../hooks/useNextData";
 
 type Props = {
-  toggleMatrix: any;
+  toggleCollectionsMatrix: any;
+  toggleCartMatrix: any;
 };
 
-const StrapiEditLinks = ({ toggleMatrix }: Props) => {
+const StrapiEditLinks = ({
+  toggleCollectionsMatrix,
+  toggleCartMatrix,
+}: Props) => {
   const {
     region,
     otherRegions,
@@ -33,14 +37,22 @@ const StrapiEditLinks = ({ toggleMatrix }: Props) => {
 
   const pathname = window.location.pathname;
 
-  const { isCollectionPage } = useCheckSite();
+  const { isCollectionPage, isCartPage } = useCheckSite();
 
   return (
     <div style={S.Container}>
       {isCollectionPage && (
         <>
-          <span style={S.Link} onClick={toggleMatrix}>
+          <span style={S.Link} onClick={toggleCollectionsMatrix}>
             Collection Page Matrix
+          </span>{" "}
+          |{" "}
+        </>
+      )}
+      {isCartPage && (
+        <>
+          <span style={S.Link} onClick={toggleCartMatrix}>
+            Cart Page Matrix
           </span>{" "}
           |{" "}
         </>

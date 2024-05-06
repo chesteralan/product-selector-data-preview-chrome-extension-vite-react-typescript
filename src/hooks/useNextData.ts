@@ -4,8 +4,8 @@ const useNextData = (currentProduct = 0) => {
   const data = useDataContext();
   const pageProps = data.props.pageProps;
   const page = pageProps?.initialPageStore?.page;
-  const pageVariant = pageProps?.initialPageVariantStore.pageVariant;
-  const isPageVariant = pageProps?.initialPageVariantStore.isVariant;
+  const pageVariant = pageProps?.initialPageVariantStore?.pageVariant;
+  const isPageVariant = pageProps?.initialPageVariantStore?.isVariant;
   const override = pageVariant?.pageOverride;
   const promo = page?.promo?.pageOverride;
   const freeGift = page?.subFreeGiftOffer;
@@ -19,36 +19,36 @@ const useNextData = (currentProduct = 0) => {
   const rebillDiscountCode =
     promo?.rebillDiscount?.code ||
     override?.rebillDiscount?.code ||
-    page.rebillDiscountCode?.code;
+    page?.rebillDiscountCode?.code;
   const higherInitialDiscountCode =
     promo?.higherDiscount?.code ||
     override?.higherDiscount?.code ||
-    page.higherInitialDiscountCode?.code;
+    page?.higherInitialDiscountCode?.code;
 
   // bump offers
-  let otpBumpOffers = page.otpBumpOffers;
+  let otpBumpOffers = page?.otpBumpOffers;
   if (override?.otpBump.length > 0) otpBumpOffers = override?.otpBump;
   if (promo?.otpBump.length > 0) otpBumpOffers = promo?.otpBump;
 
-  let subBumpOffers = page.subBumpOffers;
+  let subBumpOffers = page?.subBumpOffers;
   if (override?.subBump.length > 0) otpBumpOffers = override?.subBump;
   if (promo?.subBump.length > 0) otpBumpOffers = promo?.subBump;
 
-  const locale = data.locale;
-  const locales = data.locales;
-  const slug = data.query.slug;
+  const locale = data?.locale;
+  const locales = data?.locales;
+  const slug = data?.query?.slug;
   const pageVariantId = pageVariant?.id;
   const promoId = page?.promo?.id;
 
-  const products = page.products;
-  const product = products[currentProduct];
-  const productId = products[currentProduct].id;
-  const otpPrices = products[currentProduct].prices.otpPrices;
-  const subPrices = products[currentProduct].prices.subPrices;
-  const subUpsellUrl = products[currentProduct].subUpsellUrl;
+  const products = page?.products;
+  const product = products?.at(currentProduct);
+  const productId = products?.at(currentProduct)?.id;
+  const otpPrices = products?.at(currentProduct)?.prices?.otpPrices;
+  const subPrices = products?.at(currentProduct)?.prices?.subPrices;
+  const subUpsellUrl = products?.at(currentProduct)?.subUpsellUrl;
 
-  const otpUpsellUrl = products[currentProduct].otpUpsellUrl;
-  const klaviyoListId = products[currentProduct].klaviyoListId;
+  const otpUpsellUrl = products?.at(currentProduct)?.otpUpsellUrl;
+  const klaviyoListId = products?.at(currentProduct)?.klaviyoListId;
   const isEmailCampaign = data.page.startsWith("/email/");
   const pageId = page?.id;
 

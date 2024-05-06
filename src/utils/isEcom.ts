@@ -11,3 +11,7 @@ export const isEcom = (window: Window): boolean => {
 export const isCollectionPage = (window: Window): boolean => {
   return isEcom(window) && window.location.pathname.includes("collections");
 };
+
+export const isCartPage = (window: Window): boolean => {
+  return isEcom(window) && window.location.pathname.includes("cart");
+};
