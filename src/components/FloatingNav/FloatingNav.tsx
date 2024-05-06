@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { getPathname } from "../../utils/getPathname";
 import { getSiteRegion } from "../../utils/getSiteRegion";
-import { isUpsell } from "../../utils/isUpsell";
 import ConfigButton from "../Buttons/ConfigButton";
 import CurrentSiteButton from "../Buttons/CurrentSiteButton";
 import DevButton from "../Buttons/DevButton";

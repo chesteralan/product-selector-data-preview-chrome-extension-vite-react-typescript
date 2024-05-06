@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
-import { hasProductData, hasUpsellData, hasFunnelData } from "../../utils/hasProductData";
+import {
+  hasProductData,
+  hasUpsellData,
+  hasFunnelData,
+} from "../../utils/hasProductData";
 import { isUpsell } from "../../utils/isUpsell";
 import FunnelSelector from "../FunnelSelector/FunnelSelectorGatsby";
 import UpsellSelector from "../UpsellSelector/UpsellSelector";
-import { getPathname } from '../../utils/getPathname';
+import { getPathname } from "../../utils/getPathname";
 
 type Props = {};
 
@@ -39,16 +43,18 @@ const ProductsDataGatsby = (props: Props) => {
 
   useEffect(() => {
     const pathname = getPathname(window);
-    if(pathname.length <= 1) return () => {};
+    if (pathname.length <= 1) return () => {};
     const pageData = `/page-data${pathname}/page-data.json`;
     try {
       fetch(pageData)
         .then(async (response) => {
           const data = await response.json();
-          setFound( hasProductData(data) );
+          const hasData = hasProductData(data);
+          if (hasData) console.log("Gatsby Data", data);
+          setFound(hasData);
           setSelectorData(data);
-          setShowUpsell( isUpsell(window) && hasUpsellData(data) );
-          setShowFunnel( !isUpsell(window) && hasFunnelData(data) );
+          setShowUpsell(isUpsell(window) && hasUpsellData(data));
+          setShowFunnel(!isUpsell(window) && hasFunnelData(data));
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -58,21 +64,28 @@ const ProductsDataGatsby = (props: Props) => {
     }
   }, []);
 
-
   return found ? (
     <>
       <div style={styles} onClick={() => setShow(!show)}>
         Product Data
       </div>
-      {show ? (<>
-        {showUpsell ? <UpsellSelector 
-          data={(selectorData as any).result?.data?.upsellCheckoutData}
-          setShow={setShow}
-          /> : null}
-        {showFunnel ? <FunnelSelector
-          data={(selectorData as any).result?.data?.funnelPageData?.productSelector}
-          setShow={setShow}
-        /> : null}
+      {show ? (
+        <>
+          {showUpsell ? (
+            <UpsellSelector
+              data={(selectorData as any).result?.data?.upsellCheckoutData}
+              setShow={setShow}
+            />
+          ) : null}
+          {showFunnel ? (
+            <FunnelSelector
+              data={
+                (selectorData as any).result?.data?.funnelPageData
+                  ?.productSelector
+              }
+              setShow={setShow}
+            />
+          ) : null}
         </>
       ) : null}
     </>

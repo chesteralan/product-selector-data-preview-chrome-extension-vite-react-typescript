@@ -2,6 +2,7 @@ import { useState } from "react";
 import FunnelSelector from "../FunnelSelector/FunnelSelectorNextJs";
 import StrapiEditLinks from "../FunnelSelector/NextJs/StrapiEditLinks/StrapiEditLinks";
 import CollectionPage from "../CollectionPage/CollectionPage";
+import CartPage from "../CartPage/CartPage";
 
 type Props = {
   data: any;
@@ -36,9 +37,11 @@ const ProductsDataNextJs = (props: Props) => {
   const { data } = props;
 
   const [show, setShow] = useState<boolean>(false);
-  const [showMatrix, setShowMatrix] = useState<boolean>(false);
+  const [showCollectionMatrix, setShowCollectionMatrix] =
+    useState<boolean>(false);
+  const [showCartMatrix, setShowCartMatrix] = useState<boolean>(false);
 
-  const page = data.props.pageProps?.initialPageStore?.page;
+  const page = data.props.pageProps?.initialPageStore?.hasOwnProperty("page");
 
   return (
     <>
@@ -55,13 +58,21 @@ const ProductsDataNextJs = (props: Props) => {
         </>
       )}
       <StrapiEditLinks
-        data={data}
-        toggleMatrix={() => setShowMatrix(!showMatrix)}
+        toggleCollectionsMatrix={() =>
+          setShowCollectionMatrix(!showCollectionMatrix)
+        }
+        toggleCartMatrix={() => setShowCartMatrix(!showCartMatrix)}
       />
-      {showMatrix && (
+      {showCollectionMatrix && (
         <CollectionPage
           data={data}
-          toggleMatrix={() => setShowMatrix(!showMatrix)}
+          toggleMatrix={() => setShowCollectionMatrix(!showCollectionMatrix)}
+        />
+      )}
+      {showCartMatrix && (
+        <CartPage
+          data={data}
+          toggleMatrix={() => setShowCartMatrix(!showCartMatrix)}
         />
       )}
     </>

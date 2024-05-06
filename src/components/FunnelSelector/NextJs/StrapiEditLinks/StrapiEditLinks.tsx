@@ -2,13 +2,17 @@ import useConfig from "../../../../hooks/useConfig";
 import * as S from "./StrapiEditLinks.styles";
 import useCheckSite from "../../../../hooks/useCheckSite";
 import { isProd } from "../../../../utils/isProd";
+import useNextData from "../../../../hooks/useNextData";
 
 type Props = {
-  data: any;
-  toggleMatrix: any;
+  toggleCollectionsMatrix: any;
+  toggleCartMatrix: any;
 };
 
-const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
+const StrapiEditLinks = ({
+  toggleCollectionsMatrix,
+  toggleCartMatrix,
+}: Props) => {
   const {
     region,
     otherRegions,
@@ -20,28 +24,35 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
     ...otherConfig
   } = useConfig();
 
-  const page = data.props.pageProps?.initialPageStore?.page;
-  const pageVariant =
-    data.props.pageProps?.pageVariant || data.props.pageProps?.emailCampaign;
-  const isEmailCampaign = data.props.pageProps.hasOwnProperty("emailCampaign");
-
-  const locale = data.locale;
-  const locales = data.locales;
-  const pageId = page?.id;
-  const pageVariantId = pageVariant?.id;
-  const promoId = page?.promo?.id;
-  const slug = data.query?.slug || null;
+  const {
+    locale,
+    locales,
+    isEmailCampaign,
+    pageId,
+    pageVariantId,
+    promoId,
+    slug,
+    isPageVariant,
+  } = useNextData();
 
   const pathname = window.location.pathname;
 
-  const { isCollectionPage } = useCheckSite();
+  const { isCollectionPage, isCartPage } = useCheckSite();
 
   return (
     <div style={S.Container}>
       {isCollectionPage && (
         <>
-          <span style={S.Link} onClick={toggleMatrix}>
+          <span style={S.Link} onClick={toggleCollectionsMatrix}>
             Collection Page Matrix
+          </span>{" "}
+          |{" "}
+        </>
+      )}
+      {isCartPage && (
+        <>
+          <span style={S.Link} onClick={toggleCartMatrix}>
+            Cart Page Matrix
           </span>{" "}
           |{" "}
         </>
@@ -84,7 +95,7 @@ const StrapiEditLinks = ({ data, toggleMatrix }: Props) => {
               >
                 Edit Page
               </a>
-              {pageVariantId && (
+              {isPageVariant && (
                 <a
                   href={`${strapiServerUrl}/admin/content-manager/collectionType/api::${
                     isEmailCampaign

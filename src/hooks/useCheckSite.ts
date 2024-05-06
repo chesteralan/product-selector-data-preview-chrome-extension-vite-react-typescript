@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { isPresell } from "../utils/isPresell";
 import { isUpsell } from "../utils/isUpsell";
 import { isFunnel } from "../utils/isFunnel";
-import { isEcom, isCollectionPage } from "../utils/isEcom";
+import { isEcom, isCollectionPage, isCartPage } from "../utils/isEcom";
 import { isProd } from "../utils/isProd";
 import { isStaging } from "../utils/isStaging";
 
@@ -14,6 +14,7 @@ const useCheckSite = () => {
   const [prod, setProd] = useState(false);
   const [staging, setStaging] = useState(false);
   const [collectionPage, setCollectionPage] = useState(false);
+  const [cartPage, setCartPage] = useState(false);
   useEffect(() => {
     setPresell(isPresell(window));
     setFunnel(isFunnel(window));
@@ -22,6 +23,7 @@ const useCheckSite = () => {
     setProd(isProd(window));
     setStaging(isStaging(window));
     setCollectionPage(isCollectionPage(window));
+    setCartPage(isCartPage(window));
   }, []);
   return {
     isFunnel: funnel,
@@ -29,6 +31,7 @@ const useCheckSite = () => {
     isPresell: presell,
     isEcom: ecom,
     isCollectionPage: collectionPage,
+    isCartPage: cartPage,
     isProd: prod,
     isStaging: staging,
   };
