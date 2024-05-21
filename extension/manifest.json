@@ -1,7 +1,7 @@
 {
   "name": "Product Selector Preview",
   "description": "A chrome extension that add shortcuts to funnel and upsell content",
-  "version": "1.0.41",
+  "version": "1.41.1",
   "manifest_version": 3,
   "icons": {
     "16": "/images/16.png",
