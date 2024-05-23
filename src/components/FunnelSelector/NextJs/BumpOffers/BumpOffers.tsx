@@ -52,36 +52,28 @@ const BumpOffers = ({ bumpOffers, purchaseTab = TYPE_SUB }: Props) => {
               <li key={index} style={S.UListItem}>
                 <strong>Name</strong>: {bumpOffer.label}
                 <br />
-                {TYPE_SUB === purchaseTab ? (
-                  <>
-                    <strong>Variant ID</strong>:{" "}
-                    <a
-                      href="#"
-                      onClick={() =>
-                        variantLinkHandler(
-                          bumpOffer.subscriptionVariantID,
-                          bumpOfferDC,
-                        )
-                      }
-                      style={S.ALink}
-                    >
-                      {bumpOffer.subscriptionVariantID}
-                    </a>
-                  </>
-                ) : (
-                  <>
-                    <strong>Variant ID</strong>:{" "}
-                    <a
-                      href="#"
-                      onClick={() =>
-                        variantLinkHandler(bumpOffer.otpVariantID, bumpOfferDC)
-                      }
-                      style={S.ALink}
-                    >
-                      {bumpOffer.otpVariantID}
-                    </a>
-                  </>
-                )}
+                <strong>Variant ID</strong>:{" "}
+                <a
+                  href="#"
+                  onClick={() =>
+                    variantLinkHandler(
+                      TYPE_SUB === purchaseTab
+                        ? bumpOffer.subscriptionVariantID
+                        : bumpOffer.otpVariantID,
+                      bumpOfferDC,
+                    )
+                  }
+                  style={S.ALink}
+                >
+                  {TYPE_SUB === purchaseTab
+                    ? bumpOffer.subscriptionVariantID
+                    : bumpOffer.otpVariantID}
+                </a>
+                <br />
+                <strong>Product ID</strong>:{" "}
+                {TYPE_SUB === purchaseTab
+                  ? bumpOffer.productSubID
+                  : bumpOffer.productOtpID}
                 <br />
                 <strong>Quantity</strong>: 1
                 <br />

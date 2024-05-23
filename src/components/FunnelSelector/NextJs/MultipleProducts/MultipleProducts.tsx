@@ -4,6 +4,7 @@ import * as S from "../styles";
 import PurchaseTypeTabs from "../PurchaseTypeTabs/PurchaseTypeTabs";
 import { TYPE_SUB } from "../../../../utils/constants/purchaseType";
 import ProductDetails from "../ProductDetails/ProductDetails";
+import PackageJson from "../../../../../package.json";
 
 type Props = {
   setShow: (value: boolean) => void;
@@ -16,15 +17,11 @@ const MultipleProducts = (props: Props) => {
 
   const { setShow } = props;
 
-  const productDetails = {
-    purchaseTab,
-    showBumpoffers,
-  };
-
   return (
     <>
       <div style={S.DataWrapper} onClick={() => setShow(false)} />
       <div style={S.DataContainer}>
+        <div style={S.PackageJson}>v{PackageJson.version}</div>
         <div style={{ marginBottom: 20 }}>
           <Selector
             setCurrentProduct={setCurrentProduct}
