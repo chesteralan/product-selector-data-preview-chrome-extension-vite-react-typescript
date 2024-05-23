@@ -1,9 +1,9 @@
+import PackageJson from "../../../../../package.json";
 import PurchaseTypeTabs from "../PurchaseTypeTabs/PurchaseTypeTabs";
 import { useState } from "react";
 import { TYPE_SUB } from "../../../../utils/constants/purchaseType";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import * as S from "../styles";
-import useNextData from "../../../../hooks/useNextData";
 
 type Props = {
   setShow: any;
@@ -19,6 +19,7 @@ const SingleProduct = (props: Props) => {
     <>
       <div style={S.DataWrapper} onClick={() => setShow(false)} />
       <div style={S.DataContainer}>
+        <div style={S.PackageJson}>v{PackageJson.version}</div>
         <PurchaseTypeTabs
           selected={purchaseTab}
           setSelected={setPurchaseTab}

@@ -94,3 +94,11 @@ export const EditProduct: React.CSSProperties = {
   right: 10,
   top: 10,
 };
+
+export const PackageJson: React.CSSProperties = {
+  position: "absolute",
+  right: 5,
+  top: 5,
+  background: "aliceblue",
+  fontSize: "xx-small",
+};

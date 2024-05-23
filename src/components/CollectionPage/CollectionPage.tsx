@@ -16,7 +16,7 @@ const CollectionPage = ({ data, toggleMatrix }: Props) => {
           <thead>
             <tr style={S.TableRow}>
               <th style={{ ...S.TableHead, paddingLeft: 5 }}>Pages</th>
-              <th style={S.TableHead}>SKU</th>
+
               <th style={S.TableHead}>Discount Code</th>
               <th style={S.TableData}>RRP</th>
               <th style={S.TableData}>Price</th>
@@ -28,7 +28,7 @@ const CollectionPage = ({ data, toggleMatrix }: Props) => {
             {pages.map((page: any) => {
               const subPrices = page?.products?.at(0)?.prices?.sub?.at(0);
               const otpPrices = page?.products?.at(0)?.prices?.otp?.at(0);
-              const sku = page?.products?.at(0)?.sku;
+
               const prices = subPrices || otpPrices;
               return (
                 <tr key={page.id} style={S.TableRow}>
@@ -40,7 +40,7 @@ const CollectionPage = ({ data, toggleMatrix }: Props) => {
                       />
                     </strong>
                   </td>
-                  <td>{sku}</td>
+
                   <td>{page?.productDiscountCode?.code}</td>
                   <td style={S.TableData}>
                     ${prices?.perceived_rrp?.toFixed(2)}

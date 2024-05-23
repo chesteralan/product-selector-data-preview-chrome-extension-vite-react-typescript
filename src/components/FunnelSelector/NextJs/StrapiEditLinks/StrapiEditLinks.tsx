@@ -37,11 +37,11 @@ const StrapiEditLinks = ({
 
   const pathname = window.location.pathname;
 
-  const { isCollectionPage, isCartPage } = useCheckSite();
+  const { isCollectionPage, isCartPage, isHomePage } = useCheckSite();
 
   return (
     <div style={S.Container}>
-      {isCollectionPage && (
+      {(isCollectionPage || isHomePage) && (
         <>
           <span style={S.Link} onClick={toggleCollectionsMatrix}>
             Collection Page Matrix
