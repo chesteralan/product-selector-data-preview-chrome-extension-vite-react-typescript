@@ -1,3 +1,4 @@
+import { appendAfterDomain } from "../../../../utils/urlModifier";
 import * as S from "../styles";
 import formatPrice from "../../../../utils/formatPrice";
 import useConfig from "../../../../hooks/useConfig";
@@ -40,6 +41,7 @@ const Product = ({
               <br />
               <strong>Name</strong>: {freeGift.product.name} <br />
               <strong>Variant Id</strong>: {freeGift.variantId} <br />
+              <strong>Product Id</strong>: {freeGift.productID} <br />
               <strong>Value</strong>: {formatPrice(freeGift.rrpPrice)}
             </li>
           </ul>
@@ -55,6 +57,17 @@ const Product = ({
           <strong>
             <a href={`${upsellUrl}/token`} target="_blank" style={S.ALink}>
               {upsellUrl}
+            </a>
+          </strong>
+          <br />
+          <u>Upsell URL v2:</u>{" "}
+          <strong>
+            <a
+              href={`${appendAfterDomain(upsellUrl, "/v2")}/token`}
+              target="_blank"
+              style={S.ALink}
+            >
+              {appendAfterDomain(upsellUrl, "/v2")}
             </a>
           </strong>
         </p>

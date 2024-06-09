@@ -30,7 +30,6 @@ const ProductDetails = ({
     removeFreeGift,
     isNewCheckout = false,
     product,
-    products,
   } = useNextData(currentProduct);
 
   return (
@@ -52,27 +51,23 @@ const ProductDetails = ({
       <p>
         <u>Klaviyo List ID:</u> <strong>{klaviyoListId}</strong>
       </p>
-      {!isNewCheckout && (
-        <p>
-          <u>Is New Checkout:</u> <strong>NO</strong>
-        </p>
-      )}
-      {isNewCheckout && (
-        <div>
-          <hr />
-          <br />
-          <p>
-            <u>Is New Checkout:</u> <strong>YES</strong>
-          </p>
-          <p>
-            <u>SUB Product ID:</u> <strong>{product?.productSubID}</strong>
-          </p>
-          <p>
-            <u>OTP Product ID:</u> <strong>{product?.productOtpID}</strong>
-          </p>
-        </div>
-      )}
-      <br />
+      <p>
+        <u>SUB Variant ID:</u> <strong>{product?.subscriptionVariantID}</strong>
+      </p>
+      <p>
+        <u>OTP Variant ID:</u> <strong>{product?.otpVariantID}</strong>
+      </p>
+      <p>
+        <u>Is New Checkout:</u> <strong>{isNewCheckout ? `Yes` : `No`}</strong>
+      </p>
+      <hr />
+      <p>
+        <u>SUB Product ID:</u> <strong>{product?.productSubID}</strong>
+      </p>
+      <p>
+        <u>OTP Product ID:</u> <strong>{product?.productOtpID}</strong>
+      </p>
+
       <hr />
       {purchaseTab === TYPE_SUB && (
         <>

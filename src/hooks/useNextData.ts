@@ -5,7 +5,8 @@ const useNextData = (currentProduct = 0) => {
   const pageProps = data.props.pageProps;
   const page = pageProps?.initialPageStore?.page;
   const pageVariant = pageProps?.initialPageVariantStore?.pageVariant;
-  const isPageVariant = pageProps?.initialPageVariantStore?.isVariant;
+  const isPageVariant =
+    data.page.includes("[variant]") || data.page.includes("[campaignId]");
   const override = pageVariant?.pageOverride;
   const promo = page?.promo?.pageOverride;
   const freeGift = page?.subFreeGiftOffer;

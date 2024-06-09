@@ -7,6 +7,7 @@ import {
   isCollectionPage,
   isCartPage,
   isHomePage,
+  isEcomPdp,
 } from "../utils/isEcom";
 import { isProd } from "../utils/isProd";
 import { isStaging } from "../utils/isStaging";
@@ -16,27 +17,32 @@ const useCheckSite = () => {
   const [funnel, setFunnel] = useState(false);
   const [upsell, setUpsell] = useState(false);
   const [ecom, setEcom] = useState(false);
+  const [ecomPdp, setEcomPdp] = useState(false);
   const [prod, setProd] = useState(false);
   const [staging, setStaging] = useState(false);
   const [collectionPage, setCollectionPage] = useState(false);
   const [cartPage, setCartPage] = useState(false);
   const [homePage, setHomePage] = useState(false);
+
   useEffect(() => {
     setPresell(isPresell(window));
     setFunnel(isFunnel(window));
     setUpsell(isUpsell(window));
     setEcom(isEcom(window));
+    setEcomPdp(isEcomPdp(window));
     setProd(isProd(window));
     setStaging(isStaging(window));
     setCollectionPage(isCollectionPage(window));
     setCartPage(isCartPage(window));
     setHomePage(isHomePage(window));
   }, []);
+
   return {
     isFunnel: funnel,
     isUpsell: upsell,
     isPresell: presell,
     isEcom: ecom,
+    isEcomPdp: ecomPdp,
     isCollectionPage: collectionPage,
     isCartPage: cartPage,
     isProd: prod,
