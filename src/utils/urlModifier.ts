@@ -6,6 +6,7 @@ export const replaceDomain = (url: string, domain: string): string => {
 };
 
 export const appendAfterDomain = (url: string, appendStr: string): string => {
+  if (!url) return url;
   const newUrl = new URL(url);
   newUrl.pathname = appendStr + newUrl.pathname;
   return newUrl.href;
