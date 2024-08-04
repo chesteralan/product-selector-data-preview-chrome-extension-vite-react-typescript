@@ -1,8 +1,5 @@
-import PresellListButton from "../Buttons/PresellListButton";
 import useCheckSite from "../../hooks/useCheckSite";
-import { useDataContext } from "../../context/DataContext";
-
-type Props = {};
+import PresellListButton from "../Buttons/PresellListButton";
 
 const styles: React.CSSProperties = {
   position: "fixed",
@@ -13,14 +10,14 @@ const styles: React.CSSProperties = {
   zIndex: 9999,
 };
 
-const FloatingNavFunnel = (props: Props) => {
+const FloatingNavFunnel = () => {
   const { isFunnel } = useCheckSite();
-  return isFunnel ? (
+  return (
     <div style={styles}>
       <PresellListButton link={`/all-pdps`} />
-      <PresellListButton link={`/email/_list`} />
+      {isFunnel && <PresellListButton link={`/email/_list`} />}
     </div>
-  ) : null;
+  );
 };
 
 export default FloatingNavFunnel;

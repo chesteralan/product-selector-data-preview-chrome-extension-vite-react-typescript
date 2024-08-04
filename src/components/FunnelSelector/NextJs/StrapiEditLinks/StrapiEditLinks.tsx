@@ -33,7 +33,6 @@ const StrapiEditLinks = ({
     pageVariantId,
     promoId,
     slug,
-    isPageVariant,
   } = useNextData();
 
   const pathname = window.location.pathname;
@@ -49,6 +48,7 @@ const StrapiEditLinks = ({
 
   return (
     <div style={S.Container}>
+      <span style={S.Label}>{isEcom ? "ECOM" : "FUNNEL"}</span>
       {isCollectionPage && isEcom && (
         <>
           <span style={S.Link} onClick={toggleCollectionsMatrix}>
@@ -67,8 +67,8 @@ const StrapiEditLinks = ({
       )}
       {otherRegions.map((otherRegion) => {
         const otherConfigKey = `${otherRegion.toLowerCase()}${
-          isProd ? `Live` : `Staging`
-        }Url` as keyof typeof otherConfig;
+          isEcom ? `Ecom` : ``
+        }${isProd ? `Live` : `Staging`}Url` as keyof typeof otherConfig;
         return (
           <a
             href={`${otherConfig[otherConfigKey] as string}${pathname}`}
