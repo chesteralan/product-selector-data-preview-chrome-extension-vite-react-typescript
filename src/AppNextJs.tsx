@@ -16,7 +16,7 @@ function AppNextJs(props: Props) {
     <DataContext.Provider value={data}>
       <ProductsDataNextJs data={data} />
       {isPresell && <FloatingNavPromo />}
-      {isFunnel || isEcom ? <FloatingNavFunnel data={data} /> : null}
+      {isFunnel || isEcom ? <FloatingNavFunnel /> : null}
     </DataContext.Provider>
   );
 }
