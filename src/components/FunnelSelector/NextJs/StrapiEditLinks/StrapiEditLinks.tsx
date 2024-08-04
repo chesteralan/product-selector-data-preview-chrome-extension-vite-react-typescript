@@ -1,7 +1,6 @@
 import useConfig from "../../../../hooks/useConfig";
 import * as S from "./StrapiEditLinks.styles";
 import useCheckSite from "../../../../hooks/useCheckSite";
-import { isProd } from "../../../../utils/isProd";
 import useNextData from "../../../../hooks/useNextData";
 
 type Props = {
@@ -18,8 +17,10 @@ const StrapiEditLinks = ({
     otherRegions,
     strapiServerUrl,
     stagingUrl,
+    stagingEcomUrl,
     localUrl,
     liveUrl,
+    liveEcomUrl,
     strapiLocalUrl,
     ...otherConfig
   } = useConfig();
@@ -32,17 +33,23 @@ const StrapiEditLinks = ({
     pageVariantId,
     promoId,
     slug,
-    isPageVariant,
   } = useNextData();
 
   const pathname = window.location.pathname;
 
-  const { isCollectionPage, isCartPage, isHomePage, isEcomPdp } =
-    useCheckSite();
+  const {
+    isCollectionPage,
+    isCartPage,
+    isHomePage,
+    isEcomPdp,
+    isEcom,
+    isProd,
+  } = useCheckSite();
 
   return (
     <div style={S.Container}>
-      {(isCollectionPage || isHomePage || isEcomPdp) && (
+      <span style={S.Label}>{isEcom ? "ECOM" : "FUNNEL"}</span>
+      {isCollectionPage && isEcom && (
         <>
           <span style={S.Link} onClick={toggleCollectionsMatrix}>
             Collection Page Matrix
@@ -50,7 +57,7 @@ const StrapiEditLinks = ({
           |{" "}
         </>
       )}
-      {isCartPage && (
+      {isCartPage && isEcom && (
         <>
           <span style={S.Link} onClick={toggleCartMatrix}>
             Cart Page Matrix
@@ -60,8 +67,8 @@ const StrapiEditLinks = ({
       )}
       {otherRegions.map((otherRegion) => {
         const otherConfigKey = `${otherRegion.toLowerCase()}${
-          isProd(window) ? `Live` : `Staging`
-        }Url` as keyof typeof otherConfig;
+          isEcom ? `Ecom` : ``
+        }${isProd ? `Live` : `Staging`}Url` as keyof typeof otherConfig;
         return (
           <a
             href={`${otherConfig[otherConfigKey] as string}${pathname}`}
@@ -171,7 +178,10 @@ const StrapiEditLinks = ({
           |
           {stagingUrl && slug && (
             <>
-              <a href={`${stagingUrl}${pathname}`} style={S.Link}>
+              <a
+                href={`${isEcomPdp ? stagingEcomUrl : stagingUrl}${pathname}`}
+                style={S.Link}
+              >
                 Staging
               </a>
             </>
@@ -185,8 +195,18 @@ const StrapiEditLinks = ({
           )}
           {liveUrl && slug && (
             <>
-              <a href={`${liveUrl}${pathname}`} style={S.Link}>
+              <a
+                href={`${isEcomPdp ? liveEcomUrl : liveUrl}${pathname}`}
+                style={S.Link}
+              >
                 Live
+              </a>
+            </>
+          )}
+          {isHomePage && isEcom && (
+            <>
+              <a href={`${liveEcomUrl}`} style={S.Link}>
+                Staging
               </a>
             </>
           )}

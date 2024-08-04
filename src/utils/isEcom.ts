@@ -1,9 +1,5 @@
 export const isEcom = (window: Window): boolean => {
   const sites = [
-    "thepetlabco.com",
-    "thepetlabco.ca",
-    "thepetlabco.de",
-    "petlabco.co.uk",
     "dv7i8zlyxu5mq",
     "dbvmqh179hco0",
     "d3iawv6dyp8w0s",
@@ -14,7 +10,22 @@ export const isEcom = (window: Window): boolean => {
     "dppc82ky0c6od",
     "d4lmwr380tqt4",
     "d16jmqlegkoy3o",
+    "d1n5p4wmmjq26v",
   ];
+
+  const domains = [
+    "thepetlabco.com",
+    "testpetlabco.com",
+    "thepetlabco.ca",
+    "thepetlabco.de",
+    "petlabco.co.uk",
+    "www.petlabco.co.uk",
+  ];
+
+  const isEcom = domains.reduce((acc, domain) => {
+    return acc ? true : window.location.hostname === domain;
+  }, false);
+  if (isEcom) return true;
   return sites.some((site) => window.location.hostname.includes(site));
 };
 

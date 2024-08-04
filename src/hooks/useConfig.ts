@@ -6,17 +6,29 @@ const useConfig = () => {
   const [region, setRegion] = useState<string>(REGION_US);
   const [strapiServerUrl, setStrapiServerUrl] = useState<string | null>(null);
   const [stagingUrl, setStagingUrl] = useState<string | null>(null);
+  const [liveUrl, setLiveUrl] = useState<string | null>(null);
+  const [stagingEcomUrl, setStagingEcomUrl] = useState<string | null>(null);
+  const [liveEcomUrl, setLiveEcomUrl] = useState<string | null>(null);
   const [usStagingUrl, setUsStagingUrl] = useState<string | null>(null);
   const [caStagingUrl, setCaStagingUrl] = useState<string | null>(null);
   const [ukStagingUrl, setUkStagingUrl] = useState<string | null>(null);
   const [deStagingUrl, setDeStagingUrl] = useState<string | null>(null);
   const [auStagingUrl, setAuStagingUrl] = useState<string | null>(null);
-  const [liveUrl, setLiveUrl] = useState<string | null>(null);
+  const [usEcomStagingUrl, setUsEcomStagingUrl] = useState<string | null>(null);
+  const [caEcomStagingUrl, setCaEcomStagingUrl] = useState<string | null>(null);
+  const [ukEcomStagingUrl, setUkEcomStagingUrl] = useState<string | null>(null);
+  const [deEcomStagingUrl, setDeEcomStagingUrl] = useState<string | null>(null);
+  const [auEcomStagingUrl, setAuEcomStagingUrl] = useState<string | null>(null);
   const [usLiveUrl, setUsLiveUrl] = useState<string | null>(null);
   const [caLiveUrl, setCaLiveUrl] = useState<string | null>(null);
   const [ukLiveUrl, setUkLiveUrl] = useState<string | null>(null);
   const [deLiveUrl, setDeLiveUrl] = useState<string | null>(null);
   const [auLiveUrl, setAuLiveUrl] = useState<string | null>(null);
+  const [usEcomLiveUrl, setUsEcomLiveUrl] = useState<string | null>(null);
+  const [caEcomLiveUrl, setCaEcomLiveUrl] = useState<string | null>(null);
+  const [ukEcomLiveUrl, setUkEcomLiveUrl] = useState<string | null>(null);
+  const [deEcomLiveUrl, setDeEcomLiveUrl] = useState<string | null>(null);
+  const [auEcomLiveUrl, setAuEcomLiveUrl] = useState<string | null>(null);
   const [localUrl, setLocalUrl] = useState<string | null>(null);
   const [devToolUrl, setDevToolUrl] = useState<string | null>(null);
   const [strapiLocalUrl, setStrapiLocalUrl] = useState<string | null>(null);
@@ -47,16 +59,16 @@ const useConfig = () => {
         "strapiLocalUrl",
         "devStrapiGreenUrl",
         "devStrapiBlueUrl",
-        "usNextjsStagingUrl",
-        "usNextjsLiveUrl",
-        "caNextjsStagingUrl",
-        "caNextjsLiveUrl",
-        "ukNextjsStagingUrl",
-        "ukNextjsLiveUrl",
-        "deNextjsStagingUrl",
-        "deNextjsLiveUrl",
-        "auNextjsStagingUrl",
-        "auNextjsLiveUrl",
+        ...REGIONS_LIST.map(
+          (region) => `${region.toLowerCase()}NextjsStagingUrl`,
+        ),
+        ...REGIONS_LIST.map((region) => `${region.toLowerCase()}NextjsLiveUrl`),
+        ...REGIONS_LIST.map(
+          (region) => `${region.toLowerCase()}NextjsEcomStagingUrl`,
+        ),
+        ...REGIONS_LIST.map(
+          (region) => `${region.toLowerCase()}NextjsEcomLiveUrl`,
+        ),
       ])
       .then((items) => {
         setLocalUrl(items.nextjsLocalUrl);
@@ -64,16 +76,31 @@ const useConfig = () => {
         setStrapiLocalUrl(items.strapiLocalUrl);
         setStrapiDevGreenUrl(items.devStrapiGreenUrl);
         setStrapiDevBlueUrl(items.devStrapiBlueUrl);
+        // US
         setUsStagingUrl(items.usNextjsStagingUrl);
         setUsLiveUrl(items.usNextjsLiveUrl);
+        setUsEcomStagingUrl(items.usNextjsEcomStagingUrl);
+        setUsEcomLiveUrl(items.usNextjsEcomLiveUrl);
+        // CA
         setCaStagingUrl(items.caNextjsStagingUrl);
         setCaLiveUrl(items.caNextjsLiveUrl);
+        setCaEcomStagingUrl(items.caNextjsEcomStagingUrl);
+        setCaEcomLiveUrl(items.caNextjsEcomLiveUrl);
+        // UK
         setUkStagingUrl(items.ukNextjsStagingUrl);
         setUkLiveUrl(items.ukNextjsLiveUrl);
+        setUkEcomStagingUrl(items.ukNextjsEcomStagingUrl);
+        setUkEcomLiveUrl(items.ukNextjsEcomLiveUrl);
+        // DE
         setDeStagingUrl(items.deNextjsStagingUrl);
         setDeLiveUrl(items.deNextjsLiveUrl);
+        setDeEcomStagingUrl(items.deNextjsEcomStagingUrl);
+        setDeEcomLiveUrl(items.deNextjsEcomLiveUrl);
+        // AU
         setAuStagingUrl(items.auNextjsStagingUrl);
         setAuLiveUrl(items.auNextjsLiveUrl);
+        setAuEcomStagingUrl(items.auNextjsEcomStagingUrl);
+        setAuEcomLiveUrl(items.auNextjsEcomLiveUrl);
       });
 
     if (detectedRegion) {
@@ -82,6 +109,8 @@ const useConfig = () => {
           `${detectedRegion.toLowerCase()}StrapiServerUrl`,
           `${detectedRegion.toLowerCase()}NextjsStagingUrl`,
           `${detectedRegion.toLowerCase()}NextjsLiveUrl`,
+          `${detectedRegion.toLowerCase()}NextjsEcomStagingUrl`,
+          `${detectedRegion.toLowerCase()}NextjsEcomLiveUrl`,
           `${detectedRegion.toLowerCase()}StrapiGreenUrl`,
           `${detectedRegion.toLowerCase()}StrapiBlueUrl`,
         ])
@@ -96,6 +125,12 @@ const useConfig = () => {
             items[`${detectedRegion.toLowerCase()}NextjsStagingUrl`],
           );
           setLiveUrl(items[`${detectedRegion.toLowerCase()}NextjsLiveUrl`]);
+          setStagingEcomUrl(
+            items[`${detectedRegion.toLowerCase()}NextjsEcomStagingUrl`],
+          );
+          setLiveEcomUrl(
+            items[`${detectedRegion.toLowerCase()}NextjsEcomLiveUrl`],
+          );
           setStrapiProdGreenUrl(
             items[`${detectedRegion.toLowerCase()}StrapiGreenUrl`],
           );
@@ -113,8 +148,10 @@ const useConfig = () => {
     otherRegions,
     strapiServerUrl,
     stagingUrl,
+    stagingEcomUrl,
     localUrl,
     liveUrl,
+    liveEcomUrl,
     devToolUrl,
     strapiDevGreenUrl,
     strapiDevBlueUrl,
@@ -131,6 +168,16 @@ const useConfig = () => {
     ukLiveUrl,
     deLiveUrl,
     auLiveUrl,
+    usEcomStagingUrl,
+    caEcomStagingUrl,
+    ukEcomStagingUrl,
+    deEcomStagingUrl,
+    auEcomStagingUrl,
+    usEcomLiveUrl,
+    caEcomLiveUrl,
+    ukEcomLiveUrl,
+    deEcomLiveUrl,
+    auEcomLiveUrl,
     strapiLocalUrl,
   };
 };

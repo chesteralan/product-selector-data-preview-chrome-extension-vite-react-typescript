@@ -10,13 +10,13 @@ type Props = {
 
 function AppNextJs(props: Props) {
   const { data } = props;
-  const { isPresell, isFunnel } = useCheckSite();
+  const { isPresell, isFunnel, isEcom } = useCheckSite(data);
 
   return (
     <DataContext.Provider value={data}>
       <ProductsDataNextJs data={data} />
       {isPresell && <FloatingNavPromo />}
-      {isFunnel && <FloatingNavFunnel />}
+      {isFunnel || isEcom ? <FloatingNavFunnel data={data} /> : null}
     </DataContext.Provider>
   );
 }
