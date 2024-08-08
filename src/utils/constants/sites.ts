@@ -3,6 +3,17 @@ import { REGION_CA, REGION_DE, REGION_UK, REGION_US } from "./region";
 type Sites = { [hostname: string]: string };
 
 export const SITES: Sites = {
+  // next.js ecom
+  "thepetlabco.com": REGION_US,
+  "thepetlabco.ca": REGION_CA,
+  "thepetlabco.de": REGION_DE,
+  "petlabco.co.uk": REGION_UK,
+  "www.petlabco.co.uk": REGION_UK,
+  "dppc82ky0c6od.amplifyapp.com": REGION_US,
+  "d4lmwr380tqt4.amplifyapp.com": REGION_CA,
+  "d196iyluqjp09j.amplifyapp.com": REGION_UK,
+  "d3tx5dv4mhtrho.amplifyapp.com": REGION_DE,
+
   // next.js funnels
   "offers.thepetlabco.com": REGION_US,
   "offers.thepetlabco.ca": REGION_CA,
@@ -70,4 +81,5 @@ export const SITES: Sites = {
   dv7i8zlyxu5mq: REGION_DE,
   d3tx5dv4mhtrho: REGION_DE,
   d2e9azox4qv4wr: REGION_DE,
+  dg03dksbkti20: REGION_DE,
 };
