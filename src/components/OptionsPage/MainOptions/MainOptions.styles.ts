@@ -10,6 +10,6 @@ export const Title: React.CSSProperties = {
 
 export const Input: React.CSSProperties = {
   padding: 5,
-  width: "100%",
+  width: "90%",
   maxWidth: 500,
 };

@@ -27,7 +27,7 @@ export const getSiteRegion = (): string => {
   const match = Object.keys(SITES).find((site: string) =>
     window.location.hostname.includes(site),
   );
-  console.log(match);
+
   if (match) {
     return SITES[match] || REGION_US;
   }

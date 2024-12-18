@@ -11,11 +11,9 @@ const styles: React.CSSProperties = {
 };
 
 const FloatingNavFunnel = () => {
-  const { isFunnel } = useCheckSite();
   return (
     <div style={styles}>
       <PresellListButton link={`/all-pdps`} />
-      {isFunnel && <PresellListButton link={`/email/_list`} />}
     </div>
   );
 };

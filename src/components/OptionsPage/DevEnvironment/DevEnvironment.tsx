@@ -1,4 +1,3 @@
-import { REGIONS_LIST } from "../../../utils/constants/region";
 import Input from "../Input";
 import * as S from "../MainOptions/MainOptions.styles";
 

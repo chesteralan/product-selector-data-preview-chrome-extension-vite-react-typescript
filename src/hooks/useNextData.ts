@@ -52,9 +52,7 @@ const useNextData = (currentProduct = 0) => {
   const klaviyoListId = products?.at(currentProduct)?.klaviyoListId;
   const isEmailCampaign = data.page.startsWith("/email/");
   const pageId = page?.id;
-  const isNewCheckout = isPageVariant
-    ? override?.isNewCheckout
-    : page?.isNewCheckout;
+  const isNewCheckout = page?.isNewCheckout;
 
   return {
     data,

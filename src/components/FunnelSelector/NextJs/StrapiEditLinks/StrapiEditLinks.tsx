@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import useConfig from "../../../../hooks/useConfig";
 import * as S from "./StrapiEditLinks.styles";
 import useCheckSite from "../../../../hooks/useCheckSite";
@@ -12,6 +13,8 @@ const StrapiEditLinks = ({
   toggleCollectionsMatrix,
   toggleCartMatrix,
 }: Props) => {
+  const ref = useRef<HTMLDivElement>(null);
+
   const {
     region,
     otherRegions,
@@ -47,7 +50,7 @@ const StrapiEditLinks = ({
   } = useCheckSite();
 
   return (
-    <div style={S.Container}>
+    <div ref={ref} style={S.Container}>
       <span style={S.Label}>{isEcom ? "ECOM" : "FUNNEL"}</span>
       {isCollectionPage && isEcom && (
         <>
@@ -212,6 +215,12 @@ const StrapiEditLinks = ({
           )}
         </>
       )}
+      <button
+        style={{ color: "black", marginLeft: "20px", padding: "0px 5px" }}
+        onClick={() => (ref.current as HTMLDivElement).remove()}
+      >
+        CLOSE
+      </button>
     </div>
   );
 };
