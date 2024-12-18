@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Run install
         uses: borales/actions-yarn@v4
         with:
@@ -37,7 +37,7 @@ jobs:
           zip -r chrome-extension-${{ github.sha }}.zip extension
 
       - name: Archive chrome-extension artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: chrome-extension-${{ github.sha }}
           path: chrome-extension-${{ github.sha }}.zip
@@ -51,12 +51,12 @@ jobs:
     needs: build-chrome-extension
 
     steps:
-      - uses: actions/setup-node@v2-beta
+      - uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: 20
 
       - name: Download bundle artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: chrome-extension-${{ github.sha }}
 
