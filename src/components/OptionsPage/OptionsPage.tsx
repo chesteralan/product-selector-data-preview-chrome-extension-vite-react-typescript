@@ -1,3 +1,4 @@
+import PluginSettings from "./PluginSettings/PluginSettings";
 import * as S from "./OptionsPage.styles";
 import MainOptions from "./MainOptions/MainOptions";
 import StrapiCMS from "./StrapiCMS/StrapiCMS";
@@ -12,6 +13,7 @@ const OptionsPage = (props: Props) => {
       <MainOptions />
       <StrapiCMS />
       <DevEnvironment />
+      <PluginSettings />
       <div style={S.PackageVersion}>v{packageJson.version}</div>
     </div>
   );
