@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import useCheckSite from "../../hooks/useCheckSite";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import { getPathname } from "../../utils/getPathname";
 import { getSiteRegion } from "../../utils/getSiteRegion";
 import ConfigButton from "../Buttons/ConfigButton";
@@ -9,20 +11,11 @@ import EditButton from "../Buttons/EditButton";
 import LiveButton from "../Buttons/LiveButton";
 import LocalButton from "../Buttons/LocalButton";
 import PreviewButton from "../Buttons/PreviewButton";
-import useCheckSite from "../../hooks/useCheckSite";
+import * as S from "./FloatingNav.styles";
 
 type Props = {
   funnelId: string;
   productSelectorId: string;
-};
-
-const styles: React.CSSProperties = {
-  position: "fixed",
-  width: 30,
-  top: `calc(50vh - 146px)`,
-  right: 0,
-  display: `block`,
-  zIndex: 9999,
 };
 
 const FloatingNav = ({ funnelId, productSelectorId }: Props) => {
@@ -33,9 +26,10 @@ const FloatingNav = ({ funnelId, productSelectorId }: Props) => {
     setPathname(getPathname(window));
     setRegion(getSiteRegion());
   }, []);
-
+  const { isMobile } = useWindowSize();
+  if (!isMobile) return null;
   return (
-    <div style={styles}>
+    <div style={S.Container}>
       <EditButton funnelId={funnelId} />
       <ConfigButton productSelectorId={productSelectorId} />
       {pathname.includes("funnel-preview") ? null : (

@@ -4,7 +4,7 @@
   "long_description": "A chrome extension that add shortcuts to funnel and upsell content",
   "homepage": "https://github.com/chesteralan/product-selector-data-preview-chrome-extension-vite-react-typescript",
   "private": true,
-  "version": "1.42.5",
+  "version": "1.42.7",
   "type": "module",
   "scripts": {
     "dev": "vite --config app.config.ts",
@@ -16,13 +16,15 @@
     "manifest": "node manifest.cjs",
     "background": "tsc src/background.ts --outDir extension",
     "zip": "yarn export && yarn export-options && yarn manifest && yarn background && node archive.cjs",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "lint": "eslint ./src"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
     "@types/chrome": "^0.0.209",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.26",
@@ -30,9 +32,11 @@
     "@vitejs/plugin-react-swc": "^3.0.0",
     "archiver": "^6.0.1",
     "concurrently": "^8.2.2",
+    "eslint": "^9.17.0",
     "prettier": "3.1.0",
-    "typescript": "^4.9.3",
-    "vite": "^5.2.6"
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.1",
+    "vite": "^6.0.5"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"

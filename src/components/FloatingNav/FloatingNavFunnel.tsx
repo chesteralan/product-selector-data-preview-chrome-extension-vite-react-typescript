@@ -1,21 +1,16 @@
 import useCheckSite from "../../hooks/useCheckSite";
 import PresellListButton from "../Buttons/PresellListButton";
-
-const styles: React.CSSProperties = {
-  position: "fixed",
-  width: 30,
-  top: `30vh`,
-  right: 0,
-  display: `block`,
-  zIndex: 9999,
-};
+import * as S from "./FloatingNav.styles";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 const FloatingNavFunnel = () => {
-  return (
-    <div style={styles}>
+  const { isMobile } = useWindowSize();
+  const { isProd } = useCheckSite();
+  return !isProd && !isMobile ? (
+    <div style={S.Container}>
       <PresellListButton link={`/all-pdps`} />
     </div>
-  );
+  ) : null;
 };
 
 export default FloatingNavFunnel;

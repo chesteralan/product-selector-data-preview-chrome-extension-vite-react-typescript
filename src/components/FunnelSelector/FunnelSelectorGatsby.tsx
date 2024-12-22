@@ -1,54 +1,17 @@
 import formatPrice from "../../utils/formatPrice";
+import * as S from "./FunnelSelectorGatsby.styles";
 
 type Props = {
   data: any;
   setShow: (value: boolean) => void;
 };
 
-const DataWrapper: React.CSSProperties = {
-  width: `100%`,
-  height: `100%`,
-  position: `fixed`,
-  top: 0,
-  left: 0,
-  zIndex: 9998,
-};
-
-const DataContainer: React.CSSProperties = {
-  position: `fixed`,
-  width: `500px`,
-  height: `500px`,
-  background: `#fff`,
-  border: `1px solid #000`,
-  zIndex: 9999,
-  borderRadius: `10px`,
-  boxShadow: `0 0 10px #5d5d5d`,
-  top: `calc(50% - 280px)`,
-  left: `calc(50% - 280px)`,
-  padding: `30px`,
-  overflow: `auto`,
-};
-
-const PriceStrike: React.CSSProperties = {
-  textDecoration: `line-through`,
-};
-
-const UList: React.CSSProperties = {
-  paddingLeft: 20,
-  listStyle: "disc",
-};
-
-const UListItem: React.CSSProperties = {
-  marginBottom: 20,
-};
-
 const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
-
   const extraData = JSON.parse(data.extra);
   return (
     <>
-      <div style={DataWrapper} onClick={() => setShow(false)} />
-      <div style={DataContainer}>
+      <div style={S.DataWrapper} onClick={() => setShow(false)} />
+      <div style={S.DataContainer}>
         <h3>Subscriptions:</h3>
         <p>
           <u>Discount Code:</u>{" "}
@@ -57,16 +20,15 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
         <p>
           <u>Products</u>
         </p>
-        <ul style={UList}>
+        <ul style={S.UList}>
           {data.subscription.products.map((product: any, index: number) => {
-            const productDC = product.discount_code_override.length > 0 ? product.discount_code_override.join(",") : data.subscription.discounts.join(",")
-            const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?country=${
-              product.checkoutData.country
-            }&variant_id=${
-              product.checkoutData.variant_id
-            }&discount_code=${productDC}&quantity=${product.checkoutData.quantity}`;
+            const productDC =
+              product.discount_code_override.length > 0
+                ? product.discount_code_override.join(",")
+                : data.subscription.discounts.join(",");
+            const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?country=${product.checkoutData.country}&variant_id=${product.checkoutData.variant_id}&discount_code=${productDC}&quantity=${product.checkoutData.quantity}`;
             return (
-              <li key={index} style={UListItem}>
+              <li key={index} style={S.UListItem}>
                 <strong>{product.checkoutData.title}</strong>
                 <br />
                 <a href={variantLink} target="_blank">
@@ -75,23 +37,23 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 - {product.checkoutData.quantity}x -{" "}
                 {product.checkoutData.perceived_rrp !==
                 product.checkoutData.discounted_price ? (
-                  <span style={PriceStrike}>
+                  <span style={S.PriceStrike}>
                     {formatPrice(
                       product.checkoutData.perceived_rrp,
-                      product.checkoutData.country
+                      product.checkoutData.country,
                     )}
                   </span>
                 ) : null}{" "}
                 {formatPrice(
                   product.checkoutData.discounted_price,
-                  product.checkoutData.country
+                  product.checkoutData.country,
                 )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price,
-                    product.checkoutData.country
+                    product.checkoutData.country,
                   )}
                   {" - "}
                   {(
@@ -111,7 +73,7 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 {formatPrice(
                   product.checkoutData.discounted_price /
                     (30 * product.checkoutData.quantity),
-                  product.checkoutData.country
+                  product.checkoutData.country,
                 )}{" "}
                 <small>
                   (Savings:{" "}
@@ -119,7 +81,7 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                     (product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price) /
                       (30 * product.checkoutData.quantity),
-                    product.checkoutData.country
+                    product.checkoutData.country,
                   )}
                   )
                 </small>
@@ -128,14 +90,17 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 {formatPrice(
                   product.checkoutData.discounted_price /
                     product.checkoutData.quantity,
-                  product.checkoutData.country
+                  product.checkoutData.country,
                 )}{" "}
                 {product.freeGiftData.variantId && (
                   <>
                     <br />
-                    <strong>Free Gift</strong>: 
-                    {product.freeGiftData.variantId}{" "}
-                    - {formatPrice(product.free_gift_value,product.checkoutData.country)}
+                    <strong>Free Gift</strong>:{product.freeGiftData.variantId}{" "}
+                    -{" "}
+                    {formatPrice(
+                      product.free_gift_value,
+                      product.checkoutData.country,
+                    )}
                   </>
                 )}
                 {product.discount_code_override.length > 0 && (
@@ -179,34 +144,34 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
         <p>
           <u>Bump Offers</u>
         </p>
-        <ul style={UList}>
+        <ul style={S.UList}>
           {data.subscription.bumpoffers.map((product: any, index: number) => {
             const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?country=${product.checkoutData.country}&variant_id=${product.checkoutData.variant_id}&discount_code=${product.productRef.product.discountCode}&quantity=1`;
 
             return (
-              <li key={index} style={UListItem}>
+              <li key={index} style={S.UListItem}>
                 <strong>{product.checkoutData.title}</strong>
                 <br />
                 <a href={variantLink} target="_blank">
                   {product.checkoutData.variant_id}
                 </a>{" "}
                 - {product.checkoutData.quantity}x -{" "}
-                <span style={PriceStrike}>
+                <span style={S.PriceStrike}>
                   {formatPrice(
                     product.checkoutData.perceived_rrp,
-                    product.checkoutData.country
+                    product.checkoutData.country,
                   )}
                 </span>{" "}
                 {formatPrice(
                   product.checkoutData.discounted_price,
-                  product.checkoutData.country
+                  product.checkoutData.country,
                 )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price,
-                    product.checkoutData.country
+                    product.checkoutData.country,
                   )}
                   {" - "}
                   {(
@@ -244,18 +209,18 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
         <p>
           <u>Products</u>
         </p>
-        <ul style={UList}>
+        <ul style={S.UList}>
           {data.onetime.products.map((product: any, index: number) => {
             const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?country=${
               product.checkoutData.country
             }&variant_id=${
               product.checkoutData.variant_id
-            }&discount_code=${data.subscription.discounts.join(
-              ","
-            )}&quantity=${product.checkoutData.quantity}`;
+            }&discount_code=${data.subscription.discounts.join(",")}&quantity=${
+              product.checkoutData.quantity
+            }`;
 
             return (
-              <li key={index} style={UListItem}>
+              <li key={index} style={S.UListItem}>
                 <strong>{product.checkoutData.title}</strong>
                 <br />
                 <a href={variantLink} target="_blank">
@@ -264,23 +229,23 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 - {product.checkoutData.quantity}x -{" "}
                 {product.checkoutData.perceived_rrp !==
                 product.checkoutData.discounted_price ? (
-                  <span style={PriceStrike}>
+                  <span style={S.PriceStrike}>
                     {formatPrice(
                       product.checkoutData.perceived_rrp,
-                      product.checkoutData.country
+                      product.checkoutData.country,
                     )}
                   </span>
                 ) : null}{" "}
                 {formatPrice(
                   product.checkoutData.discounted_price,
-                  product.checkoutData.country
+                  product.checkoutData.country,
                 )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price,
-                    product.checkoutData.country
+                    product.checkoutData.country,
                   )}
                   {" - "}
                   {(
@@ -300,7 +265,7 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 {formatPrice(
                   product.checkoutData.discounted_price /
                     (30 * product.checkoutData.quantity),
-                  product.checkoutData.country
+                  product.checkoutData.country,
                 )}{" "}
                 <small>
                   (Savings:{" "}
@@ -308,7 +273,7 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                     (product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price) /
                       (30 * product.checkoutData.quantity),
-                    product.checkoutData.country
+                    product.checkoutData.country,
                   )}
                   )
                 </small>
@@ -317,7 +282,7 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
                 {formatPrice(
                   product.checkoutData.discounted_price /
                     product.checkoutData.quantity,
-                  product.checkoutData.country
+                  product.checkoutData.country,
                 )}{" "}
                 {product.upsell_url && (
                   <>
@@ -336,34 +301,34 @@ const FunnelSelectorGatsby = ({ data, setShow }: Props) => {
         <p>
           <u>Bump Offers</u>
         </p>
-        <ul style={UList}>
+        <ul style={S.UList}>
           {data.onetime.bumpoffers.map((product: any, index: number) => {
             const variantLink = `https://petlab-rebuild-tool.netlify.app/checkout-data-checker?country=${product.checkoutData.country}&variant_id=${product.checkoutData.variant_id}&discount_code=${product.productRef.product.discountCode}&quantity=1`;
 
             return (
-              <li key={index} style={UListItem}>
+              <li key={index} style={S.UListItem}>
                 <strong>{product.checkoutData.title}</strong>
                 <br />
                 <a href={variantLink} target="_blank">
                   {product.checkoutData.variant_id}
                 </a>{" "}
                 - {product.checkoutData.quantity}x -{" "}
-                <span style={PriceStrike}>
+                <span style={S.PriceStrike}>
                   {formatPrice(
                     product.checkoutData.perceived_rrp,
-                    product.checkoutData.country
+                    product.checkoutData.country,
                   )}
                 </span>{" "}
                 {formatPrice(
                   product.checkoutData.discounted_price,
-                  product.checkoutData.country
+                  product.checkoutData.country,
                 )}{" "}
                 <small>
                   (Savings:{" "}
                   {formatPrice(
                     product.checkoutData.perceived_rrp -
                       product.checkoutData.discounted_price,
-                    product.checkoutData.country
+                    product.checkoutData.country,
                   )}
                   {" - "}
                   {(

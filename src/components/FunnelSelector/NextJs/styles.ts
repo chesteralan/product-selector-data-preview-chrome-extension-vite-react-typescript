@@ -14,17 +14,12 @@ export const DataContainer: React.CSSProperties = {
   width: `700px`,
   height: `500px`,
   background: `#fff`,
-  border: `1px solid #000`,
   zIndex: 9999,
   borderRadius: `10px`,
   boxShadow: `0 0 10px #5d5d5d`,
   top: `50%`,
   left: `50%`,
   transform: "translate(-50%, -50%)",
-  padding: `30px`,
-  overflow: `auto`,
-  fontFamily: "sans-serif",
-  fontSize: "16px",
 };
 
 export const PriceStrike: React.CSSProperties = {
@@ -65,6 +60,7 @@ export const SelectorItem: React.CSSProperties = {
   borderRadius: "10px",
   width: "calc(1/3 * 100%)",
   textAlign: "center",
+  backgroundColor: "white",
 };
 
 export const SelectorItemSelected: React.CSSProperties = {
@@ -101,4 +97,21 @@ export const PackageJson: React.CSSProperties = {
   top: 5,
   background: "aliceblue",
   fontSize: "xx-small",
+};
+
+export const ContentWrapper: React.CSSProperties = {
+  background: `#fff`,
+  padding: `30px`,
+  overflow: `auto`,
+  fontFamily: "sans-serif",
+  fontSize: "16px",
+  height: `500px`,
+  borderRadius: `10px`,
+  border: `1px solid #000`,
+};
+
+export const MultiProductSelector: React.CSSProperties = {
+  marginTop: -45,
+  position: "absolute",
+  width: "100%",
 };

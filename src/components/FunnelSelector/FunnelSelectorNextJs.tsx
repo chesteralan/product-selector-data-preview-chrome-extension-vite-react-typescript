@@ -1,6 +1,6 @@
-import SingleProduct from "./NextJs/SingleProduct/SingleProduct";
-import MultipleProducts from "./NextJs/MultipleProducts/MultipleProducts";
 import useNextData from "../../hooks/useNextData";
+import MultipleProducts from "./NextJs/MultipleProducts/MultipleProducts";
+import SingleProduct from "./NextJs/SingleProduct/SingleProduct";
 
 type Props = {
   setShow: (value: boolean) => void;

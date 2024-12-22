@@ -1,40 +1,16 @@
 import { useEffect, useState } from "react";
+import { getPathname } from "../../utils/getPathname";
 import {
+  hasFunnelData,
   hasProductData,
   hasUpsellData,
-  hasFunnelData,
 } from "../../utils/hasProductData";
 import { isUpsell } from "../../utils/isUpsell";
 import FunnelSelector from "../FunnelSelector/FunnelSelectorGatsby";
 import UpsellSelector from "../UpsellSelector/UpsellSelector";
-import { getPathname } from "../../utils/getPathname";
+import * as S from "./ProductsData.styles";
 
-type Props = {};
-
-const styles: React.CSSProperties = {
-  fontFamily: "sans-serif",
-  cursor: `pointer`,
-  borderWidth: `1px 1px 0px`,
-  borderTopStyle: `solid`,
-  borderRightStyle: `solid`,
-  borderLeftStyle: `solid`,
-  borderTopColor: `rgb(0, 0, 0)`,
-  borderRightColor: `rgb(0, 0, 0)`,
-  borderLeftColor: `rgb(0, 0, 0)`,
-  borderImage: `initial`,
-  marginLeft: `10px`,
-  borderBottomStyle: `initial`,
-  borderBottomColor: `initial`,
-  padding: `10px 10px 5px`,
-  background: `rgb(0, 28, 114)`,
-  borderRadius: `10px 10px 0px 0px`,
-  color: `rgb(255, 255, 255)`,
-  position: `fixed`,
-  bottom: `0px`,
-  left: `0px`,
-  zIndex: 9999,
-};
-const ProductsDataGatsby = (props: Props) => {
+const ProductsDataGatsby = () => {
   const [found, setFound] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [showUpsell, setShowUpsell] = useState<boolean>(false);
@@ -66,7 +42,7 @@ const ProductsDataGatsby = (props: Props) => {
 
   return found ? (
     <>
-      <div style={styles} onClick={() => setShow(!show)}>
+      <div style={S.Container} onClick={() => setShow(!show)}>
         Product Data
       </div>
       {show ? (

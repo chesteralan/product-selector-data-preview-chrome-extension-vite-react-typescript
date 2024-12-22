@@ -32,8 +32,8 @@ const useNextData = (currentProduct = 0) => {
   if (promo?.otpBump.length > 0) otpBumpOffers = promo?.otpBump;
 
   let subBumpOffers = page?.subBumpOffers;
-  if (override?.subBump.length > 0) otpBumpOffers = override?.subBump;
-  if (promo?.subBump.length > 0) otpBumpOffers = promo?.subBump;
+  if (override?.subBump.length > 0) subBumpOffers = override?.subBump;
+  if (promo?.subBump.length > 0) subBumpOffers = promo?.subBump;
 
   const locale = data?.locale;
   const locales = data?.locales;
