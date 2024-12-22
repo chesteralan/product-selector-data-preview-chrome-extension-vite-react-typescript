@@ -1,9 +1,7 @@
 import Input from "../Input";
 import * as S from "../MainOptions/MainOptions.styles";
 
-type Props = {};
-
-const DevEnvironment = (props: Props) => {
+const DevEnvironment = () => {
   return (
     <div>
       <h2>Dev Environments</h2>

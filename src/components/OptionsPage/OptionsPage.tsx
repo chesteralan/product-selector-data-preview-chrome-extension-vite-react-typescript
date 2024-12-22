@@ -7,9 +7,7 @@ import StrapiCMS from "./StrapiCMS/StrapiCMS";
 import packageJson from "../../../package.json";
 import DevEnvironment from "./DevEnvironment/DevEnvironment";
 
-type Props = {};
-
-const OptionsPage = (props: Props) => {
+const OptionsPage = () => {
   const [activeTab, setActiveTab] = useState("main-options");
 
   return (

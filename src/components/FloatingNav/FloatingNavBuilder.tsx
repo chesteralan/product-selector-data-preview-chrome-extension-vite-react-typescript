@@ -33,15 +33,14 @@ const FloatingNavBuilder = ({ entryId }: Props) => {
     }
   }, [setCta]);
   const { isMobile } = useWindowSize();
+  if (!isMobile) return null;
   return (
-    !isMobile && (
-      <div style={S.Container}>
-        <EditButton funnelId={entryId} />
-        {cta.map((offerCta) => (
-          <CtaButton link={offerCta} />
-        ))}
-      </div>
-    )
+    <div style={S.Container}>
+      <EditButton funnelId={entryId} />
+      {cta.map((offerCta) => (
+        <CtaButton link={offerCta} />
+      ))}
+    </div>
   );
 };
 

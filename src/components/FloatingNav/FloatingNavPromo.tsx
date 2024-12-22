@@ -1,13 +1,11 @@
+import useCheckSite from "../../hooks/useCheckSite";
+import usePetlabCta from "../../hooks/usePetlabCta";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import CtaButton from "../Buttons/CtaButton";
-import usePetlabCta from "../../hooks/usePetlabCta";
 import PresellListButton from "../Buttons/PresellListButton";
-import useCheckSite from "../../hooks/useCheckSite";
 import * as S from "./FloatingNav.styles";
 
-type Props = {};
-
-const FloatingNavPromo = (props: Props) => {
+const FloatingNavPromo = () => {
   const cta = usePetlabCta();
   const { isPresell } = useCheckSite();
   const { isMobile } = useWindowSize();

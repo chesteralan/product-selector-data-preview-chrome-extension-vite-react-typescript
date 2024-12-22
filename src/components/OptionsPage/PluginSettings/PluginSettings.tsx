@@ -1,8 +1,6 @@
 import * as S from "../MainOptions/MainOptions.styles";
 
-type Props = {};
-
-const PluginSettings = (props: Props) => {
+const PluginSettings = () => {
   return (
     <div>
       <h2>Plugin Settings</h2>
