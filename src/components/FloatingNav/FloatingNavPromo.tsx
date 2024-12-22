@@ -1,25 +1,18 @@
+import { useWindowSize } from "../../hooks/useWindowSize";
 import CtaButton from "../Buttons/CtaButton";
 import usePetlabCta from "../../hooks/usePetlabCta";
 import PresellListButton from "../Buttons/PresellListButton";
-import { isPresell } from "../../utils/isPresell";
 import useCheckSite from "../../hooks/useCheckSite";
+import * as S from "./FloatingNav.styles";
 
 type Props = {};
-
-const styles: React.CSSProperties = {
-  position: "fixed",
-  width: 30,
-  top: `30vh`,
-  right: 0,
-  display: `block`,
-  zIndex: 9999,
-};
 
 const FloatingNavPromo = (props: Props) => {
   const cta = usePetlabCta();
   const { isPresell } = useCheckSite();
-  return isPresell ? (
-    <div style={styles}>
+  const { isMobile } = useWindowSize();
+  return !isMobile && isPresell ? (
+    <div style={S.Container}>
       {cta.map((offerCta) => (
         <CtaButton link={offerCta} />
       ))}

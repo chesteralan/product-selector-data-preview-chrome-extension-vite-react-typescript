@@ -7,7 +7,7 @@ export const Container: React.CSSProperties = {
 
 export const PackageVersion: React.CSSProperties = {
   display: "block",
-  position: "absolute",
+  position: "fixed",
   bottom: "0px",
   right: "0px",
   padding: "5px",

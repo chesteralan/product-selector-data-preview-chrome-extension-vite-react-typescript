@@ -29,6 +29,41 @@ const useConfig = () => {
   const [ukEcomLiveUrl, setUkEcomLiveUrl] = useState<string | null>(null);
   const [deEcomLiveUrl, setDeEcomLiveUrl] = useState<string | null>(null);
   const [auEcomLiveUrl, setAuEcomLiveUrl] = useState<string | null>(null);
+  const [usProdAmplifyUrl, setUsProdAmplifyUrl] = useState<string | null>(null);
+  const [caProdAmplifyUrl, setCaProdAmplifyUrl] = useState<string | null>(null);
+  const [ukProdAmplifyUrl, setUkProdAmplifyUrl] = useState<string | null>(null);
+  const [deProdAmplifyUrl, setDeProdAmplifyUrl] = useState<string | null>(null);
+  const [auProdAmplifyUrl, setAuProdAmplifyUrl] = useState<string | null>(null);
+  const [usEcomProdAmplifyUrl, setUsEcomProdAmplifyUrl] = useState<
+    string | null
+  >(null);
+  const [caEcomProdAmplifyUrl, setCaEcomProdAmplifyUrl] = useState<
+    string | null
+  >(null);
+  const [ukEcomProdAmplifyUrl, setUkEcomProdAmplifyUrl] = useState<
+    string | null
+  >(null);
+  const [deEcomProdAmplifyUrl, setDeEcomProdAmplifyUrl] = useState<
+    string | null
+  >(null);
+  const [auEcomProdAmplifyUrl, setAuEcomProdAmplifyUrl] = useState<
+    string | null
+  >(null);
+  const [usEcomPreProdCloudfrontUrl, setUsEcomPreProdCloudfrontUrl] = useState<
+    string | null
+  >(null);
+  const [caEcomPreProdCloudfrontUrl, setCaEcomPreProdCloudfrontUrl] = useState<
+    string | null
+  >(null);
+  const [ukEcomPreProdCloudfrontUrl, setUkEcomPreProdCloudfrontUrl] = useState<
+    string | null
+  >(null);
+  const [deEcomPreProdCloudfrontUrl, setDeEcomPreProdCloudfrontUrl] = useState<
+    string | null
+  >(null);
+  const [auEcomPreProdCloudfrontUrl, setAuEcomPreProdCloudfrontUrl] = useState<
+    string | null
+  >(null);
   const [localUrl, setLocalUrl] = useState<string | null>(null);
   const [devToolUrl, setDevToolUrl] = useState<string | null>(null);
   const [strapiLocalUrl, setStrapiLocalUrl] = useState<string | null>(null);
@@ -69,6 +104,15 @@ const useConfig = () => {
         ...REGIONS_LIST.map(
           (region) => `${region.toLowerCase()}NextjsEcomLiveUrl`,
         ),
+        ...REGIONS_LIST.map(
+          (region) => `${region.toLowerCase()}NextjsProdAmplifyUrl`,
+        ),
+        ...REGIONS_LIST.map(
+          (region) => `${region.toLowerCase()}NextjsEcomProdAmplifyUrl`,
+        ),
+        ...REGIONS_LIST.map(
+          (region) => `${region.toLowerCase()}NextjsEcomPreProdCloudfrontUrl`,
+        ),
       ])
       .then((items) => {
         setLocalUrl(items.nextjsLocalUrl);
@@ -81,26 +125,41 @@ const useConfig = () => {
         setUsLiveUrl(items.usNextjsLiveUrl);
         setUsEcomStagingUrl(items.usNextjsEcomStagingUrl);
         setUsEcomLiveUrl(items.usNextjsEcomLiveUrl);
+        setUsProdAmplifyUrl(items.usNextjsProdAmplifyUrl);
+        setUsEcomProdAmplifyUrl(items.usNextjsEcomProdAmplifyUrl);
+        setUsEcomPreProdCloudfrontUrl(items.usNextjsEcomPreProdCloudfrontUrl);
         // CA
         setCaStagingUrl(items.caNextjsStagingUrl);
         setCaLiveUrl(items.caNextjsLiveUrl);
         setCaEcomStagingUrl(items.caNextjsEcomStagingUrl);
         setCaEcomLiveUrl(items.caNextjsEcomLiveUrl);
+        setCaProdAmplifyUrl(items.caNextjsProdAmplifyUrl);
+        setCaEcomProdAmplifyUrl(items.caNextjsEcomProdAmplifyUrl);
+        setCaEcomPreProdCloudfrontUrl(items.caNextjsEcomPreProdCloudfrontUrl);
         // UK
         setUkStagingUrl(items.ukNextjsStagingUrl);
         setUkLiveUrl(items.ukNextjsLiveUrl);
         setUkEcomStagingUrl(items.ukNextjsEcomStagingUrl);
         setUkEcomLiveUrl(items.ukNextjsEcomLiveUrl);
+        setUkProdAmplifyUrl(items.ukNextjsProdAmplifyUrl);
+        setUkEcomProdAmplifyUrl(items.ukNextjsEcomProdAmplifyUrl);
+        setUkEcomPreProdCloudfrontUrl(items.ukNextjsEcomPreProdCloudfrontUrl);
         // DE
         setDeStagingUrl(items.deNextjsStagingUrl);
         setDeLiveUrl(items.deNextjsLiveUrl);
         setDeEcomStagingUrl(items.deNextjsEcomStagingUrl);
         setDeEcomLiveUrl(items.deNextjsEcomLiveUrl);
+        setDeProdAmplifyUrl(items.deNextjsProdAmplifyUrl);
+        setDeEcomProdAmplifyUrl(items.deNextjsEcomProdAmplifyUrl);
+        setDeEcomPreProdCloudfrontUrl(items.deNextjsEcomPreProdCloudfrontUrl);
         // AU
         setAuStagingUrl(items.auNextjsStagingUrl);
         setAuLiveUrl(items.auNextjsLiveUrl);
         setAuEcomStagingUrl(items.auNextjsEcomStagingUrl);
         setAuEcomLiveUrl(items.auNextjsEcomLiveUrl);
+        setAuProdAmplifyUrl(items.auNextjsProdAmplifyUrl);
+        setAuEcomProdAmplifyUrl(items.auNextjsEcomProdAmplifyUrl);
+        setAuEcomPreProdCloudfrontUrl(items.auNextjsEcomPreProdCloudfrontUrl);
       });
 
     if (detectedRegion) {

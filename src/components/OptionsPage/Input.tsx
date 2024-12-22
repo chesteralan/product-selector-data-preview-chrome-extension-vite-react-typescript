@@ -20,16 +20,18 @@ const Input = ({ title = "", storeKey = "" }: Props) => {
   };
 
   return (
-    <label>
-      <div>{title}</div>
-      <input
-        type="text"
-        style={S.Input}
-        placeholder={title}
-        defaultValue={value}
-        onChange={handleChange}
-      />
-    </label>
+    <div style={{ paddingTop: 5, paddingBottom: 5 }}>
+      <label>
+        <div style={{ marginBottom: 5 }}>{title}</div>
+        <input
+          type="text"
+          style={S.Input}
+          placeholder={title}
+          defaultValue={value}
+          onChange={handleChange}
+        />
+      </label>
+    </div>
   );
 };
 

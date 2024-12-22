@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import * as S from "./FloatingNav.styles";
 import { getPathname } from "../../utils/getPathname";
 import { getSiteRegion } from "../../utils/getSiteRegion";
 import ConfigButton from "../Buttons/ConfigButton";
@@ -16,15 +18,6 @@ type Props = {
   productSelectorId: string;
 };
 
-const styles: React.CSSProperties = {
-  position: "fixed",
-  width: 30,
-  top: `calc(50vh - 146px)`,
-  right: 0,
-  display: `block`,
-  zIndex: 9999,
-};
-
 const FloatingNav = ({ funnelId, productSelectorId }: Props) => {
   const [pathname, setPathname] = useState<string>("");
   const [region, setRegion] = useState<string>(`US`);
@@ -33,30 +26,36 @@ const FloatingNav = ({ funnelId, productSelectorId }: Props) => {
     setPathname(getPathname(window));
     setRegion(getSiteRegion());
   }, []);
-
+  const { isMobile } = useWindowSize();
   return (
-    <div style={styles}>
-      <EditButton funnelId={funnelId} />
-      <ConfigButton productSelectorId={productSelectorId} />
-      {pathname.includes("funnel-preview") ? null : (
-        <>
-          <LocalButton region={region} upsell={isUpsell} pathname={pathname} />
-          <DevButton region={region} upsell={isUpsell} pathname={pathname} />
-          <LiveButton region={region} upsell={isUpsell} pathname={pathname} />
-          <PreviewButton
-            region={region}
-            upsell={isUpsell}
-            pathname={pathname}
-          />
-          <DevtoolButton />
-          <CurrentSiteButton
-            region={region}
-            upsell={isUpsell}
-            pathname={pathname}
-          />
-        </>
-      )}
-    </div>
+    !isMobile && (
+      <div style={S.Container}>
+        <EditButton funnelId={funnelId} />
+        <ConfigButton productSelectorId={productSelectorId} />
+        {pathname.includes("funnel-preview") ? null : (
+          <>
+            <LocalButton
+              region={region}
+              upsell={isUpsell}
+              pathname={pathname}
+            />
+            <DevButton region={region} upsell={isUpsell} pathname={pathname} />
+            <LiveButton region={region} upsell={isUpsell} pathname={pathname} />
+            <PreviewButton
+              region={region}
+              upsell={isUpsell}
+              pathname={pathname}
+            />
+            <DevtoolButton />
+            <CurrentSiteButton
+              region={region}
+              upsell={isUpsell}
+              pathname={pathname}
+            />
+          </>
+        )}
+      </div>
+    )
   );
 };
 

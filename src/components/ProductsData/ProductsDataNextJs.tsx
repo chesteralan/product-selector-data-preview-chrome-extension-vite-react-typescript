@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import FunnelSelector from "../FunnelSelector/FunnelSelectorNextJs";
 import StrapiEditLinks from "../FunnelSelector/NextJs/StrapiEditLinks/StrapiEditLinks";
 import CollectionPage from "../CollectionPage/CollectionPage";
@@ -40,12 +41,12 @@ const ProductsDataNextJs = (props: Props) => {
   const [showCollectionMatrix, setShowCollectionMatrix] =
     useState<boolean>(false);
   const [showCartMatrix, setShowCartMatrix] = useState<boolean>(false);
-
+  const { isMobile } = useWindowSize();
   const page = data.props.pageProps?.initialPageStore?.hasOwnProperty("page");
 
   return (
     <>
-      {page && (
+      {page && !isMobile ? (
         <>
           <div style={styles} onClick={() => setShow(!show)}>
             Product Data
@@ -56,7 +57,7 @@ const ProductsDataNextJs = (props: Props) => {
             </>
           ) : null}
         </>
-      )}
+      ) : null}
       <StrapiEditLinks
         toggleCollectionsMatrix={() =>
           setShowCollectionMatrix(!showCollectionMatrix)

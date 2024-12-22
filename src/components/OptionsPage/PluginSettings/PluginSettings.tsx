@@ -4,8 +4,11 @@ type Props = {};
 
 const PluginSettings = (props: Props) => {
   return (
-    <div style={S.Container}>
+    <div>
       <h2>Plugin Settings</h2>
+      <div style={S.Container}>
+        <div style={S.MainContainer}></div>
+      </div>
     </div>
   );
 };
